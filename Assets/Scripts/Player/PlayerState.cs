@@ -6,8 +6,8 @@ public class PlayerState
 {
     protected Player player;
     protected PlayerStateMachine playerStateMachine;
-
     private string _animBoolName;
+
     public PlayerState(Player _player, PlayerStateMachine _playerStateMachine, string _animBoolName) {
         this.player = _player;
         this.playerStateMachine = _playerStateMachine;
@@ -15,13 +15,13 @@ public class PlayerState
     }
 
     public virtual void EnterState() {
-        Debug.Log("Entering " + _animBoolName);
+        player.playerAnimator.SetBool(_animBoolName, true);
     }
     public virtual void UpdateState() {
         Debug.Log("Updating " + _animBoolName);
     }
     public virtual void ExitState() {
-        Debug.Log("Exiting " + _animBoolName);
+        player.playerAnimator.SetBool(_animBoolName, false);
     }
 
 
