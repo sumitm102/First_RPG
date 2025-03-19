@@ -9,6 +9,7 @@ public class PlayerState
     private string _animBoolName;
 
     protected float xInput;
+    protected float yInput;
     protected float stateTimer;
 
     public PlayerState(Player _player, PlayerStateMachine _playerStateMachine, string _animBoolName) {
@@ -27,6 +28,7 @@ public class PlayerState
 
         //Using raw input to avoid smoothing
         xInput = Input.GetAxisRaw("Horizontal");
+        yInput = Input.GetAxisRaw("Vertical");
 
         //Changing the yVelocity parameter inside the jump blend tree based on rigidbody's vertical velocity
         player.playerAnimator.SetFloat("yVelocity", player.playerRigidbody.linearVelocityY);

@@ -11,9 +11,12 @@ public class PlayerIdleState : PlayerGroundedState
 
     public override void UpdateState() {
         base.UpdateState();
+        player.SetVelocity(0, 0);
+
+        //If player is facing the same direction as the horizontal input and if a wall detected, do nothing
+        if (player.facingDir == xInput && player.IsWallDetected()) return;
 
         if(xInput != 0) playerStateMachine.ChangeState(player.playerMoveState);
-        //player.playerRigidbody.linearVelocityX = 0f;
     
     }
 
