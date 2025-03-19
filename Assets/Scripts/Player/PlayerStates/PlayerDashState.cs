@@ -15,7 +15,10 @@ public class PlayerDashState : PlayerState
         base.UpdateState();
 
         //Even if it switches to idle, it'll switch to another state from idle upon player input or certain conditions
-        if (stateTimer < 0f) playerStateMachine.ChangeState(player.playerIdleState);
+        if (stateTimer < 0f) {
+            playerStateMachine.ChangeState(player.playerIdleState);
+            return; //To stop applying any velocity in case of undesired movement
+        }
 
         //Switching to wall slide immediately after dashing in air and detecting a wall
         if (!player.IsGroundDetected() && player.IsWallDetected())
@@ -27,8 +30,6 @@ public class PlayerDashState : PlayerState
 
     public override void ExitState() {
         base.ExitState();
-
-        Debug.Log("Exit Dash");
 
         //Setting the horizontal movement to 0 upon exiting to avoid moving indefinitely
         player.SetVelocity(0f, player.playerRigidbody.linearVelocityY);

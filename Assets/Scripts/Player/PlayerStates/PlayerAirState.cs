@@ -18,7 +18,6 @@ public class PlayerAirState : PlayerState {
         //If player is grounded, change to idle
         if (player.IsGroundDetected()) {
             playerStateMachine.ChangeState(player.playerIdleState);
-            return;
         }
 
         if (player.IsWallDetected())
