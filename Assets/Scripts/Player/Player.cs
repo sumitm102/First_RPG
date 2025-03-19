@@ -36,6 +36,8 @@ public class Player : MonoBehaviour
     public PlayerJumpState playerJumpState { get; private set; }
     public PlayerAirState playerAirState { get; private set; }
     public PlayerDashState playerDashState { get; private set; }
+    public PlayerWallSlideState playerWallSliderState { get; private set; }
+    public PlayerWallJumpState playerWallJumpState { get; private set; }
 
     #endregion
 
@@ -54,6 +56,8 @@ public class Player : MonoBehaviour
         playerJumpState = new PlayerJumpState(this, playerStateMachine, "Jump");
         playerAirState = new PlayerAirState(this, playerStateMachine, "Jump");
         playerDashState = new PlayerDashState(this, playerStateMachine, "Dash");
+        playerWallSliderState = new PlayerWallSlideState(this, playerStateMachine, "WallSlide");
+        playerWallJumpState = new PlayerWallJumpState(this, playerStateMachine, "Jump");
     }
 
     public void Start() {
@@ -80,11 +84,15 @@ public class Player : MonoBehaviour
         FlipController(_xVelocity);
     }
 
-    public bool IsGroundDetected() => Physics2D.Raycast(_groundCheck.position, Vector3.down, _groundCheckDistance, _groundLayer);
+    public bool IsGroundDetected() => Physics2D.Raycast(_groundCheck.position, Vector2.down, _groundCheckDistance, _groundLayer);
+    public bool IsWallDetected() => Physics2D.Raycast(_wallCheck.position, Vector2.right * facingDir, _wallCheckDistance, _groundLayer);
 
     private void CheckForDashInput() {
 
         _dashCooldownTimer -= Time.deltaTime;
+
+        //To make sure to not dash when wall sliding while decreasing the cool down timer above
+        if (IsWallDetected()) return;
 
         if (_dashCooldownTimer < 0f && Input.GetKeyDown(KeyCode.LeftShift)) {
             _dashCooldownTimer = _dashCooldownAmount;

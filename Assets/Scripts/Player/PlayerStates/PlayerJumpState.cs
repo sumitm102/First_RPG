@@ -6,9 +6,10 @@ public class PlayerJumpState : PlayerState {
 
     public override void EnterState() {
         base.EnterState();
-        
+
         //Applies upward force on entering the state, not changing the horizontal velocity
-        player.playerRigidbody.linearVelocity = new Vector2(player.playerRigidbody.linearVelocityX, player.jumpForce);
+        player.SetVelocity(player.playerRigidbody.linearVelocityX, player.jumpForce);
+        //player.playerRigidbody.linearVelocity = new Vector2(player.playerRigidbody.linearVelocityX, player.jumpForce);
     }
 
     public override void UpdateState() {
