@@ -1,3 +1,4 @@
+using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -16,6 +17,8 @@ public class Player : MonoBehaviour
     public float dashDir { get; private set; }
 
     #endregion
+
+    public bool isPerformingAction { get; private set; }
 
 
     [Header("Collision info")]
@@ -38,6 +41,7 @@ public class Player : MonoBehaviour
     public PlayerDashState playerDashState { get; private set; }
     public PlayerWallSlideState playerWallSliderState { get; private set; }
     public PlayerWallJumpState playerWallJumpState { get; private set; }
+    public PlayerPrimaryAttackState playerPrimaryAttackState { get; private set; }
 
     #endregion
 
@@ -58,6 +62,7 @@ public class Player : MonoBehaviour
         playerDashState = new PlayerDashState(this, playerStateMachine, "Dash");
         playerWallSliderState = new PlayerWallSlideState(this, playerStateMachine, "WallSlide");
         playerWallJumpState = new PlayerWallJumpState(this, playerStateMachine, "Jump");
+        playerPrimaryAttackState = new PlayerPrimaryAttackState(this, playerStateMachine, "Attack");
     }
 
     public void Start() {
@@ -78,6 +83,14 @@ public class Player : MonoBehaviour
         CheckForDashInput();
     }
 
+    public IEnumerator BusyFor(float _seconds) {
+        isPerformingAction = true;
+
+        yield return new WaitForSeconds(_seconds);
+
+        isPerformingAction = false;
+    }
+
     public void SetVelocity(float _xVelocity, float _yVelocity) {
 
         playerRigidbody.linearVelocity = new Vector2(_xVelocity, _yVelocity);
@@ -87,6 +100,7 @@ public class Player : MonoBehaviour
     public bool IsGroundDetected() => Physics2D.Raycast(_groundCheck.position, Vector2.down, _groundCheckDistance, _groundLayer);
     public bool IsWallDetected() => Physics2D.Raycast(_wallCheck.position, Vector2.right * facingDir, _wallCheckDistance, _groundLayer);
 
+    public void AnimationTrigger() => playerStateMachine.currentState.AnimationFinishTrigger();
     private void CheckForDashInput() {
 
         _dashCooldownTimer -= Time.deltaTime;
