@@ -16,6 +16,9 @@ public class Player : MonoBehaviour
     private float _dashCooldownTimer;
     public float dashDir { get; private set; }
 
+    [Header("Attack Details")]
+    public Vector2[] attackMovement;
+
     #endregion
 
     public bool isPerformingAction { get; private set; }
@@ -97,15 +100,12 @@ public class Player : MonoBehaviour
         FlipController(_xVelocity);
     }
 
-    public bool IsGroundDetected() => Physics2D.Raycast(_groundCheck.position, Vector2.down, _groundCheckDistance, _groundLayer);
-    public bool IsWallDetected() => Physics2D.Raycast(_wallCheck.position, Vector2.right * facingDir, _wallCheckDistance, _groundLayer);
-
     public void AnimationTrigger() => playerStateMachine.currentState.AnimationFinishTrigger();
     private void CheckForDashInput() {
 
         _dashCooldownTimer -= Time.deltaTime;
 
-        //To make sure to not dash when wall sliding while decreasing the cool down timer above
+        //To make sure to not dash when wall sliding while decreasing the its cool down timer above
         if (IsWallDetected()) return;
 
         if (_dashCooldownTimer < 0f && Input.GetKeyDown(KeyCode.LeftShift)) {
@@ -119,6 +119,18 @@ public class Player : MonoBehaviour
         }
     }
 
+    #region Collision Detection
+    public bool IsGroundDetected() => Physics2D.Raycast(_groundCheck.position, Vector2.down, _groundCheckDistance, _groundLayer);
+    public bool IsWallDetected() => Physics2D.Raycast(_wallCheck.position, Vector2.right * facingDir, _wallCheckDistance, _groundLayer);
+
+    private void OnDrawGizmos() {
+        Gizmos.DrawLine(_groundCheck.position, new Vector3(_groundCheck.position.x, _groundCheck.position.y - _groundCheckDistance, 0f));
+        Gizmos.DrawLine(_wallCheck.position, new Vector3(_wallCheck.position.x + _wallCheckDistance, _wallCheck.position.y, 0f));
+    }
+
+    #endregion
+
+    #region Flipping Character
     public void FlipPlayer() {
         facingDir *= -1;
         isFacingRight = !isFacingRight;
@@ -131,9 +143,5 @@ public class Player : MonoBehaviour
         //If player is moving right but not facing right, flip the player
         else if (_horizontalMovemnt > 0 && !isFacingRight) FlipPlayer();
     }
-
-    private void OnDrawGizmos() {
-        Gizmos.DrawLine(_groundCheck.position, new Vector3(_groundCheck.position.x, _groundCheck.position.y - _groundCheckDistance, 0f));
-        Gizmos.DrawLine(_wallCheck.position, new Vector3(_wallCheck.position.x + _wallCheckDistance, _wallCheck.position.y, 0f));
-    }
+    #endregion
 }
