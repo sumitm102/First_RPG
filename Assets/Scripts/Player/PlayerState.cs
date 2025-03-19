@@ -8,6 +8,9 @@ public class PlayerState
     protected PlayerStateMachine playerStateMachine;
     private string _animBoolName;
 
+    protected float xInput;
+    protected float stateTimer;
+
     public PlayerState(Player _player, PlayerStateMachine _playerStateMachine, string _animBoolName) {
         this.player = _player;
         this.playerStateMachine = _playerStateMachine;
@@ -18,7 +21,15 @@ public class PlayerState
         player.playerAnimator.SetBool(_animBoolName, true);
     }
     public virtual void UpdateState() {
-        Debug.Log("Updating " + _animBoolName);
+
+        //Decreasing the timer and making it accessible to other state classes
+        stateTimer -= Time.deltaTime;
+
+        //Using raw input to avoid smoothing
+        xInput = Input.GetAxisRaw("Horizontal");
+
+        //Changing the yVelocity parameter inside the jump blend tree based on rigidbody's vertical velocity
+        player.playerAnimator.SetFloat("yVelocity", player.playerRigidbody.linearVelocityY);
     }
     public virtual void ExitState() {
         player.playerAnimator.SetBool(_animBoolName, false);
