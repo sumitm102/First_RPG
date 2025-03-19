@@ -14,8 +14,8 @@ public class PlayerDashState : PlayerState
     public override void UpdateState() {
         base.UpdateState();
 
-        //Apply dash speed on top of player's current speed
-        player.SetVelocity(player.facingDir * player.dashSpeed, player.playerRigidbody.linearVelocityY);
+        //Apply dash speed and set y to 0 to not lose vertical velocity
+        player.SetVelocity(player.dashDir * player.dashSpeed, 0);
 
 
         //Even if it switches to idle, it'll switch to another state from idle upon player input or certain conditions

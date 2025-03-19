@@ -7,8 +7,13 @@ public class Player : MonoBehaviour
     [Header("Move stats")]   
     public float moveSpeed = 12f;
     public float jumpForce = 12f;
+
+    [Header("Dash info")]
     public float dashSpeed = 25f;
     public float dashDuration = 0.3f;
+    [SerializeField] private float _dashCooldownAmount = 3f;
+    private float _dashCooldownTimer;
+    public float dashDir { get; private set; }
 
     #endregion
 
@@ -64,6 +69,9 @@ public class Player : MonoBehaviour
     public void Update() {
 
         playerStateMachine.currentState.UpdateState();
+
+        //Checking for dash needs to be outside of grounded to be applicable almost everywhere for use
+        CheckForDashInput();
     }
 
     public void SetVelocity(float _xVelocity, float _yVelocity) {
@@ -73,6 +81,21 @@ public class Player : MonoBehaviour
     }
 
     public bool IsGroundDetected() => Physics2D.Raycast(_groundCheck.position, Vector3.down, _groundCheckDistance, _groundLayer);
+
+    private void CheckForDashInput() {
+
+        _dashCooldownTimer -= Time.deltaTime;
+
+        if (_dashCooldownTimer < 0f && Input.GetKeyDown(KeyCode.LeftShift)) {
+            _dashCooldownTimer = _dashCooldownAmount;
+
+            dashDir = Input.GetAxisRaw("Horizontal");
+
+            if (dashDir == 0) dashDir = facingDir;
+
+            playerStateMachine.ChangeState(playerDashState);
+        }
+    }
 
     public void FlipPlayer() {
         facingDir *= -1;
