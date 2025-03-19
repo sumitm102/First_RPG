@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerIdleState : PlayerState
+public class PlayerIdleState : PlayerGroundedState
 {
     public PlayerIdleState(Player _player, PlayerStateMachine _playerStateMachine, string _animBoolName) : base(_player, _playerStateMachine, _animBoolName) {
     }
@@ -12,9 +12,9 @@ public class PlayerIdleState : PlayerState
     public override void UpdateState() {
         base.UpdateState();
 
-        if (Input.GetKeyDown(KeyCode.D)) {
-            playerStateMachine.ChangeState(player.playerMoveState);
-        }
+        if(xInput != 0) playerStateMachine.ChangeState(player.playerMoveState);
+        //player.playerRigidbody.linearVelocityX = 0f;
+    
     }
 
     public override void ExitState() {
