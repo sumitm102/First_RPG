@@ -11,8 +11,9 @@ public class PlayerGroundedState : PlayerState {
     public override void UpdateState() {
         base.UpdateState();
 
-        if (Input.GetKeyDown(KeyCode.LeftShift))
-            playerStateMachine.ChangeState(player.playerDashState);
+        //To make sure fall animation plays and not anything else after dashing during jump
+        if (!player.IsGroundDetected())
+            playerStateMachine.ChangeState(player.playerAirState);
 
         //If space key pressed and player is grounded, change to jump state
         if (Input.GetKeyDown(KeyCode.Space) && player.IsGroundDetected()) 
