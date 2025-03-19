@@ -11,6 +11,9 @@ public class PlayerGroundedState : PlayerState {
     public override void UpdateState() {
         base.UpdateState();
 
+        if (Input.GetMouseButtonDown(0))
+            playerStateMachine.ChangeState(player.playerPrimaryAttackState);
+
         //To make sure fall animation plays and not anything else, ie: after dashing during jump
         if (!player.IsGroundDetected())
             playerStateMachine.ChangeState(player.playerAirState);
