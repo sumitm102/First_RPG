@@ -184,7 +184,8 @@ MonoBehaviour:
   moveSpeed: 8
   jumpForce: 12
   dashSpeed: 25
-  dashDuration: 0.3
+  dashDuration: 0.25
+  _dashCooldownAmount: 1.5
   _groundCheck: {fileID: 710320275}
   _groundCheckDistance: 0.23
   _wallCheck: {fileID: 93124874}
