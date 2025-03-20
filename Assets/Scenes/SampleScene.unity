@@ -178,7 +178,7 @@ Transform:
   m_GameObject: {fileID: 87139329}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -40, y: 0, z: 0}
+  m_LocalPosition: {x: -39.786667, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -671,7 +671,7 @@ GameObject:
   m_Component:
   - component: {fileID: 475986527}
   - component: {fileID: 475986529}
-  - component: {fileID: 475986528}
+  - component: {fileID: 475986530}
   m_Layer: 0
   m_Name: BG_City_Layer
   m_TagString: Untagged
@@ -688,27 +688,14 @@ Transform:
   m_GameObject: {fileID: 475986526}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -9.16, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -9.8, y: 0.8, z: 0}
+  m_LocalScale: {x: 0.75, y: 0.75, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 87139330}
   - {fileID: 1593778582}
   m_Father: {fileID: 6300060}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &475986528
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 475986526}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e1a8430a085aee449d248880d61d3e0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _parallaxEffect: 0.9
 --- !u!212 &475986529
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -764,6 +751,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &475986530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 475986526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e1a8430a085aee449d248880d61d3e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _parallaxEffect: 0.8
+  _spriteToCheck: {fileID: 475986529}
 --- !u!1 &498298039
 GameObject:
   m_ObjectHideFlags: 0
@@ -790,7 +791,7 @@ Transform:
   m_GameObject: {fileID: 498298039}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 40, y: 0, z: 0}
+  m_LocalPosition: {x: 39.5, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1146,7 +1147,7 @@ GameObject:
   m_Component:
   - component: {fileID: 847163389}
   - component: {fileID: 847163391}
-  - component: {fileID: 847163390}
+  - component: {fileID: 847163392}
   m_Layer: 0
   m_Name: BG_Sky_Layer
   m_TagString: Untagged
@@ -1163,27 +1164,14 @@ Transform:
   m_GameObject: {fileID: 847163388}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.91, y: 1.4899999, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -5.1, y: 3.3, z: 0}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 979830046}
   - {fileID: 498298040}
   m_Father: {fileID: 6300060}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &847163390
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 847163388}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e1a8430a085aee449d248880d61d3e0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _parallaxEffect: 0.99
 --- !u!212 &847163391
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1239,6 +1227,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &847163392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 847163388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e1a8430a085aee449d248880d61d3e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _parallaxEffect: 0.98
+  _spriteToCheck: {fileID: 847163391}
 --- !u!1 &949539602
 GameObject:
   m_ObjectHideFlags: 0
@@ -1445,7 +1447,7 @@ Transform:
   m_GameObject: {fileID: 979830045}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -40, y: 0, z: 0}
+  m_LocalPosition: {x: -39.875, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1710,7 +1712,7 @@ MonoBehaviour:
     ScreenPosition: {x: 0, y: 0.05}
     DeadZone:
       Enabled: 1
-      Size: {x: 0.2, y: 1.2}
+      Size: {x: 0.4, y: 1.2}
     HardLimits:
       Enabled: 0
       Size: {x: 0.8, y: 1.2}
@@ -8678,9 +8680,9 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 519420032}
+  - {fileID: 1574038222}
   - {fileID: 619394802}
+  - {fileID: 6300060}
   - {fileID: 145473202}
   - {fileID: 949539604}
   - {fileID: 1294199756}
-  - {fileID: 1574038222}
-  - {fileID: 6300060}

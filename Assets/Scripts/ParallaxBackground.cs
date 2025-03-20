@@ -5,6 +5,7 @@ public class ParallaxBackground : MonoBehaviour
     private GameObject _cam;
 
     [SerializeField] private float _parallaxEffect;
+    [SerializeField] private SpriteRenderer _spriteToCheck;
 
     private float _xPosition;
     private float _length;
@@ -16,7 +17,7 @@ public class ParallaxBackground : MonoBehaviour
 
         //Setting the initial x pos of the background to the variable
         _xPosition = transform.position.x;
-        _length = GetComponent<SpriteRenderer>().bounds.size.x;
+        _length = _spriteToCheck.bounds.size.x;
     }
 
     // Update is called once per frame
