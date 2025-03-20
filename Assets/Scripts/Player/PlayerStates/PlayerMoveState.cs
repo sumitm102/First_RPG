@@ -17,7 +17,7 @@ public class PlayerMoveState : PlayerGroundedState
             playerStateMachine.ChangeState(player.playerIdleState);
 
 
-        player.SetVelocity(xInput * player.moveSpeed, player.playerRigidbody.linearVelocityY);
+        player.SetVelocity(xInput * player.moveSpeed, player.rbody.linearVelocityY);
 
         
     }

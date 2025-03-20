@@ -27,9 +27,11 @@ public class PlayerWallSlideState : PlayerState {
 
         //If player is pressing down, slide faster/at normal vertical velocity otherwise slide at 70% of that velocity
         if(yInput < 0)
-            player.SetVelocity(0, player.playerRigidbody.linearVelocityY);
+            player.SetVelocity(0, player.rbody.linearVelocityY);
         else
-            player.SetVelocity(0, player.playerRigidbody.linearVelocityY * 0.7f);
+            player.SetVelocity(0, player.rbody.linearVelocityY * 0.7f);
+
+        
 
     }
 

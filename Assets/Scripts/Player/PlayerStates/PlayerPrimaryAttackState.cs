@@ -16,7 +16,7 @@ public class PlayerPrimaryAttackState : PlayerState {
             _comboCounter = 0;
 
         //Responsible for playing animation of a combo attack 
-        player.playerAnimator.SetInteger("ComboCounter", _comboCounter);
+        player.animator.SetInteger("ComboCounter", _comboCounter);
 
         float attackDir = player.facingDir;
 
