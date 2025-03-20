@@ -32,7 +32,7 @@ public class PlayerDashState : PlayerState
         base.ExitState();
 
         //Setting the horizontal movement to 0 upon exiting to avoid moving indefinitely
-        player.SetVelocity(0f, player.playerRigidbody.linearVelocityY);
+        player.SetVelocity(0f, player.rbody.linearVelocityY);
     }
 
 }

@@ -8,7 +8,7 @@ public class PlayerJumpState : PlayerState {
         base.EnterState();
 
         //Applies upward force on entering the state, not changing the horizontal velocity
-        player.SetVelocity(player.playerRigidbody.linearVelocityX, player.jumpForce);
+        player.SetVelocity(player.rbody.linearVelocityX, player.jumpForce);
         //player.playerRigidbody.linearVelocity = new Vector2(player.playerRigidbody.linearVelocityX, player.jumpForce);
     }
 
@@ -16,7 +16,7 @@ public class PlayerJumpState : PlayerState {
         base.UpdateState();
 
         //If player is falling, change to air state
-        if (player.playerRigidbody.linearVelocityY < 0f) playerStateMachine.ChangeState(player.playerAirState);
+        if (player.rbody.linearVelocityY < 0f) playerStateMachine.ChangeState(player.playerAirState);
    
 
     }

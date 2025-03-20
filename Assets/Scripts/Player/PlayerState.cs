@@ -20,7 +20,7 @@ public class PlayerState
     }
 
     public virtual void EnterState() {
-        player.playerAnimator.SetBool(_animBoolName, true);
+        player.animator.SetBool(_animBoolName, true);
         triggerCalled = false;
     }
     public virtual void UpdateState() {
@@ -33,10 +33,10 @@ public class PlayerState
         yInput = Input.GetAxisRaw("Vertical");
 
         //Changing the yVelocity parameter inside the jump blend tree based on rigidbody's vertical velocity
-        player.playerAnimator.SetFloat("yVelocity", player.playerRigidbody.linearVelocityY);
+        player.animator.SetFloat("yVelocity", player.rbody.linearVelocityY);
     }
     public virtual void ExitState() {
-        player.playerAnimator.SetBool(_animBoolName, false);
+        player.animator.SetBool(_animBoolName, false);
     }
 
     public virtual void AnimationFinishTrigger() {

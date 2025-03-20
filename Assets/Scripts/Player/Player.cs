@@ -2,7 +2,7 @@ using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : Entity
 {
     #region PlayerStats
     [Header("Move stats")]   
@@ -24,16 +24,7 @@ public class Player : MonoBehaviour
     public bool isPerformingAction { get; private set; }
 
 
-    [Header("Collision info")]
-    [SerializeField] private Transform _groundCheck;
-    [SerializeField] private float _groundCheckDistance;
-    [SerializeField] private Transform _wallCheck;
-    [SerializeField] private float _wallCheckDistance;
-    [SerializeField] private LayerMask _groundLayer;
-    [SerializeField] private LayerMask _wallLayer;
-
-    public int facingDir { get; private set; } = 1;
-    private bool isFacingRight = true;
+    
 
     #region States
     public PlayerStateMachine playerStateMachine { get; private set; }
@@ -48,13 +39,9 @@ public class Player : MonoBehaviour
 
     #endregion
 
-    #region Components
-    [field:SerializeField] public Animator playerAnimator { get; private set; }
-    [field: SerializeField] public Rigidbody2D playerRigidbody { get; private set; }
 
-    #endregion
-
-    public void Awake() {
+    protected override void Awake() {
+        base.Awake();
 
         //Initializing state machine and states
         playerStateMachine = new PlayerStateMachine();
@@ -68,17 +55,16 @@ public class Player : MonoBehaviour
         playerPrimaryAttackState = new PlayerPrimaryAttackState(this, playerStateMachine, "Attack");
     }
 
-    public void Start() {
-
-        if (playerAnimator == null) playerAnimator = GetComponentInChildren<Animator>();
-        if (playerRigidbody == null) playerRigidbody = GetComponent<Rigidbody2D>();
+    protected override void Start() {
+        base.Start();
 
         //Game starts with the idle state
         playerStateMachine.Initialize(playerIdleState);
     }
 
 
-    public void Update() {
+    protected override void Update() {
+        base.Update();
 
         playerStateMachine.currentState.UpdateState();
 
@@ -92,12 +78,6 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(_seconds);
 
         isPerformingAction = false;
-    }
-
-    public void SetVelocity(float _xVelocity, float _yVelocity) {
-
-        playerRigidbody.linearVelocity = new Vector2(_xVelocity, _yVelocity);
-        FlipController(_xVelocity);
     }
 
     public void AnimationTrigger() => playerStateMachine.currentState.AnimationFinishTrigger();
@@ -119,29 +99,5 @@ public class Player : MonoBehaviour
         }
     }
 
-    #region Collision Detection
-    public bool IsGroundDetected() => Physics2D.Raycast(_groundCheck.position, Vector2.down, _groundCheckDistance, _groundLayer);
-    public bool IsWallDetected() => Physics2D.Raycast(_wallCheck.position, Vector2.right * facingDir, _wallCheckDistance, _groundLayer);
-
-    private void OnDrawGizmos() {
-        Gizmos.DrawLine(_groundCheck.position, new Vector3(_groundCheck.position.x, _groundCheck.position.y - _groundCheckDistance, 0f));
-        Gizmos.DrawLine(_wallCheck.position, new Vector3(_wallCheck.position.x + _wallCheckDistance, _wallCheck.position.y, 0f));
-    }
-
-    #endregion
-
-    #region Flipping Character
-    public void FlipPlayer() {
-        facingDir *= -1;
-        isFacingRight = !isFacingRight;
-        transform.Rotate(0, 180, 0);
-    }
-
-    public void FlipController(float _horizontalMovemnt) {
-        //If player is moving left but not facing left, flip the player
-        if (_horizontalMovemnt < 0 && isFacingRight) FlipPlayer();
-        //If player is moving right but not facing right, flip the player
-        else if (_horizontalMovemnt > 0 && !isFacingRight) FlipPlayer();
-    }
-    #endregion
+    
 }

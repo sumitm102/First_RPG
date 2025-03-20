@@ -1,25 +1,29 @@
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy : Entity
 {
-    public Animator enemyAnimator { get; private set; }
+    [Header("Move info")]
+    public float moveSpeed;
+    public float idleTime;
+
     public EnemyStateMachine enemyStateMachine { get; private set; }
-    public EnemyIdleState enemyIdleState { get; private set; }
 
 
-    private void Awake() {
+
+    protected override void Awake() {
+        base.Awake();
+
         enemyStateMachine = new EnemyStateMachine();
-        enemyIdleState = new EnemyIdleState(this, enemyStateMachine, "Idle");
-    }
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        enemyStateMachine.Initialize(enemyIdleState);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    protected override void Start() {
+        base.Start();
+    }
+
+
+    protected override void Update() {
+        base.Update();
+
+        enemyStateMachine.currentState.UpdateState();
     }
 }

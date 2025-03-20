@@ -13,7 +13,7 @@ public class PlayerAirState : PlayerState {
 
         //To move while in air, 80% of ground movement is applied here
         if (xInput != 0)
-            player.SetVelocity(player.moveSpeed * xInput * 0.8f, player.playerRigidbody.linearVelocityY);
+            player.SetVelocity(player.moveSpeed * xInput * 0.8f, player.rbody.linearVelocityY);
 
         //If player is grounded, change to idle
         if (player.IsGroundDetected()) {
