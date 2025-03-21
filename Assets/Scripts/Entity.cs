@@ -4,12 +4,12 @@ public class Entity : MonoBehaviour
 {
 
     [Header("Collision info")]
-    [SerializeField] protected Transform _groundCheck;
-    [SerializeField] protected float _groundCheckDistance;
-    [SerializeField] protected Transform _wallCheck;
-    [SerializeField] protected float _wallCheckDistance;
-    [SerializeField] protected LayerMask _groundLayer;
-    [SerializeField] protected LayerMask _wallLayer;
+    [SerializeField] protected Transform groundCheck;
+    [SerializeField] protected float groundCheckDistance;
+    [SerializeField] protected Transform wallCheck;
+    [SerializeField] protected float wallCheckDistance;
+    [SerializeField] protected LayerMask groundLayer;
+    [SerializeField] protected LayerMask wallLayer;
 
     public int facingDir { get; private set; } = 1;
     protected bool isFacingRight = true;
@@ -40,12 +40,12 @@ public class Entity : MonoBehaviour
     }
 
     #region Collision Detection
-    public virtual bool IsGroundDetected() => Physics2D.Raycast(_groundCheck.position, Vector2.down, _groundCheckDistance, _groundLayer);
-    public virtual bool IsWallDetected() => Physics2D.Raycast(_wallCheck.position, Vector2.right * facingDir, _wallCheckDistance, _groundLayer);
+    public virtual bool IsGroundDetected() => Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, groundLayer);
+    public virtual bool IsWallDetected() => Physics2D.Raycast(wallCheck.position, Vector2.right * facingDir, wallCheckDistance, groundLayer);
 
     protected virtual void OnDrawGizmos() {
-        Gizmos.DrawLine(_groundCheck.position, new Vector3(_groundCheck.position.x, _groundCheck.position.y - _groundCheckDistance, 0f));
-        Gizmos.DrawLine(_wallCheck.position, new Vector3(_wallCheck.position.x + _wallCheckDistance, _wallCheck.position.y, 0f));
+        Gizmos.DrawLine(groundCheck.position, new Vector3(groundCheck.position.x, groundCheck.position.y - groundCheckDistance, 0f));
+        Gizmos.DrawLine(wallCheck.position, new Vector3(wallCheck.position.x + wallCheckDistance, wallCheck.position.y, 0f));
     }
 
     #endregion
