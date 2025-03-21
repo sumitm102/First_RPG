@@ -226,6 +226,7 @@ GameObject:
   m_Component:
   - component: {fileID: 84775424800253640}
   - component: {fileID: 3276084184604615432}
+  - component: {fileID: 3539408708551188382}
   - component: {fileID: 3859933695264574946}
   - component: {fileID: 2327112906711063993}
   m_Layer: 7
@@ -278,18 +279,36 @@ MonoBehaviour:
     m_Bits: 0
   attackCheck: {fileID: 1104516434778163080}
   attackCheckRadius: 1.1
+  knockBackVelocity: {x: 4, y: 12}
+  knockBackDuration: 0.07
   <animator>k__BackingField: {fileID: 993609241908968006}
   <rbody>k__BackingField: {fileID: 3859933695264574946}
+  <fx>k__BackingField: {fileID: 3539408708551188382}
   playerLayer:
     serializedVersion: 2
     m_Bits: 64
-  moveSpeed: 1.5
+  moveSpeed: 2.2
   idleTime: 2
   battleTime: 5
   attackDistance: 1.5
   attackCooldown: 0.4
   detectionRange: 10
   lastTimeAttacked: 0
+--- !u!114 &3539408708551188382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7191907103611490172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ec0f96b3d45f374c8d4010a3d7512d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _spriteRenderer: {fileID: 9025102443212236155}
+  _flashFXMaterial: {fileID: 2100000, guid: 85476ef544ba45843828bce34faf27d3, type: 2}
+  _flashDuration: 0.2
 --- !u!50 &3859933695264574946
 Rigidbody2D:
   serializedVersion: 5
@@ -305,7 +324,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 4
+  m_GravityScale: 12
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2

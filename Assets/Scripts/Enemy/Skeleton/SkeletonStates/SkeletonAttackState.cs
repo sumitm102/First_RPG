@@ -14,8 +14,8 @@ public class SkeletonAttackState : EnemyState {
     public override void UpdateState() {
         base.UpdateState();
 
-        //Stopping enemy to move during attack
-        _enemy.SetVelocity(0, 0);
+        //Stopping enemy to move during attack unless knocked back
+        _enemy.SetZeroVelocity();
 
         if (triggerCalled)
             enemyStateMachine.ChangeState(_enemy.skeletonBattleState);

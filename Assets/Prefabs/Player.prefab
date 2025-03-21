@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3759187530831964553}
   - component: {fileID: 3245447782267314318}
+  - component: {fileID: 4483232599073276178}
   - component: {fileID: 8778554955354915562}
   - component: {fileID: 7491265991326914010}
   m_Layer: 6
@@ -62,8 +63,11 @@ MonoBehaviour:
     m_Bits: 0
   attackCheck: {fileID: 7591442287649616141}
   attackCheckRadius: 0.8
+  knockBackVelocity: {x: 0, y: 0}
+  knockBackDuration: 0
   <animator>k__BackingField: {fileID: 3529230869686392838}
   <rbody>k__BackingField: {fileID: 7491265991326914010}
+  <fx>k__BackingField: {fileID: 4483232599073276178}
   moveSpeed: 8
   jumpForce: 12
   dashSpeed: 25
@@ -73,6 +77,21 @@ MonoBehaviour:
   - {x: 3, y: 2}
   - {x: 1, y: 3}
   - {x: 4, y: 2}
+--- !u!114 &4483232599073276178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1277585159819231040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ec0f96b3d45f374c8d4010a3d7512d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _spriteRenderer: {fileID: 5959728458770364020}
+  _flashFXMaterial: {fileID: 2100000, guid: 85476ef544ba45843828bce34faf27d3, type: 2}
+  _flashDuration: 0.2
 --- !u!70 &8778554955354915562
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

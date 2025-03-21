@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Entity : MonoBehaviour
@@ -13,6 +14,12 @@ public class Entity : MonoBehaviour
 
     public Transform attackCheck;
     public float attackCheckRadius;
+
+    [Header("Knockback info")]
+    [SerializeField] protected Vector2 knockBackVelocity;
+    [SerializeField] protected float knockBackDuration;
+    protected bool isKnockedBack;
+
 
     public int facingDir { get; private set; } = 1;
     protected bool isFacingRight = true;
@@ -41,13 +48,36 @@ public class Entity : MonoBehaviour
     public virtual void Damage() {
        
         fx.StartCoroutine("FlashFX");
+        StartCoroutine("Knockback");
     }
 
+    protected virtual IEnumerator Knockback() {
+        isKnockedBack = true;
+        rbody.linearVelocity = new Vector2(knockBackVelocity.x * -facingDir, knockBackVelocity.y);
+
+        yield return new WaitForSeconds(knockBackDuration);
+
+        isKnockedBack = false;
+    }
+
+
+    #region Velocity
     public void SetVelocity(float _xVelocity, float _yVelocity) {
+
+        //To avoid moving when knocked back
+        if (isKnockedBack) return;
 
         rbody.linearVelocity = new Vector2(_xVelocity, _yVelocity);
         FlipController(_xVelocity);
     }
+
+    public void SetZeroVelocity() {
+        if (isKnockedBack) return;
+
+        rbody.linearVelocity = new Vector2(0, 0);
+    }
+
+    #endregion
 
     #region Collision Detection
     public virtual bool IsGroundDetected() => Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, groundLayer);

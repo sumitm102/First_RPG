@@ -12,6 +12,9 @@ public class PlayerPrimaryAttackState : PlayerState {
     public override void EnterState() {
         base.EnterState();
 
+        //To make sure input stays consistent and doesn't get an unwanted value applied from another state
+        xInput = 0;
+
         if (_comboCounter > 2 || Time.time >= _lastTimeAttacked + _comboWindow)
             _comboCounter = 0;
 
