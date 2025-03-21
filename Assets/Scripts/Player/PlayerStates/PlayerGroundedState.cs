@@ -19,6 +19,9 @@ public class PlayerGroundedState : PlayerState {
         if (Input.GetMouseButtonDown(0))
             playerStateMachine.ChangeState(player.playerPrimaryAttackState);
 
+        if (Input.GetKeyDown(KeyCode.W))
+            playerStateMachine.ChangeState(player.playerCounterAttackState);
+
         //To make sure fall animation plays and not anything else, ie: after dashing during jump
         if (!player.IsGroundDetected())
             playerStateMachine.ChangeState(player.playerAirState);
