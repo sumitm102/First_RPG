@@ -19,6 +19,7 @@ public class Player : Entity
     [Header("Attack Details")]
     public Vector2[] attackMovement;
 
+
     #endregion
 
     public bool isPerformingAction { get; private set; }
