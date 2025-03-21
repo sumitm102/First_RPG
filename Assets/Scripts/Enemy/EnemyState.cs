@@ -29,4 +29,6 @@ public class EnemyState
     public virtual void ExitState() {
         enemyBase.animator.SetBool(_animBoolName, false);
     }
+
+    public void AnimationFinishTrigger() => triggerCalled = true;
 }
