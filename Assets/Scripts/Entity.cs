@@ -11,12 +11,16 @@ public class Entity : MonoBehaviour
     [SerializeField] protected LayerMask groundLayer;
     [SerializeField] protected LayerMask wallLayer;
 
+    public Transform attackCheck;
+    public float attackCheckRadius;
+
     public int facingDir { get; private set; } = 1;
     protected bool isFacingRight = true;
 
     #region Components
     [field: SerializeField] public Animator animator { get; private set; }
     [field: SerializeField] public Rigidbody2D rbody { get; private set; }
+    [field: SerializeField] public EntityFX fx { get; private set; }
 
     #endregion
 
@@ -27,10 +31,16 @@ public class Entity : MonoBehaviour
     protected virtual void Start() {
         if (animator == null) animator = GetComponentInChildren<Animator>();
         if (rbody == null) rbody = GetComponent<Rigidbody2D>();
+        if (fx == null) fx = GetComponent<EntityFX>();
     }
 
     protected virtual void Update() {
 
+    }
+
+    public virtual void Damage() {
+       
+        fx.StartCoroutine("FlashFX");
     }
 
     public void SetVelocity(float _xVelocity, float _yVelocity) {
@@ -46,6 +56,7 @@ public class Entity : MonoBehaviour
     protected virtual void OnDrawGizmos() {
         Gizmos.DrawLine(groundCheck.position, new Vector3(groundCheck.position.x, groundCheck.position.y - groundCheckDistance, 0f));
         Gizmos.DrawLine(wallCheck.position, new Vector3(wallCheck.position.x + wallCheckDistance, wallCheck.position.y, 0f));
+        Gizmos.DrawWireSphere(attackCheck.position, attackCheckRadius);
     }
 
     #endregion
