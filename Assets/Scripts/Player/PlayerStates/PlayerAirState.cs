@@ -1,15 +1,35 @@
 using UnityEngine;
 
 public class PlayerAirState : PlayerState {
+    private float? _lastTimeOnGround;
+    private float? _jumpButtonPressedTime;
     public PlayerAirState(Player _player, PlayerStateMachine _playerStateMachine, string _animBoolName) : base(_player, _playerStateMachine, _animBoolName) {
     }
 
     public override void EnterState() {
         base.EnterState();
+
+        _lastTimeOnGround = Time.time;
     }
 
     public override void UpdateState() {
         base.UpdateState();
+
+        #region Jump Buffer
+
+        //Only make jump buffering available when player switches from move to air state
+        if (playerStateMachine.previousState.Equals(player.playerMoveState) && Input.GetKeyDown(KeyCode.Space))
+            _jumpButtonPressedTime = Time.time;
+            
+
+        if (Time.time - _lastTimeOnGround <= player.jumpBufferTime) {
+            if (Time.time - _jumpButtonPressedTime <= player.jumpBufferTime) {
+                playerStateMachine.ChangeState(player.playerJumpState);
+                return;
+            }
+        }
+
+        #endregion
 
         //To move while in air, 80% of ground movement is applied here
         if (xInput != 0)
@@ -29,6 +49,9 @@ public class PlayerAirState : PlayerState {
 
     public override void ExitState() {
         base.ExitState();
+
+        _lastTimeOnGround = null;
+        _jumpButtonPressedTime = null;
     }
 
 }

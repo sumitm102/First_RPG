@@ -926,6 +926,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1554527525 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 619272383620241024, guid: 1ca0a8c952f7bbd41b35f126957859a3, type: 3}
+  m_PrefabInstance: {fileID: 3144739459764216475}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1574038219
 GameObject:
   m_ObjectHideFlags: 0
@@ -7937,6 +7942,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 3245447782267314318, guid: 6d5aea47882ea2842a6a300d5e987274, type: 3}
+      propertyPath: jumpBufferTime
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3245447782267314318, guid: 6d5aea47882ea2842a6a300d5e987274, type: 3}
+      propertyPath: jumpBufferCooldown
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3759187530831964553, guid: 6d5aea47882ea2842a6a300d5e987274, type: 3}
       propertyPath: m_LocalPosition.x
       value: -10.2
@@ -8030,6 +8043,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3276084184604615432, guid: 1ca0a8c952f7bbd41b35f126957859a3, type: 3}
+      propertyPath: counterImage
+      value: 
+      objectReference: {fileID: 1554527525}
     - target: {fileID: 7191907103611490172, guid: 1ca0a8c952f7bbd41b35f126957859a3, type: 3}
       propertyPath: m_Name
       value: EnemySkeleton

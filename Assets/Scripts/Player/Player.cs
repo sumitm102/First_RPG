@@ -20,13 +20,13 @@ public class Player : Entity
     public Vector2[] attackMovement;
     public float counterAttackDuration = 0.2f;
 
+    [Header("Jump Buffering")]
+    public float jumpBufferTime;
 
     #endregion
 
     public bool isPerformingAction { get; private set; }
 
-
-    
 
     #region States
     public PlayerStateMachine playerStateMachine { get; private set; }
