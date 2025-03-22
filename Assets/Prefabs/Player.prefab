@@ -62,7 +62,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   attackCheck: {fileID: 7591442287649616141}
-  attackCheckRadius: 0.8
+  attackCheckRadius: 0.85
   knockBackVelocity: {x: 0, y: 0}
   knockBackDuration: 0
   <animator>k__BackingField: {fileID: 3529230869686392838}
@@ -77,6 +77,8 @@ MonoBehaviour:
   - {x: 3, y: 2}
   - {x: 1, y: 3}
   - {x: 4, y: 2}
+  counterAttackDuration: 0.2
+  jumpBufferTime: 0.5
 --- !u!114 &4483232599073276178
 MonoBehaviour:
   m_ObjectHideFlags: 0
