@@ -87,13 +87,13 @@ public class Player : Entity
     public void AnimationTrigger() => playerStateMachine.currentState.AnimationFinishTrigger();
     private void CheckForDashInput() {
 
-        _dashCooldownTimer -= Time.deltaTime;
+        //_dashCooldownTimer -= Time.deltaTime;
 
         //To make sure to not dash when wall sliding while decreasing the its cool down timer above
         if (IsWallDetected()) return;
 
-        if (_dashCooldownTimer < 0f && Input.GetKeyDown(KeyCode.LeftShift)) {
-            _dashCooldownTimer = _dashCooldownAmount;
+        if (Input.GetKeyDown(KeyCode.LeftShift) && SkillManager.Instance.dashSkill.CanUseSkill()) {
+            //_dashCooldownTimer = _dashCooldownAmount;
 
             dashDir = Input.GetAxisRaw("Horizontal");
 
