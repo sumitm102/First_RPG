@@ -12,8 +12,8 @@ public class Player : Entity
     [Header("Dash info")]
     public float dashSpeed = 25f;
     public float dashDuration = 0.3f;
-    [SerializeField] private float _dashCooldownAmount = 3f;
-    private float _dashCooldownTimer;
+    //[SerializeField] private float _dashCooldownAmount = 3f;
+    //private float _dashCooldownTimer;
     public float dashDir { get; private set; }
 
     [Header("Attack Details")]
