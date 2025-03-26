@@ -14,12 +14,9 @@ public class Skill : MonoBehaviour
             cooldownTimer = cooldown;
             UseSkill();
 
-            Debug.Log("Can use skill");
             return true;
         }
 
-
-        Debug.Log("Skill is on cooldown");
         return false;
     }
 
