@@ -27,6 +27,8 @@ public class Player : Entity
 
     public bool isPerformingAction { get; private set; }
 
+    public SkillManager skillManager { get; private set; }
+
 
     #region States
     public PlayerStateMachine playerStateMachine { get; private set; }
@@ -61,6 +63,8 @@ public class Player : Entity
 
     protected override void Start() {
         base.Start();
+
+        skillManager = SkillManager.Instance;
 
         //Game starts with the idle state
         playerStateMachine.Initialize(playerIdleState);
