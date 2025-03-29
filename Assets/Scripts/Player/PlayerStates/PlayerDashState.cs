@@ -8,6 +8,9 @@ public class PlayerDashState : PlayerState
     public override void EnterState() {
         base.EnterState();
 
+        //Creates a clone as the character start dashing
+        player.skillManager.cloneSkill.CreateClone(player.transform);
+
         stateTimer = player.dashDuration; //stateTimer inherited from PlayerState
     }
 
