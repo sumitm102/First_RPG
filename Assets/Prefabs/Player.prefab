@@ -72,7 +72,6 @@ MonoBehaviour:
   jumpForce: 12
   dashSpeed: 25
   dashDuration: 0.25
-  _dashCooldownAmount: 0.5
   attackMovement:
   - {x: 3, y: 2}
   - {x: 1, y: 3}
