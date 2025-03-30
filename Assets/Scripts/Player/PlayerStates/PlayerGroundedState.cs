@@ -19,7 +19,8 @@ public class PlayerGroundedState : PlayerState {
         if (Input.GetMouseButtonDown(0))
             playerStateMachine.ChangeState(player.playerPrimaryAttackState);
 
-        if (Input.GetMouseButtonDown(1))
+        //If holding down right click and checking if the player doesn't have a sword
+        if (Input.GetMouseButtonDown(1) && HasNoSword())
             playerStateMachine.ChangeState(player.playerAimSwordState);
 
         if (Input.GetKeyDown(KeyCode.W))
@@ -33,6 +34,17 @@ public class PlayerGroundedState : PlayerState {
 
     public override void ExitState() {
         base.ExitState();
+    }
+
+    private bool HasNoSword() {
+        if (!player.sword) return true;
+
+        if (player.sword.TryGetComponent<SwordSkillController>(out SwordSkillController swordSkillController)) {
+            swordSkillController.ReturnSword();
+            //Debug.Log("ReturnSword Invoked");
+        }
+
+        return false;
     }
 
 

@@ -28,6 +28,7 @@ public class Player : Entity
     public bool isPerformingAction { get; private set; }
 
     public SkillManager skillManager { get; private set; }
+    public GameObject sword { get; private set; }
 
 
     #region States
@@ -110,5 +111,17 @@ public class Player : Entity
         }
     }
 
-    
+
+    #region Sword
+    public void AssignNewSword(GameObject _newSword) {
+        sword = _newSword;
+    }
+
+    public void ClearSword() {
+        Destroy(sword);
+    }
+
+    #endregion
+
+
 }
