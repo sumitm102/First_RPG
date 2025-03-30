@@ -6,6 +6,9 @@ public class PlayerAimSwordState : PlayerState {
 
     public override void EnterState() {
         base.EnterState();
+
+        player.skillManager.swordSkill.DotsActive(true);
+
     }
     public override void UpdateState() {
         base.UpdateState();
