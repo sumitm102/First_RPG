@@ -8128,6 +8128,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 3245447782267314318, guid: 6d5aea47882ea2842a6a300d5e987274, type: 3}
+      propertyPath: swordReturnImpact
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3759187530831964553, guid: 6d5aea47882ea2842a6a300d5e987274, type: 3}
       propertyPath: m_LocalPosition.x
       value: -10.2

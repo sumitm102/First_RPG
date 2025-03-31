@@ -8,6 +8,7 @@ public class Player : Entity
     [Header("Move stats")]   
     public float moveSpeed = 12f;
     public float jumpForce = 12f;
+    public float swordReturnImpact = 8f;
 
     [Header("Dash info")]
     public float dashSpeed = 25f;
@@ -117,7 +118,9 @@ public class Player : Entity
         sword = _newSword;
     }
 
-    public void ClearSword() {
+    public void CatchSword() {
+        playerStateMachine.ChangeState(playerCatchSwordState);
+
         Destroy(sword);
     }
 
