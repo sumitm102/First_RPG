@@ -51,8 +51,8 @@ MonoBehaviour:
   _rbody: {fileID: 1731256152282521462}
   _circleCollider: {fileID: 6008884201416047923}
   _returnSpeed: 12
+  _pierceAmount: 0
   _bounceSpeed: 10
-  enemyTargetList: []
 --- !u!50 &1731256152282521462
 Rigidbody2D:
   serializedVersion: 5
@@ -115,7 +115,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 0.5
+  m_Radius: 0.35
 --- !u!1 &7833371138802229891
 GameObject:
   m_ObjectHideFlags: 0
