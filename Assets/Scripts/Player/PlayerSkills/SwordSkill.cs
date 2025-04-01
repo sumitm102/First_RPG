@@ -1,7 +1,22 @@
 using UnityEngine;
 
+public enum SwordType {
+    Regular,
+    Bounce,
+    Pierce,
+    Spinning
+}
+
 public class SwordSkill : Skill
 {
+    //Default sword type
+    public SwordType swordType = SwordType.Regular;
+
+    [Header("Bouncy info")]
+    [SerializeField] private int _amountOfBounces;
+    [SerializeField] private float _bounceGravity;
+
+
     [Header("Skill info")]
     [SerializeField] private GameObject _swordPrefab;
     [SerializeField] private Vector2 _launchForce;
@@ -45,16 +60,26 @@ public class SwordSkill : Skill
     public void CreateSword() {
         GameObject newSword = Instantiate(_swordPrefab, player.transform.position, transform.rotation);
 
-        SwordSkillController newSwordSkillController = newSword.GetComponent<SwordSkillController>();
+        //SwordSkillController newSwordSkillController = newSword.GetComponent<SwordSkillController>();
 
-        newSwordSkillController.SetupSword(_finalDir, _swordGravity, player);
+        if(newSword.TryGetComponent<SwordSkillController>(out SwordSkillController newSwordSkillController)) {
+            if (swordType == SwordType.Bounce) {
+                _swordGravity = _bounceGravity;
+                newSwordSkillController.SetupBounce(true, _amountOfBounces);
+            }
 
+            newSwordSkillController.SetupSword(_finalDir, _swordGravity, player);
+        }
+
+      
         player.AssignNewSword(newSword);
 
         DotsActive(false);
     }
 
 
+
+    #region Aiming and Dots
     public Vector2 AimDirection() {
         Vector2 playerPosition = player.transform.position;
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -87,5 +112,7 @@ public class SwordSkill : Skill
 
         return position;
     }
+
+    #endregion
 
 }
