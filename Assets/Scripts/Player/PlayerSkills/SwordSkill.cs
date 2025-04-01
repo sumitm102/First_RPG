@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public enum SwordType {
@@ -13,8 +14,12 @@ public class SwordSkill : Skill
     public SwordType swordType = SwordType.Regular;
 
     [Header("Bouncy info")]
-    [SerializeField] private int _amountOfBounces;
-    [SerializeField] private float _bounceGravity;
+    [SerializeField] private int _bounceAmount;
+    [SerializeField] private float _bounceGravity;  
+
+    [Header("Pierce info")]
+    [SerializeField] private int _pierceAmount;
+    [SerializeField] private float _pierceGravity;
 
 
     [Header("Skill info")]
@@ -38,8 +43,16 @@ public class SwordSkill : Skill
         base.Start();
 
         GenerateDots();
+
+        SetupGravity();
     }
 
+    private void SetupGravity() {
+        if (swordType == SwordType.Bounce)
+            _swordGravity = _bounceGravity;
+        else if (swordType == SwordType.Pierce)
+            _swordGravity = _pierceGravity;
+    }
 
     protected override void Update() {
         base.Update();
@@ -63,10 +76,10 @@ public class SwordSkill : Skill
         //SwordSkillController newSwordSkillController = newSword.GetComponent<SwordSkillController>();
 
         if(newSword.TryGetComponent<SwordSkillController>(out SwordSkillController newSwordSkillController)) {
-            if (swordType == SwordType.Bounce) {
-                _swordGravity = _bounceGravity;
-                newSwordSkillController.SetupBounce(true, _amountOfBounces);
-            }
+            if (swordType == SwordType.Bounce)
+                newSwordSkillController.SetupBounce(true, _bounceAmount);
+            else if (swordType == SwordType.Pierce)
+                newSwordSkillController.SetupPierce(_pierceAmount);
 
             newSwordSkillController.SetupSword(_finalDir, _swordGravity, player);
         }

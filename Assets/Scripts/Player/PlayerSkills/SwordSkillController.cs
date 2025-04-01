@@ -13,11 +13,14 @@ public class SwordSkillController : MonoBehaviour
     private bool _canRotate = true;
     private bool _isReturning;
 
+    [Header("Pierce info")]
+    [SerializeField] private int _pierceAmount;
+
     [Header("Bounce info")]
     [SerializeField] private float _bounceSpeed;
-    private bool isBouncing;
-    private int amountOfBounces;
-    private List<Transform> enemyTargetList;
+    private bool _isBouncing;
+    private int _bounceAmount;
+    private List<Transform> _enemyTargetList;
     private int _targetIndex;
 
     private void Awake() {
@@ -45,19 +48,19 @@ public class SwordSkillController : MonoBehaviour
     }
 
     private void BounceLogic() {
-        if (isBouncing && enemyTargetList.Count > 0) {
-            transform.position = Vector2.MoveTowards(transform.position, enemyTargetList[_targetIndex].position, _bounceSpeed * Time.deltaTime);
+        if (_isBouncing && _enemyTargetList.Count > 0) {
+            transform.position = Vector2.MoveTowards(transform.position, _enemyTargetList[_targetIndex].position, _bounceSpeed * Time.deltaTime);
 
-            if ((enemyTargetList[_targetIndex].position - transform.position).sqrMagnitude < 0.1f * 0.1f) {
+            if ((_enemyTargetList[_targetIndex].position - transform.position).sqrMagnitude < 0.1f * 0.1f) {
                 _targetIndex++;
-                amountOfBounces--;
+                _bounceAmount--;
 
-                if (amountOfBounces <= 0) {
-                    isBouncing = false;
+                if (_bounceAmount <= 0) {
+                    _isBouncing = false;
                     _isReturning = true; //For returning to the player when all bounces have been performed
                 }
 
-                if (_targetIndex >= enemyTargetList.Count)
+                if (_targetIndex >= _enemyTargetList.Count)
                     _targetIndex = 0;
             }
         }
@@ -67,15 +70,16 @@ public class SwordSkillController : MonoBehaviour
 
         if (_isReturning) return;
 
+        _collider.GetComponent<Enemy>()?.Damage();
 
         if (_collider.TryGetComponent<Enemy>(out Enemy _enemy)) {
 
-            if (isBouncing && enemyTargetList.Count <= 0) {
+            if (_isBouncing && _enemyTargetList.Count <= 0) {
                 Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 10f);
 
                 foreach (var collider in colliders) {
                     if (collider.TryGetComponent<Enemy>(out Enemy _surroundingEnemy))
-                        enemyTargetList.Add(_surroundingEnemy.transform);
+                        _enemyTargetList.Add(_surroundingEnemy.transform);
                     
                 }
             }
@@ -86,6 +90,12 @@ public class SwordSkillController : MonoBehaviour
 
     private void StuckInto(Collider2D _collider) {
 
+        if (_pierceAmount > 0 && _collider.TryGetComponent<Enemy>(out Enemy enmey)) {
+            _pierceAmount--;
+            return;
+        }
+
+
         _canRotate = false;
         _circleCollider.enabled = false;
 
@@ -93,7 +103,7 @@ public class SwordSkillController : MonoBehaviour
         _rbody.bodyType = RigidbodyType2D.Kinematic;
         _rbody.constraints = RigidbodyConstraints2D.FreezeAll;
 
-        if (isBouncing && enemyTargetList.Count > 0) return;
+        if (_isBouncing && _enemyTargetList.Count > 0) return;
 
         _animator.SetBool("Rotation", false);
 
@@ -107,15 +117,20 @@ public class SwordSkillController : MonoBehaviour
         _rbody.linearVelocity = _dir;
         _rbody.gravityScale = _gravityScale;
 
-        _animator.SetBool("Rotation", true);
+        if(_pierceAmount <= 0)
+            _animator.SetBool("Rotation", true);
     }
 
     public void SetupBounce(bool _isBouncing, int _amountOfBounces) {
-        isBouncing = _isBouncing;
-        amountOfBounces = _amountOfBounces;
+        this._isBouncing = _isBouncing;
+        _bounceAmount = _amountOfBounces;
 
         //Needs a default value when it's private
-        enemyTargetList = new List<Transform>();
+        _enemyTargetList = new List<Transform>();
+    }
+
+    public void SetupPierce(int _amountOfPierce) {
+        _pierceAmount = _amountOfPierce;
     }
 
     public void ReturnSword() {
