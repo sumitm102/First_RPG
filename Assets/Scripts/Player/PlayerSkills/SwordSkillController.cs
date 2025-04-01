@@ -13,10 +13,11 @@ public class SwordSkillController : MonoBehaviour
     private bool _canRotate = true;
     private bool _isReturning;
 
-    public float bounceSpeed;
-    public bool isBouncing = true;
-    public int amountOfBounces = 4;
-    public List<Transform> enemyTargetList;
+    [Header("Bounce info")]
+    [SerializeField] private float _bounceSpeed;
+    private bool isBouncing;
+    private int amountOfBounces;
+    private List<Transform> enemyTargetList;
     private int _targetIndex;
 
     private void Awake() {
@@ -28,11 +29,11 @@ public class SwordSkillController : MonoBehaviour
     private void Update() {
 
         //For rotating the sword along the aiming path
-        if(_canRotate) 
+        if (_canRotate)
             transform.right = _rbody.linearVelocity;
 
         if (_isReturning) {
-            transform.position = Vector2.MoveTowards(transform.position,  _player.transform.position, _returnSpeed * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(transform.position, _player.transform.position, _returnSpeed * Time.deltaTime);
 
             if ((_player.transform.position - transform.position).sqrMagnitude < 0.5f * 0.5f) {
                 _player.CatchSword();
@@ -40,8 +41,12 @@ public class SwordSkillController : MonoBehaviour
 
         }
 
+        BounceLogic();
+    }
+
+    private void BounceLogic() {
         if (isBouncing && enemyTargetList.Count > 0) {
-            transform.position = Vector2.MoveTowards(transform.position, enemyTargetList[_targetIndex].position, bounceSpeed * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(transform.position, enemyTargetList[_targetIndex].position, _bounceSpeed * Time.deltaTime);
 
             if ((enemyTargetList[_targetIndex].position - transform.position).sqrMagnitude < 0.1f * 0.1f) {
                 _targetIndex++;
@@ -52,7 +57,7 @@ public class SwordSkillController : MonoBehaviour
                     _isReturning = true; //For returning to the player when all bounces have been performed
                 }
 
-                if(_targetIndex >= enemyTargetList.Count) 
+                if (_targetIndex >= enemyTargetList.Count)
                     _targetIndex = 0;
             }
         }
@@ -103,6 +108,14 @@ public class SwordSkillController : MonoBehaviour
         _rbody.gravityScale = _gravityScale;
 
         _animator.SetBool("Rotation", true);
+    }
+
+    public void SetupBounce(bool _isBouncing, int _amountOfBounces) {
+        isBouncing = _isBouncing;
+        amountOfBounces = _amountOfBounces;
+
+        //Needs a default value when it's private
+        enemyTargetList = new List<Transform>();
     }
 
     public void ReturnSword() {
