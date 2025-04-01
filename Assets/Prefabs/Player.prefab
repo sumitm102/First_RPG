@@ -71,6 +71,7 @@ MonoBehaviour:
   <fx>k__BackingField: {fileID: 4483232599073276178}
   moveSpeed: 8
   jumpForce: 12
+  swordReturnImpact: 3
   dashSpeed: 25
   dashDuration: 0.25
   attackMovement:
