@@ -15,7 +15,8 @@ public class SwordSkill : Skill
 
     [Header("Bouncy info")]
     [SerializeField] private int _bounceAmount;
-    [SerializeField] private float _bounceGravity;  
+    [SerializeField] private float _bounceGravity;
+    [SerializeField] private float _boundSpeed;
 
     [Header("Pierce info")]
     [SerializeField] private int _pierceAmount;
@@ -32,7 +33,8 @@ public class SwordSkill : Skill
     [SerializeField] private GameObject _swordPrefab;
     [SerializeField] private Vector2 _launchForce;
     [SerializeField] private float _swordGravity;
-
+    [SerializeField] private float _freezeTimeDuration;
+    [SerializeField] private float _returnSpeed;
 
     private Vector2 _finalDir;
 
@@ -85,13 +87,13 @@ public class SwordSkill : Skill
 
         if(newSword.TryGetComponent<SwordSkillController>(out SwordSkillController newSwordSkillController)) {
             if (swordType == SwordType.Bounce)
-                newSwordSkillController.SetupBounce(true, _bounceAmount);
+                newSwordSkillController.SetupBounce(true, _bounceAmount, _boundSpeed);
             else if (swordType == SwordType.Pierce)
                 newSwordSkillController.SetupPierce(_pierceAmount);
             else if (swordType == SwordType.Spinning)
                 newSwordSkillController.SetupSpin(true, _maxTravelDistance, _spinDuration, _damageCooldown);
 
-                newSwordSkillController.SetupSword(_finalDir, _swordGravity, player);
+            newSwordSkillController.SetupSword(_finalDir, _swordGravity, player, _freezeTimeDuration, _returnSpeed);
         }
 
       

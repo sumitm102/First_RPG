@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Enemy : Entity
@@ -14,6 +15,7 @@ public class Enemy : Entity
     public float moveSpeed;
     public float idleTime;
     public float battleTime;
+    private float _defaultMoveSpeed;
 
     [Header("Attack info")]
     public float attackDistance;
@@ -33,6 +35,8 @@ public class Enemy : Entity
 
     protected override void Start() {
         base.Start();
+
+        _defaultMoveSpeed = moveSpeed;
     }
 
 
@@ -43,6 +47,28 @@ public class Enemy : Entity
         //Debug.Log(IsPlayerDetected().collider.gameObject.name);
     }
 
+
+    public virtual void FreezeTime(bool _timeFrozen) {
+
+        //Stopping move speed and animation to implement immobile enemies
+        if (_timeFrozen) {
+            moveSpeed = 0;
+            animator.speed = 0;
+        }
+        else {
+            moveSpeed = _defaultMoveSpeed;
+            animator.speed = 1;
+        }
+    }
+
+    protected virtual IEnumerator FreezeTimeFor(float _seconds) {
+        FreezeTime(true);
+
+        yield return new WaitForSeconds(_seconds);
+
+        FreezeTime(false);
+
+    }
 
     #region Counter Attack Window
     public virtual void OpenCounterAttackWindow() {
