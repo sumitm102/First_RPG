@@ -337,14 +337,18 @@ MonoBehaviour:
   swordType: 3
   _bounceAmount: 5
   _bounceGravity: 5
+  _boundSpeed: 20
   _pierceAmount: 2
   _pierceGravity: 1
+  _damageCooldown: 0.35
   _maxTravelDistance: 7
-  _spinDuration: 2
+  _spinDuration: 3
   _spinGravity: 1
   _swordPrefab: {fileID: 5067393807024921750, guid: 46350d582dea40842b33b8f448e10c57, type: 3}
   _launchForce: {x: 35, y: 25}
   _swordGravity: 4.5
+  _freezeTimeDuration: 0.5
+  _returnSpeed: 15
   _numOfDots: 20
   _spaceBetweenDots: 0.07
   _dotPrefab: {fileID: 4227545852906352605, guid: 9c08afb3ff25dbe4988b53e764c2c721, type: 3}

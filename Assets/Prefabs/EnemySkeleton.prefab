@@ -356,7 +356,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   groundCheck: {fileID: 860077154171651564}
-  groundCheckDistance: 0.3
+  groundCheckDistance: 1
   wallCheck: {fileID: 4123241401574144795}
   wallCheckDistance: 0.7
   groundLayer:

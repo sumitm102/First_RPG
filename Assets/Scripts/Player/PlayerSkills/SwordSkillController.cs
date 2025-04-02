@@ -8,17 +8,19 @@ public class SwordSkillController : MonoBehaviour
     [SerializeField] private Animator _animator;
     [SerializeField] private Rigidbody2D _rbody;
     [SerializeField] private CircleCollider2D _circleCollider;
-    [SerializeField] private float _returnSpeed = 12f;
     private Player _player;
 
     private bool _canRotate = true;
     private bool _isReturning;
 
+    private float _returnSpeed = 12f;
+    private float _freezeTimeDuration;
+
     [Header("Pierce info")]
     private int _pierceAmount;
 
     [Header("Bounce info")]
-    [SerializeField] private float _bounceSpeed;
+    private float _bounceSpeed;
     private bool _isBouncing;
     private int _bounceAmount;
     private List<Transform> _enemyTargetList;
@@ -40,6 +42,10 @@ public class SwordSkillController : MonoBehaviour
         _animator = GetComponentInChildren<Animator>();
         _rbody = GetComponent<Rigidbody2D>();
         _circleCollider = GetComponent<CircleCollider2D>();
+    }
+
+    private void DestroySword() {
+        Destroy(this.gameObject);
     }
 
     private void Update() {
@@ -79,11 +85,12 @@ public class SwordSkillController : MonoBehaviour
                 _spinTimer -= Time.deltaTime;
 
                 //To move the sword little by little when spinning after surpassing max distance
-                transform.position = Vector2.MoveTowards(transform.position, new Vector2(transform.position.x + _spinDirection, transform.position.y), 1.5f * Time.deltaTime);
+                transform.position = Vector2.MoveTowards(transform.position, new Vector2(transform.position.x + _spinDirection, transform.position.y), 1f * Time.deltaTime);
 
                 if (_spinTimer < 0) {
                     _isReturning = true;
                     _isSpinning = false;
+                    //_wasStopped = false;
                 }
 
                 _damageTimer -= Time.deltaTime;
@@ -96,8 +103,11 @@ public class SwordSkillController : MonoBehaviour
                     Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 1f);
 
                     foreach (var collider in colliders) {
-                        if (collider.TryGetComponent<Enemy>(out Enemy _surroundingEnemy))
-                            _surroundingEnemy.Damage();
+                        if (collider.TryGetComponent<Enemy>(out Enemy _surroundingEnemy)) {
+                            DamageAndFreezeEnemy(_surroundingEnemy);
+
+                        }
+
 
                     }
 
@@ -118,8 +128,8 @@ public class SwordSkillController : MonoBehaviour
 
             if ((_enemyTargetList[_targetIndex].position - transform.position).sqrMagnitude < 0.1f * 0.1f) {
                 
-                //Damaging the enemy before switching to the next target
-                _enemyTargetList[_targetIndex].GetComponent<Enemy>()?.Damage();
+                //Damaging the enemy and freezing it before switching to the next target
+                DamageAndFreezeEnemy(_enemyTargetList[_targetIndex].GetComponent<Enemy>());
 
                 _targetIndex++;
                 _bounceAmount--;
@@ -139,7 +149,11 @@ public class SwordSkillController : MonoBehaviour
 
         if (_isReturning) return;
 
-        _collider.GetComponent<Enemy>()?.Damage();
+
+        if(_collider.TryGetComponent<Enemy>(out Enemy enemy)) {
+            DamageAndFreezeEnemy(enemy);
+        }
+
 
         if (_collider.TryGetComponent<Enemy>(out Enemy _enemy) && _isBouncing && _enemyTargetList.Count <= 0) {
             Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 10f);
@@ -153,6 +167,13 @@ public class SwordSkillController : MonoBehaviour
         }
 
         StuckInto(_collider);
+    }
+
+    private void DamageAndFreezeEnemy(Enemy enemy) {
+        enemy.Damage();
+
+        //Ignoring the return value of the coroutine
+        _ = enemy.StartCoroutine("FreezeTimeFor", _freezeTimeDuration);
     }
 
     private void StuckInto(Collider2D _collider) {
@@ -185,8 +206,10 @@ public class SwordSkillController : MonoBehaviour
 
 
     #region Setup Swords
-    public void SetupSword(Vector2 _dir, float _gravityScale, Player _player) {
+    public void SetupSword(Vector2 _dir, float _gravityScale, Player _player, float _freezeTimeDuration, float _returnSpeed) {
         this._player = _player;
+        this._freezeTimeDuration = _freezeTimeDuration;
+        this._returnSpeed = _returnSpeed;
 
         _rbody.linearVelocity = _dir;
         _rbody.gravityScale = _gravityScale;
@@ -195,10 +218,14 @@ public class SwordSkillController : MonoBehaviour
             _animator.SetBool("Rotation", true);
 
         _spinDirection = Mathf.Clamp(_rbody.linearVelocityX, -1f, 1f);
+
+        //If sword doesn't return after throwing for 10 seconds, destroy it
+        Invoke("DestroySword", 10f);
     }
 
-    public void SetupBounce(bool _isBouncing, int _amountOfBounces) {
+    public void SetupBounce(bool _isBouncing, int _amountOfBounces, float _bounceSpeed) {
         this._isBouncing = _isBouncing;
+        this._bounceSpeed = _bounceSpeed;
         _bounceAmount = _amountOfBounces;
 
         //Needs a default value when it's private

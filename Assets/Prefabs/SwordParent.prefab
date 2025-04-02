@@ -51,7 +51,6 @@ MonoBehaviour:
   _rbody: {fileID: 1731256152282521462}
   _circleCollider: {fileID: 6008884201416047923}
   _returnSpeed: 12
-  _pierceAmount: 0
   _bounceSpeed: 10
 --- !u!50 &1731256152282521462
 Rigidbody2D:
