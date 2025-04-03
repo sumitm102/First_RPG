@@ -50,8 +50,6 @@ MonoBehaviour:
   _animator: {fileID: 4498848673954807407}
   _rbody: {fileID: 1731256152282521462}
   _circleCollider: {fileID: 6008884201416047923}
-  _returnSpeed: 12
-  _bounceSpeed: 10
 --- !u!50 &1731256152282521462
 Rigidbody2D:
   serializedVersion: 5
