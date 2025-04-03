@@ -37,7 +37,7 @@ public class BlackholeSkillController : MonoBehaviour
 
             float _xOffset;
 
-            //Random offset to position the clones either to the right or to left of the enemy
+            //Set offset randomly to position the clones either to the right or to left of the enemy
             if (Random.Range(0, 100) > 50)
                 _xOffset = 2f;
             else

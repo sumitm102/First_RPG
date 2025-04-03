@@ -4,6 +4,7 @@ using UnityEngine;
 public class BlackholeHotkeyController : MonoBehaviour
 {
     private KeyCode _hotkey;
+    private bool _keyHasBeenPressed;
     private TextMeshProUGUI _textMeshPro;
     private Transform _enemyTransform;
     private BlackholeSkillController _blackholeSkillController;
@@ -22,7 +23,8 @@ public class BlackholeHotkeyController : MonoBehaviour
     }
 
     private void Update() {
-        if (Input.GetKeyDown(_hotkey)) {
+        if (Input.GetKeyDown(_hotkey) && !_keyHasBeenPressed) {
+            _keyHasBeenPressed = true;
             _blackholeSkillController.AddEnemyToList(_enemyTransform);
 
             _textMeshPro.color = Color.clear;
