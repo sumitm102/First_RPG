@@ -891,10 +891,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hotkeyPrefab: {fileID: 7268969830140239904, guid: b5d2ad072a1517d4283b4b3ab2b1a36c, type: 3}
-  _keyCodeList: 7100000077000000650000007200000074000000
+  _keyCodeList: 7100000077000000650000006600000074000000
   _maxSize: 15
   _growSpeed: 1
+  _shrinkSpeed: 3
   _canGrow: 0
+  _canShrink: 0
+  attackAmount: 4
+  cloneAttackCooldown: 0.3
 --- !u!212 &753190902
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -35,12 +35,12 @@ public class CloneSkillController : MonoBehaviour {
     }
 
 
-    public void SetupClone(Transform _newTransform, float  _cloneDuration, bool _canAttack) {
+    public void SetupClone(Transform _newTransform, float  _cloneDuration, bool _canAttack, Vector3 _offset) {
 
         //Randomly performs one of the three attacks when instantiated assuming player is able to attack
          if(_canAttack) _animator.SetInteger("AttackNumber", Random.Range(1, 4));
 
-        transform.position = _newTransform.position;
+        transform.position = _newTransform.position + _offset;
         _cloneTimer = _cloneDuration;
 
         FaceClosestTarget();

@@ -9,7 +9,7 @@ public class PlayerDashState : PlayerState
         base.EnterState();
 
         //Creates a clone as the character start dashing
-        player.skillManager.cloneSkill.CreateClone(player.transform);
+        player.skillManager.cloneSkill.CreateClone(player.transform, Vector3.zero);
 
         stateTimer = player.dashDuration; //stateTimer inherited from PlayerState
     }
