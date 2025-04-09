@@ -15,8 +15,8 @@ public class BlackholeSkillController : MonoBehaviour
 
     private bool _canCreateHotkeys = true;
     private bool _cloneAttackReleased;
-    private int _attackAmount = 4;
-    private float _cloneAttackCooldown = 0.3f;
+    private int _attackAmount;
+    private float _cloneAttackCooldown;
     private float _cloneAttackTimer;
 
     private List<Transform> _targetList = new List<Transform>();
@@ -24,7 +24,7 @@ public class BlackholeSkillController : MonoBehaviour
 
     private void Update() {
 
-        _cloneAttackTimer -= Time.time;
+        _cloneAttackTimer -= Time.deltaTime;
 
         if (Input.GetKeyDown(KeyCode.R)) {
             ReleaseCloneAttack();
@@ -32,9 +32,9 @@ public class BlackholeSkillController : MonoBehaviour
 
         CloneAttackLogic();
 
-        if (_canGrow && !_canShrink) {
+        if (_canGrow && !_canShrink) 
             transform.localScale = Vector2.Lerp(transform.localScale, new Vector2(_maxSize, _maxSize), _growSpeed * Time.deltaTime);
-        }
+        
 
         if (_canShrink) {
             transform.localScale = Vector2.Lerp(transform.localScale, new Vector2(-1f, -1f), _shrinkSpeed * Time.deltaTime);
@@ -56,6 +56,9 @@ public class BlackholeSkillController : MonoBehaviour
     }
 
     private void ReleaseCloneAttack() {
+        //Making the player invisible before releasing the attack
+        PlayerManager.Instance.player.MakeTransparent(true); 
+
         _cloneAttackReleased = true;
         _canCreateHotkeys = false;
         DestroyHotKeys();
@@ -78,11 +81,16 @@ public class BlackholeSkillController : MonoBehaviour
 
             _attackAmount--;
 
-            if (_attackAmount <= 0) {
-                _canShrink = true;
-                _cloneAttackReleased = false;
-            }
+            if (_attackAmount <= 0) 
+                Invoke("FinishBlackholeAbility" , 1f); // Invokes the function after a second of delay
+            
         }
+    }
+
+    private void FinishBlackholeAbility() {
+        _canShrink = true;
+        _cloneAttackReleased = false;
+        PlayerManager.Instance.player.ExitBlackholeAbility();
     }
 
     private void OnTriggerEnter2D(Collider2D _collider) {

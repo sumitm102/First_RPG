@@ -28,6 +28,7 @@ public class Entity : MonoBehaviour
     [field: SerializeField] public Animator animator { get; private set; }
     [field: SerializeField] public Rigidbody2D rbody { get; private set; }
     [field: SerializeField] public EntityFX fx { get; private set; }
+    [field: SerializeField] public SpriteRenderer spriteRenderer { get; private set; }
 
     #endregion
 
@@ -39,6 +40,7 @@ public class Entity : MonoBehaviour
         if (animator == null) animator = GetComponentInChildren<Animator>();
         if (rbody == null) rbody = GetComponent<Rigidbody2D>();
         if (fx == null) fx = GetComponent<EntityFX>();
+        if (spriteRenderer == null) spriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
 
     protected virtual void Update() {
@@ -105,4 +107,11 @@ public class Entity : MonoBehaviour
         else if (_horizontalMovemnt > 0 && !isFacingRight) FlipCharacter();
     }
     #endregion
+
+    public void MakeTransparent(bool _isTransparent) {
+        if (_isTransparent) 
+            spriteRenderer.color = Color.clear;
+        else
+            spriteRenderer.color = Color.white;
+    }
 }
