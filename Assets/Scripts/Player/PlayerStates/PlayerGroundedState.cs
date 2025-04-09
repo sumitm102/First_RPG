@@ -12,6 +12,10 @@ public class PlayerGroundedState : PlayerState {
     public override void UpdateState() {
         base.UpdateState();
 
+        //If Q is pressed, use ultimate skill
+        if (Input.GetKeyDown(KeyCode.Q))
+            playerStateMachine.ChangeState(player.playerBlackholeState);
+
         //If space key pressed and player is grounded, change to jump state
         if (Input.GetKeyDown(KeyCode.Space) && player.IsGroundDetected())
             playerStateMachine.ChangeState(player.playerJumpState);

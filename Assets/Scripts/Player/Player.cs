@@ -27,7 +27,6 @@ public class Player : Entity
     #endregion
 
     public bool isPerformingAction { get; private set; }
-
     public SkillManager skillManager { get; private set; }
     public GameObject sword { get; private set; }
 
@@ -45,6 +44,7 @@ public class Player : Entity
     public PlayerCounterAttackState playerCounterAttackState { get; private set; }
     public PlayerAimSwordState playerAimSwordState { get; private set; }
     public PlayerCatchSwordState playerCatchSwordState { get; private set; }
+    public PlayerBlackholeAbilityState playerBlackholeState { get; private set; }
 
     #endregion
 
@@ -67,6 +67,8 @@ public class Player : Entity
 
         playerAimSwordState = new PlayerAimSwordState(this, playerStateMachine, "AimSword");
         playerCatchSwordState = new PlayerCatchSwordState(this, playerStateMachine, "CatchSword");
+
+        playerBlackholeState = new PlayerBlackholeAbilityState(this, playerStateMachine, "Jump");
     }
 
     protected override void Start() {
@@ -125,6 +127,10 @@ public class Player : Entity
     }
 
     #endregion
+
+    public void ExitBlackholeAbility() {
+        playerStateMachine.ChangeState(playerAirState);
+    }
 
 
 }

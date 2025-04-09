@@ -17,7 +17,7 @@ public class PlayerAirState : PlayerState {
 
         #region Jump Buffer
 
-        //Only make jump buffering available when player switches from move to air state
+        //Only make jump buffering available when player switches from move state to air state and space key is pressed
         if (playerStateMachine.previousState.Equals(player.playerMoveState) && Input.GetKeyDown(KeyCode.Space))
             _jumpButtonPressedTime = Time.time;
             
