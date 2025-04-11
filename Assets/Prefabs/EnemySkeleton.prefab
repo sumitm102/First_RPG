@@ -372,6 +372,7 @@ MonoBehaviour:
   <animator>k__BackingField: {fileID: 993609241908968006}
   <rbody>k__BackingField: {fileID: 3859933695264574946}
   <fx>k__BackingField: {fileID: 3539408708551188382}
+  <spriteRenderer>k__BackingField: {fileID: 0}
   playerLayer:
     serializedVersion: 2
     m_Bits: 64

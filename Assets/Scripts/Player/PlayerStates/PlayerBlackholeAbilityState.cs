@@ -32,6 +32,9 @@ public class PlayerBlackholeAbilityState : PlayerState {
             
         }
 
+        if (player.skillManager.blackholeSkill.IsAbilityCompleted())
+            playerStateMachine.ChangeState(player.playerAirState);
+
         // Exiting the state and entering the air state is invoked in the BlackholeSkillController script when all of the clone attacks are performed
     }
 
