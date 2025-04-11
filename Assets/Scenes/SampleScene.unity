@@ -375,6 +375,7 @@ MonoBehaviour:
   _maxSize: 15
   _growSpeed: 3
   _shrinkSpeed: 6
+  _blackholeDuration: 4
   _blackholePrefab: {fileID: 2446082584282325615, guid: 2eac592f5328e534aa8f3a05fdd1329a, type: 3}
   _cloneAttackCooldown: 0.35
   _attackAmount: 5

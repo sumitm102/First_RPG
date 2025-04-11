@@ -69,6 +69,7 @@ MonoBehaviour:
   <animator>k__BackingField: {fileID: 3529230869686392838}
   <rbody>k__BackingField: {fileID: 7491265991326914010}
   <fx>k__BackingField: {fileID: 4483232599073276178}
+  <spriteRenderer>k__BackingField: {fileID: 0}
   moveSpeed: 8
   jumpForce: 12
   swordReturnImpact: 3

@@ -128,9 +128,5 @@ public class Player : Entity
 
     #endregion
 
-    public void ExitBlackholeAbility() {
-        playerStateMachine.ChangeState(playerAirState);
-    }
-
 
 }
