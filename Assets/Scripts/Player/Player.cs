@@ -88,6 +88,10 @@ public class Player : Entity
 
         //Checking for dash needs to be outside of grounded to be applicable almost everywhere for use
         CheckForDashInput();
+
+        // Teleports to the crystal's position if g is pressed and other requirements are fulfilled
+        if (Input.GetKeyDown(KeyCode.G))
+            skillManager.crystalSkill.CanUseSkill();
     }
 
     public IEnumerator BusyFor(float _seconds) {

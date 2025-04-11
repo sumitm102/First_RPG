@@ -11,6 +11,7 @@ public class SkillManager : MonoBehaviour
     public CloneSkill cloneSkill { get; private set; }
     public SwordSkill swordSkill { get; private set; }
     public BlackholeSkill blackholeSkill { get; private set; }
+    public CrystalSkill crystalSkill { get; private set; }
 
     #endregion
 
@@ -26,6 +27,7 @@ public class SkillManager : MonoBehaviour
         if(cloneSkill == null) cloneSkill = GetComponent<CloneSkill>();
         if (swordSkill == null) swordSkill = GetComponent<SwordSkill>();
         if (blackholeSkill == null) blackholeSkill = GetComponent<BlackholeSkill>();
+        if (crystalSkill == null) crystalSkill = GetComponent<CrystalSkill>();
 
     }
 }
