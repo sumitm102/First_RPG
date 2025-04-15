@@ -11,14 +11,17 @@ public class CrystalSkillController : MonoBehaviour
     private bool _canGrow;
     private float _growSpeed;
 
+    private Transform _closestEnemy;
+
     private Animator _anim => GetComponent<Animator>();
     private CircleCollider2D _circleCollider => GetComponent<CircleCollider2D>();
-    public void SetupCrystal(float _crystalDuration, bool _canExplode, bool _canMoveToEnemy, float _moveSpeed, float _growSpeed) {
+    public void SetupCrystal(float _crystalDuration, bool _canExplode, bool _canMoveToEnemy, float _moveSpeed, float _growSpeed, Transform _closestEnemy) {
         _crystalExistTimer = _crystalDuration;
         this._canExplode = _canExplode;
         this._canMoveToEnemy = _canMoveToEnemy;
         this._moveSpeed = _moveSpeed;
         this._growSpeed = _growSpeed;
+        this._closestEnemy = _closestEnemy;
     }
 
     private void Update() {
@@ -26,6 +29,16 @@ public class CrystalSkillController : MonoBehaviour
         
         if (_crystalExistTimer < 0) 
             ExplodeOrSelfDestroy();
+
+        if (_canMoveToEnemy && _closestEnemy != null) {
+            transform.position = Vector2.Lerp(transform.position, _closestEnemy.position, _moveSpeed * Time.deltaTime);
+
+            if ((_closestEnemy.position - transform.position).sqrMagnitude < 1.2f * 1.2f) {
+                _canMoveToEnemy = false;
+                ExplodeOrSelfDestroy();
+            }
+
+        }
 
         if (_canGrow) 
             transform.localScale = Vector2.Lerp(transform.localScale, new Vector2(3f, 3f), _growSpeed * Time.deltaTime); 
