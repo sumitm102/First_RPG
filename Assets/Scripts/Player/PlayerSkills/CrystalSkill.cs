@@ -5,6 +5,7 @@ public class CrystalSkill : Skill
 {
     [SerializeField] private GameObject _crystalPrefab;
     [SerializeField] private float _crystalDuration;
+    [SerializeField] private float _enemyCheckRadius;
     private GameObject _currentCrystal;
 
     [Header("Explosive crystal")]
@@ -21,10 +22,13 @@ public class CrystalSkill : Skill
         if(_currentCrystal == null) {
             _currentCrystal = Instantiate(_crystalPrefab, player.transform.position, Quaternion.identity);
             if (_currentCrystal.TryGetComponent<CrystalSkillController>(out CrystalSkillController crystalController))
-                crystalController.SetupCrystal(_crystalDuration, _canExplode, _canMoveToEnemy, _moveSpeed, _growSpeed);
+                crystalController.SetupCrystal(_crystalDuration, _canExplode, _canMoveToEnemy, _moveSpeed, _growSpeed, FindClosestEnemy(_currentCrystal.transform, _enemyCheckRadius));
         }
             
         else {
+
+            //Stop teleportation when crystal is moving
+            if (_canMoveToEnemy) return;
 
             Vector2 playerPosition = player.transform.position;
 
