@@ -9,17 +9,19 @@ public class CloneSkill : Skill
     [SerializeField] private float _cloneDuration;
     [SerializeField] private bool _canAttack = true;
     [SerializeField] private float _enemyCheckRadius = 5f;
+    [SerializeField] private float _chanceToDuplicate;
 
     [SerializeField] private bool _canCreateCloneOnDashStart;
     [SerializeField] private bool _canCreateCloneOnDashEnd;
     [SerializeField] private bool _canCreateCloneOnCounterAttack;
+    [SerializeField] private bool _canDuplicateClone;
 
     public void CreateClone(Transform _clonePosition, Vector3 _offset) {
         GameObject newClone = Instantiate(_clonePrefab);
 
         //Calling the method that handles logic related to the clone itself
         if(newClone.TryGetComponent<CloneSkillController>(out CloneSkillController controller)) {
-            controller.SetupClone(_clonePosition, _cloneDuration, _canAttack, _offset, FindClosestEnemy(newClone.transform, _enemyCheckRadius));
+            controller.SetupClone(_clonePosition, _cloneDuration, _canAttack, _offset, FindClosestEnemy(newClone.transform, _enemyCheckRadius), _canDuplicateClone, _chanceToDuplicate);
         }
     }
 
