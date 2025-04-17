@@ -15,14 +15,25 @@ public class CrystalSkill : Skill
     [Header("Moving crystal")]
     [SerializeField] private bool _canMoveToEnemy;
     [SerializeField] private float _moveSpeed;
+
+    [Header("Multi stacking crystal")]
+    [SerializeField] private bool _canUseMultiStacks;
+    [SerializeField] private int _stackAmount;
+    [SerializeField] private float _multiStackCooldown;
+    [SerializeField] private float _useTimeWindow;
+    [SerializeField] private List<GameObject> _crystalList = new List<GameObject>();
     
     public override void UseSkill() {
         base.UseSkill();
 
+        if (CanUseMultiCrystal())
+            return;
+
         if(_currentCrystal == null) {
             _currentCrystal = Instantiate(_crystalPrefab, player.transform.position, Quaternion.identity);
             if (_currentCrystal.TryGetComponent<CrystalSkillController>(out CrystalSkillController crystalController))
-                crystalController.SetupCrystal(_crystalDuration, _canExplode, _canMoveToEnemy, _moveSpeed, _growSpeed, FindClosestEnemy(_currentCrystal.transform, _enemyCheckRadius));
+                crystalController.
+                    SetupCrystal(_crystalDuration, _canExplode, _canMoveToEnemy, _moveSpeed, _growSpeed, FindClosestEnemy(_currentCrystal.transform, _enemyCheckRadius));
         }
             
         else {
@@ -39,5 +50,49 @@ public class CrystalSkill : Skill
             if(_currentCrystal.TryGetComponent<CrystalSkillController>(out CrystalSkillController crystalSkillController))
                 crystalSkillController.ExplodeOrSelfDestroy();
         }
+    }
+
+    private bool CanUseMultiCrystal() {
+        if (_canUseMultiStacks && _crystalList.Count > 0) {
+
+            if(_crystalList.Count == _stackAmount) 
+                Invoke(nameof(ResetAbility), _useTimeWindow);
+            
+
+            cooldown = 0;
+            GameObject crystalToSpawn = _crystalList[_crystalList.Count - 1];
+            GameObject newCrystal = Instantiate(crystalToSpawn, player.transform.position, Quaternion.identity);
+
+            _crystalList.Remove(crystalToSpawn);
+
+            if (newCrystal.TryGetComponent<CrystalSkillController>(out CrystalSkillController crystalController))
+                crystalController.
+                    SetupCrystal(_crystalDuration, _canExplode, _canMoveToEnemy, _moveSpeed, _growSpeed, FindClosestEnemy(newCrystal.transform, _enemyCheckRadius));
+
+
+            if (_crystalList.Count <= 0) {
+                cooldown = _multiStackCooldown;
+                RefillCrystalList();
+            }
+
+            return true;
+        }
+
+        return false;
+    }
+
+    private void RefillCrystalList() {
+        int amountToAdd = _stackAmount - _crystalList.Count;
+
+        for(int i = 0; i < amountToAdd; i++) {
+            _crystalList.Add(_crystalPrefab);
+        }
+    }
+
+    private void ResetAbility() {
+        if (cooldownTimer > 0) return;
+
+        cooldownTimer = _multiStackCooldown;
+        RefillCrystalList();
     }
 }
