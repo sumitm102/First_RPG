@@ -8,6 +8,9 @@ public class CrystalSkill : Skill
     [SerializeField] private float _enemyCheckRadius;
     private GameObject _currentCrystal;
 
+    [Header("Crystal mirage")]
+    [SerializeField] private bool _cloneInsteadOfCrystal;
+
     [Header("Explosive crystal")]
     [SerializeField] private bool _canExplode;
     [SerializeField] private float _growSpeed = 5f;
@@ -41,14 +44,21 @@ public class CrystalSkill : Skill
             //Stop teleportation when crystal is moving
             if (_canMoveToEnemy) return;
 
-            Vector2 playerPosition = player.transform.position;
-
             // For teleportation
+            Vector2 playerPosition = player.transform.position;
             player.transform.position = _currentCrystal.transform.position;
             _currentCrystal.transform.position = playerPosition;
-            
-            if(_currentCrystal.TryGetComponent<CrystalSkillController>(out CrystalSkillController crystalSkillController))
-                crystalSkillController.ExplodeOrSelfDestroy();
+
+            //If true then spawn a clone at the crystal's position, otherwise make it explode or destroy it
+            if (_cloneInsteadOfCrystal) {
+                player.skillManager.cloneSkill.CreateClone(_currentCrystal.transform, Vector3.zero);
+                Destroy(_currentCrystal);
+            }
+            else {
+
+                if (_currentCrystal.TryGetComponent<CrystalSkillController>(out CrystalSkillController crystalSkillController))
+                    crystalSkillController.ExplodeOrSelfDestroy();
+            }
         }
     }
 
