@@ -329,9 +329,11 @@ MonoBehaviour:
   _cloneDuration: 0.8
   _canAttack: 1
   _enemyCheckRadius: 5
-  _canCreateCloneOnDashStart: 0
+  _chanceToDuplicate: 30
+  _canCreateCloneOnDashStart: 1
   _canCreateCloneOnDashEnd: 0
   _canCreateCloneOnCounterAttack: 1
+  _canDuplicateClone: 0
 --- !u!114 &381960419
 MonoBehaviour:
   m_ObjectHideFlags: 0
