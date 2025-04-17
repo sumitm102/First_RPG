@@ -329,6 +329,9 @@ MonoBehaviour:
   _cloneDuration: 0.8
   _canAttack: 1
   _enemyCheckRadius: 5
+  _canCreateCloneOnDashStart: 0
+  _canCreateCloneOnDashEnd: 0
+  _canCreateCloneOnCounterAttack: 1
 --- !u!114 &381960419
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -397,11 +400,12 @@ MonoBehaviour:
   _crystalPrefab: {fileID: 5820441317442609468, guid: f98f93fc229577245a7cf70e919f3bb1, type: 3}
   _crystalDuration: 1.5
   _enemyCheckRadius: 8
-  _canExplode: 1
+  _cloneInsteadOfCrystal: 1
+  _canExplode: 0
   _growSpeed: 5
-  _canMoveToEnemy: 1
+  _canMoveToEnemy: 0
   _moveSpeed: 3.5
-  _canUseMultiStacks: 1
+  _canUseMultiStacks: 0
   _stackAmount: 3
   _multiStackCooldown: 4
   _useTimeWindow: 2.5
@@ -8661,63 +8665,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1ca0a8c952f7bbd41b35f126957859a3, type: 3}
---- !u!1001 &6107945556443889765
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 64698933489054599, guid: f98f93fc229577245a7cf70e919f3bb1, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -13.78412
-      objectReference: {fileID: 0}
-    - target: {fileID: 64698933489054599, guid: f98f93fc229577245a7cf70e919f3bb1, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.7156949
-      objectReference: {fileID: 0}
-    - target: {fileID: 64698933489054599, guid: f98f93fc229577245a7cf70e919f3bb1, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 64698933489054599, guid: f98f93fc229577245a7cf70e919f3bb1, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 64698933489054599, guid: f98f93fc229577245a7cf70e919f3bb1, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 64698933489054599, guid: f98f93fc229577245a7cf70e919f3bb1, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 64698933489054599, guid: f98f93fc229577245a7cf70e919f3bb1, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 64698933489054599, guid: f98f93fc229577245a7cf70e919f3bb1, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 64698933489054599, guid: f98f93fc229577245a7cf70e919f3bb1, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 64698933489054599, guid: f98f93fc229577245a7cf70e919f3bb1, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5820441317442609468, guid: f98f93fc229577245a7cf70e919f3bb1, type: 3}
-      propertyPath: m_Name
-      value: Crystal
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: f98f93fc229577245a7cf70e919f3bb1, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -8731,4 +8678,3 @@ SceneRoots:
   - {fileID: 710959676}
   - {fileID: 381960417}
   - {fileID: 1205996415}
-  - {fileID: 6107945556443889765}

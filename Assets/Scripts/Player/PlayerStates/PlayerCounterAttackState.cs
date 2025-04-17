@@ -1,6 +1,9 @@
 using UnityEngine;
 
 public class PlayerCounterAttackState : PlayerState {
+
+    private bool _canCreateClone;
+
     public PlayerCounterAttackState(Player _player, PlayerStateMachine _playerStateMachine, string _animBoolName) : base(_player, _playerStateMachine, _animBoolName) {
     }
 
@@ -13,6 +16,7 @@ public class PlayerCounterAttackState : PlayerState {
     public override void EnterState() {
         base.EnterState();
 
+        _canCreateClone = true;
         stateTimer = player.counterAttackDuration;
     }
     public override void UpdateState() {
@@ -23,13 +27,19 @@ public class PlayerCounterAttackState : PlayerState {
 
         Collider2D[] colliders = Physics2D.OverlapCircleAll(player.attackCheck.position, player.attackCheckRadius);
 
-        foreach(var collider in colliders) {
+        foreach (var collider in colliders) {
 
             if (collider.TryGetComponent<Enemy>(out Enemy enemy)) {
                 if (enemy.CanBeStunned()) {
                     stateTimer = 10f; //Any value bigger than 1 to change state through animation trigger
 
                     player.animator.SetBool("SuccessfulCounterAttack", true);
+
+                    //To avoid creating multiple clones when parrying more than one enemies
+                    if (_canCreateClone) {
+                        _canCreateClone = false;
+                        player.skillManager.cloneSkill.CreateCloneOnCounterAttack(enemy.transform);
+                    }
                 }
             }
         }

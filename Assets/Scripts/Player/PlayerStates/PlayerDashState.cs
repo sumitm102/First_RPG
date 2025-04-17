@@ -9,7 +9,7 @@ public class PlayerDashState : PlayerState
         base.EnterState();
 
         //Creates a clone as the character start dashing
-        player.skillManager.cloneSkill.CreateClone(player.transform, Vector3.zero);
+        player.skillManager.cloneSkill.CreateCloneOnDashStart();
 
         stateTimer = player.dashDuration; //stateTimer inherited from PlayerState
     }
@@ -33,6 +33,8 @@ public class PlayerDashState : PlayerState
 
     public override void ExitState() {
         base.ExitState();
+
+        player.skillManager.cloneSkill.CreateCloneOnDashEnd();
 
         //Setting the horizontal movement to 0 upon exiting to avoid moving indefinitely
         player.SetVelocity(0f, player.rbody.linearVelocityY);
