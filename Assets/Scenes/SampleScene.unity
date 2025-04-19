@@ -331,9 +331,10 @@ MonoBehaviour:
   _enemyCheckRadius: 5
   _chanceToDuplicate: 30
   _canCreateCloneOnDashStart: 1
-  _canCreateCloneOnDashEnd: 0
+  _canCreateCloneOnDashEnd: 1
   _canCreateCloneOnCounterAttack: 1
-  _canDuplicateClone: 0
+  _canDuplicateClone: 1
+  crystalInsteadOfClone: 1
 --- !u!114 &381960419
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -402,10 +403,10 @@ MonoBehaviour:
   _crystalPrefab: {fileID: 5820441317442609468, guid: f98f93fc229577245a7cf70e919f3bb1, type: 3}
   _crystalDuration: 1.5
   _enemyCheckRadius: 8
-  _cloneInsteadOfCrystal: 1
-  _canExplode: 0
+  _cloneInsteadOfCrystal: 0
+  _canExplode: 1
   _growSpeed: 5
-  _canMoveToEnemy: 0
+  _canMoveToEnemy: 1
   _moveSpeed: 3.5
   _canUseMultiStacks: 0
   _stackAmount: 3

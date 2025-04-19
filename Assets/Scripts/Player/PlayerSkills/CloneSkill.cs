@@ -16,7 +16,16 @@ public class CloneSkill : Skill
     [SerializeField] private bool _canCreateCloneOnCounterAttack;
     [SerializeField] private bool _canDuplicateClone;
 
+    [Header("Crystal instead of clone")]
+    public bool crystalInsteadOfClone;
+
     public void CreateClone(Transform _clonePosition, Vector3 _offset) {
+
+        if (crystalInsteadOfClone) {
+            SkillManager.Instance.crystalSkill.CreateCrystal();
+            return;
+        }
+
         GameObject newClone = Instantiate(_clonePrefab);
 
         //Calling the method that handles logic related to the clone itself

@@ -1,8 +1,6 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class CrystalSkillController : MonoBehaviour
-{
+public class CrystalSkillController : MonoBehaviour {
     private float _crystalExistTimer;
     private float _moveSpeed;
     private bool _canMoveToEnemy;
@@ -12,6 +10,7 @@ public class CrystalSkillController : MonoBehaviour
     private float _growSpeed;
 
     private Transform _closestEnemy;
+    [SerializeField] private LayerMask _layer;
 
     private Animator _anim => GetComponent<Animator>();
     private CircleCollider2D _circleCollider => GetComponent<CircleCollider2D>();
@@ -21,13 +20,13 @@ public class CrystalSkillController : MonoBehaviour
         this._canMoveToEnemy = _canMoveToEnemy;
         this._moveSpeed = _moveSpeed;
         this._growSpeed = _growSpeed;
-        this._closestEnemy = _closestEnemy;
+        this._closestEnemy = _closestEnemy;;
     }
 
     private void Update() {
         _crystalExistTimer -= Time.deltaTime;
-        
-        if (_crystalExistTimer < 0) 
+
+        if (_crystalExistTimer < 0)
             ExplodeOrSelfDestroy();
 
         if (_canMoveToEnemy && _closestEnemy != null) {
@@ -40,12 +39,21 @@ public class CrystalSkillController : MonoBehaviour
 
         }
 
-        if (_canGrow) 
-            transform.localScale = Vector2.Lerp(transform.localScale, new Vector2(3f, 3f), _growSpeed * Time.deltaTime); 
-        
+        if (_canGrow)
+            transform.localScale = Vector2.Lerp(transform.localScale, new Vector2(3f, 3f), _growSpeed * Time.deltaTime);
+
 
     }
 
+    public void ChooseRandomEnemy() {
+
+        float checkRadius = SkillManager.Instance.blackholeSkill.GetBlackholeRadius();
+
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, checkRadius, _layer);
+
+        if (colliders.Length > 0)
+            _closestEnemy = colliders[Random.Range(0, colliders.Length)].transform;
+    }
 
 
     //Used in an event on crystal explode animation
