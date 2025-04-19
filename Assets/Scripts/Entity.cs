@@ -29,6 +29,7 @@ public class Entity : MonoBehaviour
     [field: SerializeField] public Rigidbody2D rbody { get; private set; }
     [field: SerializeField] public EntityFX fx { get; private set; }
     [field: SerializeField] public SpriteRenderer spriteRenderer { get; private set; }
+    [field: SerializeField] public CharacterStats characterStats { get; private set; }
 
     #endregion
 
@@ -41,6 +42,7 @@ public class Entity : MonoBehaviour
         if (rbody == null) rbody = GetComponent<Rigidbody2D>();
         if (fx == null) fx = GetComponent<EntityFX>();
         if (spriteRenderer == null) spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        if (characterStats == null) characterStats = GetComponent<CharacterStats>();
     }
 
     protected virtual void Update() {
@@ -49,8 +51,8 @@ public class Entity : MonoBehaviour
 
     public virtual void Damage() {
        
-        fx.StartCoroutine("FlashFX");
-        StartCoroutine("Knockback");
+        fx.StartCoroutine(fx.FlashFX());
+        StartCoroutine(nameof(Knockback));
     }
 
     protected virtual IEnumerator Knockback() {
