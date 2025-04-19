@@ -15,7 +15,7 @@ public class EntityFX : MonoBehaviour
         _originalMaterial = _spriteRenderer.material;
     }
 
-    private IEnumerator FlashFX() {
+    public IEnumerator FlashFX() {
         _spriteRenderer.material = _flashFXMaterial;
         yield return new WaitForSeconds(_flashDuration);
         _spriteRenderer.material = _originalMaterial;
