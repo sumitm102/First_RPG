@@ -32,13 +32,9 @@ public class CrystalSkill : Skill
         if (CanUseMultiCrystal())
             return;
 
-        if(_currentCrystal == null) {
-            _currentCrystal = Instantiate(_crystalPrefab, player.transform.position, Quaternion.identity);
-            if (_currentCrystal.TryGetComponent<CrystalSkillController>(out CrystalSkillController crystalController))
-                crystalController.
-                    SetupCrystal(_crystalDuration, _canExplode, _canMoveToEnemy, _moveSpeed, _growSpeed, FindClosestEnemy(_currentCrystal.transform, _enemyCheckRadius));
-        }
-            
+        if(_currentCrystal == null) 
+            CreateCrystal();
+
         else {
 
             //Stop teleportation when crystal is moving
@@ -61,6 +57,20 @@ public class CrystalSkill : Skill
             }
         }
     }
+
+    public void CreateCrystal() {
+        _currentCrystal = Instantiate(_crystalPrefab, player.transform.position, Quaternion.identity);
+
+        if (_currentCrystal.TryGetComponent<CrystalSkillController>(out CrystalSkillController crystalController)) {
+            crystalController.
+                SetupCrystal(_crystalDuration, _canExplode, _canMoveToEnemy, _moveSpeed, _growSpeed, FindClosestEnemy(_currentCrystal.transform, _enemyCheckRadius));
+
+            //crystalController.ChooseRandomEnemy();
+
+        }
+    }
+
+    public void CurrentCrystalChooseRandomTarget() => _currentCrystal.GetComponent<CrystalSkillController>().ChooseRandomEnemy();
 
     private bool CanUseMultiCrystal() {
         if (_canUseMultiStacks && _crystalList.Count > 0) {

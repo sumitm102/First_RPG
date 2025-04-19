@@ -1,9 +1,7 @@
-using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BlackholeSkillController : MonoBehaviour
-{
+public class BlackholeSkillController : MonoBehaviour {
     [SerializeField] private GameObject _hotkeyPrefab;
     [SerializeField] private List<KeyCode> _keyCodeList;
 
@@ -31,7 +29,7 @@ public class BlackholeSkillController : MonoBehaviour
         _cloneAttackTimer -= Time.deltaTime;
         _blackholeDuration -= Time.deltaTime;
 
-        if(_blackholeDuration < 0) {
+        if (_blackholeDuration < 0) {
             _blackholeDuration = Mathf.Infinity;
 
             if (_targetList.Count > 0)
@@ -46,9 +44,9 @@ public class BlackholeSkillController : MonoBehaviour
 
         CloneAttackLogic();
 
-        if (_canGrow && !_canShrink) 
+        if (_canGrow && !_canShrink)
             transform.localScale = Vector2.Lerp(transform.localScale, new Vector2(_maxSize, _maxSize), _growSpeed * Time.deltaTime);
-        
+
 
         if (_canShrink) {
             transform.localScale = Vector2.Lerp(transform.localScale, new Vector2(-1f, -1f), _shrinkSpeed * Time.deltaTime);
@@ -68,6 +66,10 @@ public class BlackholeSkillController : MonoBehaviour
         this._cloneAttackCooldown = _cloneAttackCooldown;
         _blackholeDuration = _blackholeTimer;
 
+        //To avoid making the player invisible when using crystal ability during ultimate
+        if (SkillManager.Instance.cloneSkill.crystalInsteadOfClone)
+            _playerCanDisappear = false;
+
     }
 
     private void ReleaseCloneAttack() {
@@ -75,7 +77,7 @@ public class BlackholeSkillController : MonoBehaviour
 
         if (_playerCanDisappear) {
             _playerCanDisappear = false;
-            PlayerManager.Instance.player.MakeTransparent(true); 
+            PlayerManager.Instance.player.MakeTransparent(true);
         }
 
         _cloneAttackReleased = true;
@@ -95,15 +97,21 @@ public class BlackholeSkillController : MonoBehaviour
             else
                 _xOffset = -2f;
 
-            if(_targetList.Count <= 0) {
+            if (_targetList.Count <= 0) {
                 FinishBlackholeAbility();
                 return;
             }
 
-            if(_attackAmount > 0) {
+            if (_attackAmount > 0) {
                 int randomIndex = Random.Range(0, _targetList.Count);
-                SkillManager.Instance.cloneSkill.CreateClone(_targetList[randomIndex], new Vector3(_xOffset, 0));
-                
+
+                if (SkillManager.Instance.cloneSkill.crystalInsteadOfClone) {
+                    SkillManager.Instance.crystalSkill.CreateCrystal();
+                    SkillManager.Instance.crystalSkill.CurrentCrystalChooseRandomTarget();
+                }
+                else
+                    SkillManager.Instance.cloneSkill.CreateClone(_targetList[randomIndex], new Vector3(_xOffset, 0));
+
                 _attackAmount--;
 
             }
@@ -111,7 +119,7 @@ public class BlackholeSkillController : MonoBehaviour
 
                 Invoke("FinishBlackholeAbility", 0.8f); // Invokes the function after some delay
             }
-            
+
         }
     }
 
@@ -123,8 +131,8 @@ public class BlackholeSkillController : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D _collider) {
-        
-        if(_collider.TryGetComponent<Enemy>(out Enemy enemy)) {
+
+        if (_collider.TryGetComponent<Enemy>(out Enemy enemy)) {
             enemy.FreezeTime(true);
             CreateHotkey(enemy);
 
@@ -132,7 +140,7 @@ public class BlackholeSkillController : MonoBehaviour
     }
 
     private void OnTriggerExit2D(Collider2D _collider) {
-        if(_collider.TryGetComponent<Enemy>(out Enemy enemy)) {
+        if (_collider.TryGetComponent<Enemy>(out Enemy enemy)) {
             enemy.FreezeTime(false);
         }
     }
@@ -162,11 +170,11 @@ public class BlackholeSkillController : MonoBehaviour
         if (_hotkeyList.Count <= 0)
             return;
 
-        for(int i = 0; i < _hotkeyList.Count; i++)
+        for (int i = 0; i < _hotkeyList.Count; i++)
             Destroy(_hotkeyList[i]);
-        
+
     }
 
     public void AddEnemyToList(Transform _enemyTransform) => _targetList.Add(_enemyTransform);
-    
+
 }
