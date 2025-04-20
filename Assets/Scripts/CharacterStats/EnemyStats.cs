@@ -15,4 +15,10 @@ public class EnemyStats : CharacterStats
 
         _enemy.DamageEffect();
     }
+
+    protected override void Die() {
+        base.Die();
+
+        _enemy.ChangeToDeadState();
+    }
 }

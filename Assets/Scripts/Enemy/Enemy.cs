@@ -24,6 +24,7 @@ public class Enemy : Entity
     [HideInInspector] public float lastTimeAttacked;
 
     public EnemyStateMachine enemyStateMachine { get; private set; }
+    public string lastAnimBoolName { get; private set; }
 
 
 
@@ -45,6 +46,10 @@ public class Enemy : Entity
 
         enemyStateMachine.currentState.UpdateState();
         //Debug.Log(IsPlayerDetected().collider.gameObject.name);
+    }
+
+    public virtual void AssignLastAnimName(string _animBoolName) {
+        lastAnimBoolName = _animBoolName;
     }
 
 

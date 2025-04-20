@@ -3,6 +3,7 @@ using UnityEngine;
 public class SkeletonGroundedState : EnemyState {
     protected EnemySkeleton enemy;
     protected Transform player;
+    private float _closeRangeDetectionDistance = 2f;
 
     public SkeletonGroundedState(Enemy _enemyBase, EnemyStateMachine _enemyStateMachine, string _animBoolName, EnemySkeleton _enemy) : base(_enemyBase, _enemyStateMachine, _animBoolName) {
         this.enemy = _enemy;
@@ -17,7 +18,7 @@ public class SkeletonGroundedState : EnemyState {
         base.UpdateState();
 
         //If played is detected or the distance between is less than the close range value (needed for detecting player while facing back) then switch to battle state
-        if (enemy.IsPlayerDetected() || Vector2.Distance(player.transform.position, enemy.transform.position) < 2f) 
+        if (enemy.IsPlayerDetected() || (enemy.transform.position - player.transform.position).sqrMagnitude < _closeRangeDetectionDistance * _closeRangeDetectionDistance) 
             enemyStateMachine.ChangeState(enemy.skeletonBattleState);
         
     }
