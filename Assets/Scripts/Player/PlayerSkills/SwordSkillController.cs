@@ -61,7 +61,7 @@ public class SwordSkillController : MonoBehaviour
 
             foreach (var collider in colliders) {
                 if (collider.TryGetComponent<Enemy>(out Enemy _surroundingEnemy))
-                    _surroundingEnemy.Damage();
+                    _surroundingEnemy.DamageEffect();
 
             }
 
@@ -170,7 +170,7 @@ public class SwordSkillController : MonoBehaviour
     }
 
     private void DamageAndFreezeEnemy(Enemy enemy) {
-        enemy.Damage();
+        enemy.DamageEffect();
 
         //Ignoring the return value of the coroutine
         _ = enemy.StartCoroutine("FreezeTimeFor", _freezeTimeDuration);

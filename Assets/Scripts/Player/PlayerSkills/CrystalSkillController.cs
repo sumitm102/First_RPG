@@ -62,7 +62,7 @@ public class CrystalSkillController : MonoBehaviour {
 
         foreach (var collider in colliders) {
             if (collider.TryGetComponent<Enemy>(out Enemy enemy))
-                enemy.Damage();
+                enemy.DamageEffect();
         }
     }
 

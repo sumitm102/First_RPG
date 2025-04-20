@@ -2,22 +2,19 @@ using UnityEngine;
 
 public class PlayerAnimationTriggers : MonoBehaviour
 {
-    private Player player => GetComponentInParent<Player>();
+    private Player _player => GetComponentInParent<Player>();
 
     private void AnimationTrigger() {
-        player.AnimationTrigger();
+        _player.AnimationTrigger();
     }
 
     private void AttackTrigger() {
 
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(player.attackCheck.position, player.attackCheckRadius);
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(_player.attackCheck.position, _player.attackCheckRadius);
 
         foreach(var collider in colliders) {
             if (collider.TryGetComponent<Enemy>(out Enemy enemy)) {
-                enemy.Damage();
-                enemy.characterStats.TakeDamage(player.characterStats.damage.GetValue());
-
-                Debug.Log(player.characterStats.damage.GetValue());
+                _player.characterStats.InflictDamage(enemy.characterStats);
             }
                 
         }      

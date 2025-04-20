@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4483232599073276178}
   - component: {fileID: 8778554955354915562}
   - component: {fileID: 7491265991326914010}
-  - component: {fileID: 4328315655251207524}
+  - component: {fileID: 8621279008061769889}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -71,7 +71,7 @@ MonoBehaviour:
   <rbody>k__BackingField: {fileID: 7491265991326914010}
   <fx>k__BackingField: {fileID: 4483232599073276178}
   <spriteRenderer>k__BackingField: {fileID: 5959728458770364020}
-  <characterStats>k__BackingField: {fileID: 4328315655251207524}
+  <characterStats>k__BackingField: {fileID: 0}
   moveSpeed: 8
   jumpForce: 12
   swordReturnImpact: 3
@@ -162,7 +162,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &4328315655251207524
+--- !u!114 &8621279008061769889
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -171,14 +171,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 1277585159819231040}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03d87e2d5170f484088406d561aa5529, type: 3}
+  m_Script: {fileID: 11500000, guid: c46c0544ba5bb834c866abb6daf6b0cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth:
     _baseValue: 100
     modifierList: 
   damage:
-    _baseValue: 7
+    _baseValue: 5
+    modifierList: 
+  strength:
+    _baseValue: 0
     modifierList: 
   _currentHealth: 0
 --- !u!1 &2175347600454398749
