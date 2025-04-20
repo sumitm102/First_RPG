@@ -316,7 +316,7 @@ GameObject:
   - component: {fileID: 3539408708551188382}
   - component: {fileID: 3859933695264574946}
   - component: {fileID: 2327112906711063993}
-  - component: {fileID: 4121699546631049087}
+  - component: {fileID: 4759954705687674113}
   m_Layer: 7
   m_Name: EnemySkeleton
   m_TagString: Untagged
@@ -374,7 +374,7 @@ MonoBehaviour:
   <rbody>k__BackingField: {fileID: 3859933695264574946}
   <fx>k__BackingField: {fileID: 3539408708551188382}
   <spriteRenderer>k__BackingField: {fileID: 0}
-  <characterStats>k__BackingField: {fileID: 4121699546631049087}
+  <characterStats>k__BackingField: {fileID: 0}
   playerLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -476,7 +476,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.95814824, y: 1.5131617}
   m_EdgeRadius: 0
---- !u!114 &4121699546631049087
+--- !u!114 &4759954705687674113
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -485,13 +485,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 7191907103611490172}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03d87e2d5170f484088406d561aa5529, type: 3}
+  m_Script: {fileID: 11500000, guid: 87da636b2e46f4b46b90966c7432d914, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth:
-    _baseValue: 100
+    _baseValue: 120
     modifierList: 
   damage:
     _baseValue: 10
+    modifierList: 
+  strength:
+    _baseValue: 0
     modifierList: 
   _currentHealth: 0

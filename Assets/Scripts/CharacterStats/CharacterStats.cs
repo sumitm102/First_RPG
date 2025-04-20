@@ -4,15 +4,13 @@ public class CharacterStats : MonoBehaviour
 {
     public Stat maxHealth;
     public Stat damage;
+    public Stat strength;
 
     [SerializeField] private int _currentHealth;
     
-    void Start()
+    protected virtual void Start()
     {
         _currentHealth = maxHealth.GetValue();
-
-        //Example: Equip sword with 4 damage
-        damage.AddModifier(4);
     }
 
     
@@ -21,9 +19,16 @@ public class CharacterStats : MonoBehaviour
         
     }
 
-    public void TakeDamage(int _damage) {
+    public virtual void InflictDamage(CharacterStats _targetStats) {
+
+        int totalDamage = damage.GetValue() + strength.GetValue();
+        _targetStats.TakeDamage(totalDamage);
+    }
+
+    public virtual void TakeDamage(int _damage) {
 
         _currentHealth -= _damage;
+        Debug.Log(_currentHealth);
 
         if(_currentHealth <= 0) {
             Die();
@@ -31,7 +36,7 @@ public class CharacterStats : MonoBehaviour
 
     }
 
-    private void Die() {
+    protected virtual void Die() {
 
     }
 }
