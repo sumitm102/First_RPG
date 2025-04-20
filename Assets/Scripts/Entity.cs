@@ -30,6 +30,7 @@ public class Entity : MonoBehaviour
     [field: SerializeField] public EntityFX fx { get; private set; }
     [field: SerializeField] public SpriteRenderer spriteRenderer { get; private set; }
     [field: SerializeField] public CharacterStats characterStats { get; private set; }
+    [field: SerializeField] public CapsuleCollider2D capsuleCollider { get; private set; }
 
     #endregion
 
@@ -43,6 +44,7 @@ public class Entity : MonoBehaviour
         if (fx == null) fx = GetComponent<EntityFX>();
         if (spriteRenderer == null) spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         if (characterStats == null) characterStats = GetComponent<CharacterStats>();
+        if (capsuleCollider == null) capsuleCollider = GetComponent<CapsuleCollider2D>();
     }
 
     protected virtual void Update() {
@@ -115,5 +117,9 @@ public class Entity : MonoBehaviour
             spriteRenderer.color = Color.clear;
         else
             spriteRenderer.color = Color.white;
+    }
+
+    public virtual void ChangeToDeadState() {
+
     }
 }

@@ -315,8 +315,8 @@ GameObject:
   - component: {fileID: 3276084184604615432}
   - component: {fileID: 3539408708551188382}
   - component: {fileID: 3859933695264574946}
-  - component: {fileID: 2327112906711063993}
   - component: {fileID: 4759954705687674113}
+  - component: {fileID: 350494017781944244}
   m_Layer: 7
   m_Name: EnemySkeleton
   m_TagString: Untagged
@@ -373,8 +373,9 @@ MonoBehaviour:
   <animator>k__BackingField: {fileID: 993609241908968006}
   <rbody>k__BackingField: {fileID: 3859933695264574946}
   <fx>k__BackingField: {fileID: 3539408708551188382}
-  <spriteRenderer>k__BackingField: {fileID: 0}
-  <characterStats>k__BackingField: {fileID: 0}
+  <spriteRenderer>k__BackingField: {fileID: 9025102443212236155}
+  <characterStats>k__BackingField: {fileID: 4759954705687674113}
+  <capsuleCollider>k__BackingField: {fileID: 350494017781944244}
   playerLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -430,8 +431,30 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!61 &2327112906711063993
-BoxCollider2D:
+--- !u!114 &4759954705687674113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7191907103611490172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87da636b2e46f4b46b90966c7432d914, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth:
+    _baseValue: 1000
+    modifierList: 
+  damage:
+    _baseValue: 10
+    modifierList: 
+  strength:
+    _baseValue: 0
+    modifierList: 
+  _currentHealth: 0
+--- !u!70 &350494017781944244
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -464,37 +487,6 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.00719738, y: -0.25658083}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 0.95814824, y: 1.5131617}
-  m_EdgeRadius: 0
---- !u!114 &4759954705687674113
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7191907103611490172}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87da636b2e46f4b46b90966c7432d914, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth:
-    _baseValue: 120
-    modifierList: 
-  damage:
-    _baseValue: 10
-    modifierList: 
-  strength:
-    _baseValue: 0
-    modifierList: 
-  _currentHealth: 0
+  m_Offset: {x: 0, y: -0.23}
+  m_Size: {x: 1.05, y: 1.57}
+  m_Direction: 0

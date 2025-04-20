@@ -16,4 +16,10 @@ public class PlayerStats : CharacterStats
 
         _player.DamageEffect();
     }
+
+    protected override void Die() {
+        base.Die();
+
+        _player.ChangeToDeadState();
+    }
 }
