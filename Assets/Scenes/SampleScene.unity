@@ -8671,6 +8671,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8621279008061769889, guid: 6d5aea47882ea2842a6a300d5e987274, type: 3}
+      propertyPath: evasion._baseValue
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 8621279008061769889, guid: 6d5aea47882ea2842a6a300d5e987274, type: 3}
       propertyPath: maxHealth._baseValue
       value: 1000
       objectReference: {fileID: 0}
