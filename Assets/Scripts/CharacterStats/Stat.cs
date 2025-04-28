@@ -17,6 +17,10 @@ public class Stat
         return finalValue;
     }
 
+    public void SetDefaultValue(int _value) {
+        _baseValue = _value;
+    }
+
     public void AddModifier(int _modifier) => modifierList.Add(_modifier);
     public void RemoveModifier(int _modifier) => modifierList.RemoveAt(_modifier);
     
