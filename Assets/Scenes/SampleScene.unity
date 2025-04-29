@@ -8723,6 +8723,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4759954705687674113, guid: 1ca0a8c952f7bbd41b35f126957859a3, type: 3}
+      propertyPath: iceDamage._baseValue
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4759954705687674113, guid: 1ca0a8c952f7bbd41b35f126957859a3, type: 3}
+      propertyPath: lightningDamage._baseValue
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 7191907103611490172, guid: 1ca0a8c952f7bbd41b35f126957859a3, type: 3}
       propertyPath: m_Name
       value: EnemySkeleton

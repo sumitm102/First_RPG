@@ -71,6 +71,40 @@ public class CharacterStats : MonoBehaviour
         Debug.Log(totalMagicalDamage);
 
         _targetStats.TakeDamage(totalMagicalDamage);
+
+        //Making sure at least one of the ailments has a value greater than 0 to avoid infinite looping
+        if (Mathf.Max(_fireDamage, _iceDamage, _lightningDamage) <= 0)
+            return;
+
+        bool canApplyIgnite = _fireDamage > _iceDamage && _fireDamage > _lightningDamage;
+        bool canApplyChill = _iceDamage > _fireDamage && _iceDamage > _lightningDamage;
+        bool canApplyShock = _lightningDamage > _fireDamage && _lightningDamage > _iceDamage;
+
+        //Randomly apply one of the ailments if damage amount of all ailments are equal
+        while(!canApplyIgnite && !canApplyChill && !canApplyShock) {
+            if(Random.value < 0.3f && _fireDamage > 0) {
+                canApplyIgnite = true;
+                _targetStats.ApplyAilments(canApplyIgnite, canApplyChill, canApplyShock);
+                Debug.Log("Applied fire");
+                return;
+            }
+
+            if(Random.value < 0.4f && _iceDamage > 0) {
+                canApplyChill = true;
+                _targetStats.ApplyAilments(canApplyIgnite, canApplyChill, canApplyShock);
+                Debug.Log("Applied ice");
+                return;
+            }
+            
+            if(Random.value < 0.5f && _lightningDamage > 0) {
+                canApplyShock = true;
+                _targetStats.ApplyAilments(canApplyIgnite, canApplyChill, canApplyShock);
+                Debug.Log("Applied lightning");
+                return;
+            }
+        }
+
+        _targetStats.ApplyAilments(canApplyIgnite, canApplyChill, canApplyShock);
     }
 
     public void ApplyAilments(bool _ignited, bool _chilled, bool _shocked) {
