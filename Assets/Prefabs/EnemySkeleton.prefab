@@ -473,6 +473,21 @@ MonoBehaviour:
   evasion:
     _baseValue: 0
     modifierList: 
+  magicResistance:
+    _baseValue: 0
+    modifierList: 
+  fireDamage:
+    _baseValue: 5
+    modifierList: 
+  iceDamage:
+    _baseValue: 0
+    modifierList: 
+  lightningDamage:
+    _baseValue: 0
+    modifierList: 
+  isIgnited: 0
+  isChilled: 0
+  isShocked: 0
   _currentHealth: 0
 --- !u!70 &350494017781944244
 CapsuleCollider2D:

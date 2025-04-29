@@ -72,6 +72,7 @@ MonoBehaviour:
   <fx>k__BackingField: {fileID: 4483232599073276178}
   <spriteRenderer>k__BackingField: {fileID: 5959728458770364020}
   <characterStats>k__BackingField: {fileID: 0}
+  <capsuleCollider>k__BackingField: {fileID: 0}
   moveSpeed: 8
   jumpForce: 12
   swordReturnImpact: 3
@@ -174,15 +175,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c46c0544ba5bb834c866abb6daf6b0cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth:
-    _baseValue: 100
+  strength:
+    _baseValue: 0
+    modifierList: 
+  agility:
+    _baseValue: 0
+    modifierList: 
+  intelligence:
+    _baseValue: 0
+    modifierList: 
+  vitality:
+    _baseValue: 0
     modifierList: 
   damage:
     _baseValue: 5
     modifierList: 
-  strength:
+  critChance:
     _baseValue: 0
     modifierList: 
+  critPower:
+    _baseValue: 0
+    modifierList: 
+  maxHealth:
+    _baseValue: 1000
+    modifierList: 
+  armor:
+    _baseValue: 0
+    modifierList: 
+  evasion:
+    _baseValue: 70
+    modifierList: 
+  magicResistance:
+    _baseValue: 1
+    modifierList: 
+  fireDamage:
+    _baseValue: 0
+    modifierList: 
+  iceDamage:
+    _baseValue: 0
+    modifierList: 
+  lightningDamage:
+    _baseValue: 0
+    modifierList: 
+  isIgnited: 0
+  isChilled: 0
+  isShocked: 0
   _currentHealth: 0
 --- !u!1 &2175347600454398749
 GameObject:

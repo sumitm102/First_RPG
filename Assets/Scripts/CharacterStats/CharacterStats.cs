@@ -17,6 +17,16 @@ public class CharacterStats : MonoBehaviour
     public Stat maxHealth;
     public Stat armor;
     public Stat evasion;
+    public Stat magicResistance;
+
+    [Header("Magic stats")]
+    public Stat fireDamage;
+    public Stat iceDamage;
+    public Stat lightningDamage;
+
+    public bool isIgnited;
+    public bool isChilled;
+    public bool isShocked;
 
     [Space]
 
@@ -45,8 +55,35 @@ public class CharacterStats : MonoBehaviour
 
         totalDamage = CheckTargetArmor(_targetStats, totalDamage);
 
-        _targetStats.TakeDamage(totalDamage);
+        //_targetStats.TakeDamage(totalDamage);
+        InflictMagicalDamage(_targetStats);
     }
+
+    public virtual void InflictMagicalDamage(CharacterStats _targetStats) {
+
+        int _fireDamage = fireDamage.GetValue();
+        int _iceDamage = iceDamage.GetValue();
+        int _lightningDamage = lightningDamage.GetValue();
+
+        int totalMagicalDamage = _fireDamage + _iceDamage + _lightningDamage + intelligence.GetValue();
+        totalMagicalDamage -= _targetStats.magicResistance.GetValue() + (_targetStats.intelligence.GetValue() * 3);
+        totalMagicalDamage = Mathf.Clamp(totalMagicalDamage, 0, int.MaxValue);
+        Debug.Log(totalMagicalDamage);
+
+        _targetStats.TakeDamage(totalMagicalDamage);
+    }
+
+    public void ApplyAilments(bool _ignited, bool _chilled, bool _shocked) {
+
+        if (isIgnited || isChilled || isShocked)
+            return;
+
+        isIgnited = _ignited;
+        isChilled = _chilled;
+        isShocked = _shocked;
+
+    }
+
     private bool TargetCanAvoidAttack(CharacterStats _targetStats) {
         int totalEvasion = _targetStats.evasion.GetValue() + _targetStats.agility.GetValue();
 
