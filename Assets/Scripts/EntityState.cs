@@ -4,18 +4,22 @@ public abstract class EntityState
 {
     protected Player player;
     protected StateMachine stateMachine;
-    protected string stateName;
+    protected int animBoolName;
 
-    public EntityState(StateMachine sm, string sn, Player p) {
+    protected Animator anim;
+
+    public EntityState(StateMachine sm, int abn, Player p) {
         stateMachine = sm;
-        stateName = sn;
+        animBoolName = abn;
         player = p;
+
+        anim = player.Anim;
     }
 
 
     // EnterState gets called at first after transitioning to a new state.
     public virtual void EnterState() {
-        //Debug.Log("Entering " + stateName);
+        anim.SetBool(animBoolName, true);
     }
 
 
@@ -27,6 +31,6 @@ public abstract class EntityState
 
     // ExitState of the current state gets called before transitioning to a new state.
     public virtual void ExitState() {
-        //Debug.Log("Exiting " + stateName);
+        anim.SetBool(animBoolName, false);
     }
 }

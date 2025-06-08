@@ -1,7 +1,7 @@
 using UnityEngine;
 
 public class PlayerIdleState : EntityState {
-    public PlayerIdleState(StateMachine sm, string sn, Player p) : base(sm, sn, p) {
+    public PlayerIdleState(StateMachine sm, int abn, Player p) : base(sm, abn, p) {
     }
 
     public override void EnterState() {

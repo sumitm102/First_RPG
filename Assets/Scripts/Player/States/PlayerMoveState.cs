@@ -1,7 +1,7 @@
 using UnityEngine;
 
 public class PlayerMoveState : EntityState {
-    public PlayerMoveState(StateMachine sm, string sn, Player p) : base(sm, sn, p) {
+    public PlayerMoveState(StateMachine sm, int abn, Player p) : base(sm, abn, p) {
     }
 
     public override void EnterState() {
