@@ -7,6 +7,7 @@ public abstract class EntityState
     protected int animBoolName;
 
     protected Animator anim;
+    protected Rigidbody2D rb;
 
     public EntityState(StateMachine sm, int abn, Player p) {
         stateMachine = sm;
@@ -14,6 +15,7 @@ public abstract class EntityState
         player = p;
 
         anim = player.Anim;
+        rb = player.RB;
     }
 
 

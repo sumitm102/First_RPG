@@ -5,6 +5,11 @@ public class Player : MonoBehaviour
     private PlayerInputSet _inputSet;
     public StateMachine PlayerStateMachine { get; private set; }
 
+
+    [field: Header("Movement details")]
+    [field: SerializeField] public float MoveSpeed { get; private set; } = 8f;
+
+
     #region States
 
     public PlayerIdleState IdleState { get; private set; }
@@ -12,12 +17,14 @@ public class Player : MonoBehaviour
 
     #endregion
 
+
     #region Anim Bools
 
-    private readonly int _idleHash = Animator.StringToHash("Idle");
-    private readonly int _moveHash = Animator.StringToHash("Move");
+    private static readonly int _idleHash = Animator.StringToHash("Idle");
+    private static readonly int _moveHash = Animator.StringToHash("Move");
 
     #endregion
+
 
     #region Components
 
@@ -26,7 +33,8 @@ public class Player : MonoBehaviour
 
     #endregion
 
-    [field: SerializeField] public Vector2 MoveInput { get; private set; }
+    public Vector2 MoveInput { get; private set; }
+
 
     private void Awake() {
 
@@ -57,5 +65,9 @@ public class Player : MonoBehaviour
 
     private void Update() {
         PlayerStateMachine.UpdateActiveState();
+    }
+
+    public void SetVelocity(float xVeclocity, float yVelocity) {
+        RB.linearVelocity = new Vector2(xVeclocity, yVelocity);
     }
 }
