@@ -1,0 +1,25 @@
+using UnityEngine;
+
+public class PlayerGroundedState : EntityState {
+    public PlayerGroundedState(StateMachine sm, int abn, Player p) : base(sm, abn, p) {
+    }
+
+    public override void EnterState() {
+        base.EnterState();
+    }
+    public override void UpdateState() {
+        base.UpdateState();
+
+        if (rb.linearVelocityY < 0 || !player.GroundDetected)
+            player.PlayerStateMachine.ChangeState(player.FallState);
+
+        if (inputSet.Player.Jump.WasPressedThisFrame() && player.GroundDetected)
+            player.PlayerStateMachine.ChangeState(player.JumpState);
+
+    }
+
+    public override void ExitState() {
+        base.ExitState();
+    }
+
+}

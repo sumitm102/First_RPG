@@ -1,18 +1,28 @@
 using UnityEngine;
 
 public class Player : MonoBehaviour {
-    private PlayerInputSet _inputSet;
+    public PlayerInputSet InputSet { get; private set; }
     public StateMachine PlayerStateMachine { get; private set; }
 
 
     [field: Header("Movement details")]
     [field: SerializeField] public float MoveSpeed { get; private set; } = 8f;
+    [field: SerializeField] public float JumpForce { get; private set; } = 12f;
+    [field: SerializeField, Range(0, 1)] public float InAirMultiplier { get; private set; } = 0.65f; // Range should be from 0 to 1
 
+    [Header("Collision Detection")]
+    [SerializeField] private Transform _groundCheckTransform;
+    [SerializeField] private float _groundCheckDistance;
+    [SerializeField] private LayerMask _groundMask;
+    public bool GroundDetected { get; private set; }
+    
 
     #region States
 
     public PlayerIdleState IdleState { get; private set; }
     public PlayerMoveState MoveState { get; private set; }
+    public PlayerJumpState JumpState { get; private set; }
+    public PlayerFallState FallState { get; private set; }
 
     #endregion
 
@@ -21,6 +31,7 @@ public class Player : MonoBehaviour {
 
     private static readonly int _idleHash = Animator.StringToHash("Idle");
     private static readonly int _moveHash = Animator.StringToHash("Move");
+    private static readonly int _jumpFallHash = Animator.StringToHash("JumpFall"); // Same hash for two states since they both need to enter the blend tree
 
     #endregion
 
@@ -43,21 +54,27 @@ public class Player : MonoBehaviour {
         if (RB == null) RB = GetComponent<Rigidbody2D>();
 
         PlayerStateMachine = new StateMachine();
-        _inputSet = new PlayerInputSet();
+        InputSet = new PlayerInputSet(); // Input needs to be initialized before the states
+
+        #region State Initialization
 
         IdleState = new PlayerIdleState(PlayerStateMachine, _idleHash, this);
         MoveState = new PlayerMoveState(PlayerStateMachine, _moveHash, this);
+        JumpState = new PlayerJumpState(PlayerStateMachine, _jumpFallHash, this);
+        FallState = new PlayerFallState(PlayerStateMachine, _jumpFallHash, this);
+
+        #endregion
     }
 
     private void OnEnable() {
-        _inputSet.Enable();
+        InputSet.Enable();
 
-        _inputSet.Player.Movement.performed += ctx => MoveInput = ctx.ReadValue<Vector2>();
-        _inputSet.Player.Movement.canceled += ctx => MoveInput = Vector2.zero;
+        InputSet.Player.Movement.performed += ctx => MoveInput = ctx.ReadValue<Vector2>();
+        InputSet.Player.Movement.canceled += ctx => MoveInput = Vector2.zero;
     }
 
     private void OnDisable() {
-        _inputSet.Disable();
+        InputSet.Disable();
     }
 
     private void Start() {
@@ -65,6 +82,7 @@ public class Player : MonoBehaviour {
     }
 
     private void Update() {
+        HandleCollisionDetection();
         PlayerStateMachine.UpdateActiveState();
     }
 
@@ -85,9 +103,16 @@ public class Player : MonoBehaviour {
         //if ((MoveInput.x > 0 && !_isFacingRight) || (MoveInput.x < 0 && _isFacingRight))
         //    FlipCharacter();
     }
-
     private void FlipCharacter() {
         transform.Rotate(0, 180, 0);
         _isFacingRight = !_isFacingRight;
+    }
+
+    private void HandleCollisionDetection() {
+        GroundDetected = Physics2D.Raycast(_groundCheckTransform.position, Vector3.down, _groundCheckDistance, _groundMask);
+    }
+
+    private void OnDrawGizmos() {
+        Gizmos.DrawLine(_groundCheckTransform.position, _groundCheckTransform.position + new Vector3(0, -_groundCheckDistance));
     }
 }
