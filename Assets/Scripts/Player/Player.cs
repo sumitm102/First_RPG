@@ -1,7 +1,6 @@
 using UnityEngine;
 
-public class Player : MonoBehaviour
-{
+public class Player : MonoBehaviour {
     private PlayerInputSet _inputSet;
     public StateMachine PlayerStateMachine { get; private set; }
 
@@ -33,13 +32,15 @@ public class Player : MonoBehaviour
 
     #endregion
 
+    private bool _isFacingRight = true;
+
     public Vector2 MoveInput { get; private set; }
 
 
     private void Awake() {
 
-        if(Anim == null) Anim = GetComponentInChildren<Animator>();
-        if(RB == null) RB = GetComponent<Rigidbody2D>();
+        if (Anim == null) Anim = GetComponentInChildren<Animator>();
+        if (RB == null) RB = GetComponent<Rigidbody2D>();
 
         PlayerStateMachine = new StateMachine();
         _inputSet = new PlayerInputSet();
@@ -67,7 +68,26 @@ public class Player : MonoBehaviour
         PlayerStateMachine.UpdateActiveState();
     }
 
-    public void SetVelocity(float xVeclocity, float yVelocity) {
-        RB.linearVelocity = new Vector2(xVeclocity, yVelocity);
+    public void SetVelocity(float xVelocity, float yVelocity) {
+        RB.linearVelocity = new Vector2(xVelocity, yVelocity);
+        HandleFlip(xVelocity);
+    }
+
+    private void HandleFlip(float xVelocity) {
+
+        // Flip character if horizontal velocity is towards the right but player is facing left or  if horizontal velocity is towards the left but the player is facing right
+        if ((xVelocity > 0 && !_isFacingRight) || (xVelocity < 0 && _isFacingRight))
+            FlipCharacter();
+
+
+        // Also works
+        // Flip character if input is towards the right but player is facing left or  if input is towards the left but the player is facing right
+        //if ((MoveInput.x > 0 && !_isFacingRight) || (MoveInput.x < 0 && _isFacingRight))
+        //    FlipCharacter();
+    }
+
+    private void FlipCharacter() {
+        transform.Rotate(0, 180, 0);
+        _isFacingRight = !_isFacingRight;
     }
 }
