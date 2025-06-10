@@ -8,6 +8,9 @@ public abstract class EntityState
 
     protected Animator anim;
     protected Rigidbody2D rb;
+    protected PlayerInputSet inputSet;
+
+    private static readonly int _yVelocityHash = Animator.StringToHash("yVelocity");
 
     public EntityState(StateMachine sm, int abn, Player p) {
         stateMachine = sm;
@@ -16,6 +19,7 @@ public abstract class EntityState
 
         anim = player.Anim;
         rb = player.RB;
+        inputSet = player.InputSet;
     }
 
 
@@ -27,7 +31,9 @@ public abstract class EntityState
 
     // UpdateState gets called each frame and runs the logic of the current state
     public virtual void UpdateState() {
-        //Debug.Log("Updating " + stateName);
+
+        // For updating the JumpFall blend tree based on the player's current vertical velocity
+        anim.SetFloat(_yVelocityHash, rb.linearVelocityY);
     }
 
 
