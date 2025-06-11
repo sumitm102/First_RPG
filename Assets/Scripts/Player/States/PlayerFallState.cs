@@ -13,6 +13,9 @@ public class PlayerFallState : PlayerAirState {
 
         if (player.GroundDetected)
             player.PlayerStateMachine.ChangeState(player.IdleState);
+
+        if (player.WallDetected)
+            player.PlayerStateMachine.ChangeState(player.WallSlideState);
     }
 
     public override void ExitState() {

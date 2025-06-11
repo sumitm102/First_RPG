@@ -10,7 +10,9 @@ public class PlayerGroundedState : EntityState {
     public override void UpdateState() {
         base.UpdateState();
 
-        if (rb.linearVelocityY < 0 || !player.GroundDetected)
+
+        // Using and operator to avoid flickering when player transitions from wall slide state to idle state
+        if (rb.linearVelocityY < 0 && !player.GroundDetected)
             player.PlayerStateMachine.ChangeState(player.FallState);
 
         if (inputSet.Player.Jump.WasPressedThisFrame() && player.GroundDetected)
