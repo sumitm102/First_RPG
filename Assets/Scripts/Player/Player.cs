@@ -9,12 +9,15 @@ public class Player : MonoBehaviour {
     [field: SerializeField] public float MoveSpeed { get; private set; } = 8f;
     [field: SerializeField] public float JumpForce { get; private set; } = 12f;
     [field: SerializeField, Range(0, 1)] public float InAirMultiplier { get; private set; } = 0.65f; // Range should be from 0 to 1
+    [field: SerializeField, Range(0, 1)] public float SlowedWallSlideMultiplier { get; private set; } = 0.3f; // Range should be from 0 to 1
 
     [Header("Collision Detection")]
     [SerializeField] private Transform _groundCheckTransform;
     [SerializeField] private float _groundCheckDistance;
-    [SerializeField] private LayerMask _groundMask;
+    [SerializeField] private LayerMask _detectionLayer;
+    [SerializeField] private float _wallCheckDistance;
     public bool GroundDetected { get; private set; }
+    public bool WallDetected { get; private set; }
     
 
     #region States
@@ -23,6 +26,7 @@ public class Player : MonoBehaviour {
     public PlayerMoveState MoveState { get; private set; }
     public PlayerJumpState JumpState { get; private set; }
     public PlayerFallState FallState { get; private set; }
+    public PlayerWallSlideState WallSlideState { get; private set; }
 
     #endregion
 
@@ -32,6 +36,7 @@ public class Player : MonoBehaviour {
     private static readonly int _idleHash = Animator.StringToHash("Idle");
     private static readonly int _moveHash = Animator.StringToHash("Move");
     private static readonly int _jumpFallHash = Animator.StringToHash("JumpFall"); // Same hash for two states since they both need to enter the blend tree
+    private static readonly int _wallSlideHash = Animator.StringToHash("WallSlide");
 
     #endregion
 
@@ -44,6 +49,7 @@ public class Player : MonoBehaviour {
     #endregion
 
     private bool _isFacingRight = true;
+    private int _facingDir = 1;
 
     public Vector2 MoveInput { get; private set; }
 
@@ -62,6 +68,7 @@ public class Player : MonoBehaviour {
         MoveState = new PlayerMoveState(PlayerStateMachine, _moveHash, this);
         JumpState = new PlayerJumpState(PlayerStateMachine, _jumpFallHash, this);
         FallState = new PlayerFallState(PlayerStateMachine, _jumpFallHash, this);
+        WallSlideState = new PlayerWallSlideState(PlayerStateMachine, _wallSlideHash, this);
 
         #endregion
     }
@@ -106,13 +113,16 @@ public class Player : MonoBehaviour {
     private void FlipCharacter() {
         transform.Rotate(0, 180, 0);
         _isFacingRight = !_isFacingRight;
+        _facingDir = -_facingDir;
     }
 
     private void HandleCollisionDetection() {
-        GroundDetected = Physics2D.Raycast(_groundCheckTransform.position, Vector3.down, _groundCheckDistance, _groundMask);
+        GroundDetected = Physics2D.Raycast(_groundCheckTransform.position, Vector3.down, _groundCheckDistance, _detectionLayer);
+        WallDetected = Physics2D.Raycast(transform.position, Vector3.right * _facingDir, _wallCheckDistance, _detectionLayer);
     }
 
     private void OnDrawGizmos() {
         Gizmos.DrawLine(_groundCheckTransform.position, _groundCheckTransform.position + new Vector3(0, -_groundCheckDistance));
+        Gizmos.DrawLine(transform.position, transform.position + new Vector3(_facingDir * _wallCheckDistance, 0));
     }
 }

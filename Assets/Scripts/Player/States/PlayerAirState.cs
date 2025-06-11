@@ -14,6 +14,7 @@ public class PlayerAirState : EntityState {
         //To move while in air, a certain amount of move force is applied to the player based on the multiplier
         if (player.MoveInput.x != 0)
             player.SetVelocity(player.MoveSpeed * (player.MoveInput.x * player.InAirMultiplier), rb.linearVelocityY);
+
     }
 
     public override void ExitState() {
