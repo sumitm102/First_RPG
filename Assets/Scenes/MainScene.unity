@@ -487,6 +487,7 @@ MonoBehaviour:
   <JumpForce>k__BackingField: 12
   <InAirMultiplier>k__BackingField: 0.65
   <SlowedWallSlideMultiplier>k__BackingField: 0.3
+  <WallJumpForce>k__BackingField: {x: 6, y: 12}
   _groundCheckTransform: {fileID: 610861243}
   _groundCheckDistance: 0.08
   _detectionLayer:
