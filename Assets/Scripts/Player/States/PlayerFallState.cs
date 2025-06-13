@@ -12,10 +12,10 @@ public class PlayerFallState : PlayerAirState {
         base.UpdateState();
 
         if (player.GroundDetected)
-            player.PlayerStateMachine.ChangeState(player.IdleState);
+            stateMachine.ChangeState(player.IdleState);
 
         if (player.WallDetected)
-            player.PlayerStateMachine.ChangeState(player.WallSlideState);
+            stateMachine.ChangeState(player.WallSlideState);
     }
 
     public override void ExitState() {
