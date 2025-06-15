@@ -11,6 +11,10 @@ public class Player : MonoBehaviour {
     [field: SerializeField, Range(0, 1)] public float InAirMultiplier { get; private set; } = 0.65f; // Range should be from 0 to 1
     [field: SerializeField, Range(0, 1)] public float SlowedWallSlideMultiplier { get; private set; } = 0.3f; // Range should be from 0 to 1
     [field: SerializeField] public Vector2 WallJumpForce { get; private set; }
+    [field: Space]
+    [field: SerializeField] public float DashDuration { get; private set; } = 0.25f;
+    [field: SerializeField] public float DashSpeed { get; private set; } = 20f;
+    [field: SerializeField] public float DashCooldown { get; private set; }
 
     [Header("Collision Detection")]
     [SerializeField] private Transform _groundCheckTransform;
@@ -29,6 +33,7 @@ public class Player : MonoBehaviour {
     public PlayerFallState FallState { get; private set; }
     public PlayerWallSlideState WallSlideState { get; private set; }
     public PlayerWallJumpState WallJumpState { get; private set; }
+    public PlayerDashState DashState { get; private set; }
 
     #endregion
 
@@ -39,6 +44,7 @@ public class Player : MonoBehaviour {
     private static readonly int _moveHash = Animator.StringToHash("Move");
     private static readonly int _jumpFallHash = Animator.StringToHash("JumpFall"); // Same hash for two states since they both need to enter the blend tree
     private static readonly int _wallSlideHash = Animator.StringToHash("WallSlide");
+    private static readonly int _dashHash = Animator.StringToHash("Dash");
 
 
     #endregion
@@ -73,6 +79,7 @@ public class Player : MonoBehaviour {
         FallState = new PlayerFallState(PlayerStateMachine, _jumpFallHash, this);
         WallSlideState = new PlayerWallSlideState(PlayerStateMachine, _wallSlideHash, this);
         WallJumpState = new PlayerWallJumpState(PlayerStateMachine, _jumpFallHash, this);
+        DashState = new PlayerDashState(PlayerStateMachine, _dashHash, this);
 
         #endregion
     }

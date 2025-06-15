@@ -170,7 +170,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &167673233
 Transform:
   m_ObjectHideFlags: 0
@@ -335,7 +335,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &849089128
 Transform:
   m_ObjectHideFlags: 0
@@ -488,6 +488,9 @@ MonoBehaviour:
   <InAirMultiplier>k__BackingField: 0.65
   <SlowedWallSlideMultiplier>k__BackingField: 0.3
   <WallJumpForce>k__BackingField: {x: 6, y: 12}
+  <DashDuration>k__BackingField: 0.25
+  <DashSpeed>k__BackingField: 20
+  <DashCooldown>k__BackingField: 0
   _groundCheckTransform: {fileID: 610861243}
   _groundCheckDistance: 0.08
   _detectionLayer:

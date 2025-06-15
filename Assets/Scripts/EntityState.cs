@@ -10,6 +10,8 @@ public abstract class EntityState
     protected Rigidbody2D rb;
     protected PlayerInputSet inputSet;
 
+    protected float stateTimer;
+
     private static readonly int _yVelocityHash = Animator.StringToHash("yVelocity");
 
     public EntityState(StateMachine sm, int abn, Player p) {
@@ -32,13 +34,28 @@ public abstract class EntityState
     // UpdateState gets called each frame and runs the logic of the current state
     public virtual void UpdateState() {
 
+        stateTimer -= Time.deltaTime;
+
         // For updating the JumpFall blend tree based on the player's current vertical velocity
         anim.SetFloat(_yVelocityHash, rb.linearVelocityY);
+
+        if (inputSet.Player.Dash.WasPressedThisFrame() && CanDash())
+            stateMachine.ChangeState(player.DashState);
     }
 
 
     // ExitState of the current state gets called before transitioning to a new state.
     public virtual void ExitState() {
         anim.SetBool(animBoolName, false);
+    }
+
+    private bool CanDash() {
+        if (player.WallDetected)
+            return false;
+
+        if (stateMachine.CurrentState == player.DashState)
+            return false;
+
+        return true;
     }
 }
