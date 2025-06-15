@@ -18,6 +18,9 @@ public class PlayerGroundedState : EntityState {
         if (inputSet.Player.Jump.WasPressedThisFrame() && player.GroundDetected)
             stateMachine.ChangeState(player.JumpState);
 
+        if (inputSet.Player.Attack.WasPressedThisFrame())
+            stateMachine.ChangeState(player.BasicAttackState);
+
     }
 
     public override void ExitState() {

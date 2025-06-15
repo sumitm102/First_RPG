@@ -11,6 +11,7 @@ public abstract class EntityState
     protected PlayerInputSet inputSet;
 
     protected float stateTimer;
+    protected bool triggerCalled;
 
     private static readonly int _yVelocityHash = Animator.StringToHash("yVelocity");
 
@@ -28,6 +29,8 @@ public abstract class EntityState
     // EnterState gets called at first after transitioning to a new state.
     public virtual void EnterState() {
         anim.SetBool(animBoolName, true);
+
+        triggerCalled = false;
     }
 
 
@@ -57,5 +60,9 @@ public abstract class EntityState
             return false;
 
         return true;
+    }
+
+    public void CallAnimationTrigger() {
+        triggerCalled = true;
     }
 }
