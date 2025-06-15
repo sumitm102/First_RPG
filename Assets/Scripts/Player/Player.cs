@@ -16,6 +16,10 @@ public class Player : MonoBehaviour {
     [field: SerializeField] public float DashSpeed { get; private set; } = 20f;
     [field: SerializeField] public float DashCooldown { get; private set; }
 
+    [field: Header("Attack details")]
+    [field: SerializeField] public Vector2 AttackVelocity { get; private set; }
+    [field: SerializeField] public float AttackVelocityDuration { get; private set; } = 0.1f;
+
     [Header("Collision Detection")]
     [SerializeField] private Transform _groundCheckTransform;
     [SerializeField] private float _groundCheckDistance;
@@ -34,6 +38,7 @@ public class Player : MonoBehaviour {
     public PlayerWallSlideState WallSlideState { get; private set; }
     public PlayerWallJumpState WallJumpState { get; private set; }
     public PlayerDashState DashState { get; private set; }
+    public PlayerBasicAttackState BasicAttackState { get; private set; }
 
     #endregion
 
@@ -45,6 +50,7 @@ public class Player : MonoBehaviour {
     private static readonly int _jumpFallHash = Animator.StringToHash("JumpFall"); // Same hash for two states since they both need to enter the blend tree
     private static readonly int _wallSlideHash = Animator.StringToHash("WallSlide");
     private static readonly int _dashHash = Animator.StringToHash("Dash");
+    private static readonly int _basicAttackHash = Animator.StringToHash("BasicAttack");
 
 
     #endregion
@@ -80,6 +86,7 @@ public class Player : MonoBehaviour {
         WallSlideState = new PlayerWallSlideState(PlayerStateMachine, _wallSlideHash, this);
         WallJumpState = new PlayerWallJumpState(PlayerStateMachine, _jumpFallHash, this);
         DashState = new PlayerDashState(PlayerStateMachine, _dashHash, this);
+        BasicAttackState = new PlayerBasicAttackState(PlayerStateMachine, _basicAttackHash, this);
 
         #endregion
     }
@@ -107,6 +114,10 @@ public class Player : MonoBehaviour {
     public void SetVelocity(float xVelocity, float yVelocity) {
         RB.linearVelocity = new Vector2(xVelocity, yVelocity);
         HandleFlip(xVelocity);
+    }
+
+    public void CallAnimationTrigger() {
+        PlayerStateMachine.CurrentState.CallAnimationTrigger();
     }
 
     private void HandleFlip(float xVelocity) {

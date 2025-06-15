@@ -491,6 +491,8 @@ MonoBehaviour:
   <DashDuration>k__BackingField: 0.25
   <DashSpeed>k__BackingField: 20
   <DashCooldown>k__BackingField: 0
+  <AttackVelocity>k__BackingField: {x: 3, y: 1.5}
+  <AttackVelocityDuration>k__BackingField: 0.1
   _groundCheckTransform: {fileID: 610861243}
   _groundCheckDistance: 0.08
   _detectionLayer:
@@ -591,6 +593,7 @@ GameObject:
   - component: {fileID: 1135975774}
   - component: {fileID: 1135975773}
   - component: {fileID: 1135975772}
+  - component: {fileID: 1135975775}
   m_Layer: 0
   m_Name: Animator
   m_TagString: Untagged
@@ -690,6 +693,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 966927547}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1135975775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1135975771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f94ab51e2f7e99f468b8c5efca2b0a62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1181806204
 GameObject:
   m_ObjectHideFlags: 0
