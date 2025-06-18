@@ -8,8 +8,10 @@ public class PlayerBasicAttackState : EntityState {
     private const int _FirstComboIndex = 1;
     private int _comboIndex = _FirstComboIndex;
     private int _comboLimit = 3;
+    private int _attackDir;
 
     private float _lastTimeAttacked;
+    private bool _comboAttackQueued;
     public PlayerBasicAttackState(StateMachine sm, int abn, Player p) : base(sm, abn, p) {
 
 
@@ -21,7 +23,11 @@ public class PlayerBasicAttackState : EntityState {
     public override void EnterState() {
         base.EnterState();
 
+        _comboAttackQueued = false;
         ManageComboIndex();
+
+        // Defining attack direction according to player input or the character's facing direction
+        _attackDir = player.MoveInput.x != 0 ? ((int)player.MoveInput.x) : player.FacingDir;
 
         anim.SetInteger(_attackIndexHash, _comboIndex);
 
@@ -33,9 +39,14 @@ public class PlayerBasicAttackState : EntityState {
         base.UpdateState();
         HandleAttackVelocity();
 
-        if (triggerCalled)
-            stateMachine.ChangeState(player.IdleState);
+        if (inputSet.Player.Attack.WasPressedThisFrame())
+            QueueNextAttack();
+        
+
+        if (triggerCalled) 
+            HandleStateExit();
     }
+
 
     public override void ExitState() {
         base.ExitState();
@@ -48,7 +59,7 @@ public class PlayerBasicAttackState : EntityState {
         _attackVelocityTimer = player.AttackVelocityDuration;
         Vector2 currentAttackVelocity = player.AttackVelocity[_comboIndex - 1];
 
-        player.SetVelocity(currentAttackVelocity.x * player.FacingDir, currentAttackVelocity.y);
+        player.SetVelocity(currentAttackVelocity.x * _attackDir, currentAttackVelocity.y);
     }
 
     private void HandleAttackVelocity() {
@@ -66,4 +77,19 @@ public class PlayerBasicAttackState : EntityState {
             _comboIndex = _FirstComboIndex;
     }
 
+    private void HandleStateExit() {
+        if (_comboAttackQueued) {
+
+            anim.SetBool(animBoolName, false);
+
+            player.EnterAttackStateWithDelay();
+        }
+        else
+            stateMachine.ChangeState(player.IdleState);
+    }
+
+    private void QueueNextAttack() {
+        if (_comboIndex < _comboLimit)
+            _comboAttackQueued = true;
+    }
 }

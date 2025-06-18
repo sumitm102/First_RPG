@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Player : MonoBehaviour {
@@ -20,6 +21,7 @@ public class Player : MonoBehaviour {
     [field: SerializeField] public Vector2[] AttackVelocity { get; private set; }
     [field: SerializeField] public float AttackVelocityDuration { get; private set; } = 0.1f;
     [field: SerializeField] public float ComboResetTime { get; private set; } = 1f;
+    private Coroutine _queuedAttackCo;
 
     [Header("Collision Detection")]
     [SerializeField] private Transform _groundCheckTransform;
@@ -137,6 +139,19 @@ public class Player : MonoBehaviour {
     private void HandleCollisionDetection() {
         GroundDetected = Physics2D.Raycast(_groundCheckTransform.position, Vector3.down, _groundCheckDistance, _detectionLayer);
         WallDetected = Physics2D.Raycast(transform.position, Vector3.right * FacingDir, _wallCheckDistance, _detectionLayer);
+    }
+
+    public void EnterAttackStateWithDelay() {
+
+        // To stop running multiple coroutines at the same time
+        if (_queuedAttackCo != null)
+            StopCoroutine(_queuedAttackCo);
+
+        _queuedAttackCo = StartCoroutine(EnterAttackStateWithDelayCo());
+    }
+    private IEnumerator EnterAttackStateWithDelayCo() {
+        yield return new WaitForEndOfFrame();
+        PlayerStateMachine.ChangeState(BasicAttackState);
     }
 
     private void OnDrawGizmos() {
