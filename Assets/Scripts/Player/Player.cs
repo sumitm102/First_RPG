@@ -19,6 +19,7 @@ public class Player : MonoBehaviour {
 
     [field: Header("Attack details")]
     [field: SerializeField] public Vector2[] AttackVelocity { get; private set; }
+    [field: SerializeField] public Vector2 JumpAttackVelocity { get; private set; }
     [field: SerializeField] public float AttackVelocityDuration { get; private set; } = 0.1f;
     [field: SerializeField] public float ComboResetTime { get; private set; } = 1f;
     private Coroutine _queuedAttackCo;
@@ -42,6 +43,7 @@ public class Player : MonoBehaviour {
     public PlayerWallJumpState WallJumpState { get; private set; }
     public PlayerDashState DashState { get; private set; }
     public PlayerBasicAttackState BasicAttackState { get; private set; }
+    public PlayerJumpAttackState JumpAttackState { get; private set; }
 
     #endregion
 
@@ -54,6 +56,7 @@ public class Player : MonoBehaviour {
     private static readonly int _wallSlideHash = Animator.StringToHash("WallSlide");
     private static readonly int _dashHash = Animator.StringToHash("Dash");
     private static readonly int _basicAttackHash = Animator.StringToHash("BasicAttack");
+    private static readonly int _jumpAttackHash = Animator.StringToHash("JumpAttack");
 
 
     #endregion
@@ -90,6 +93,7 @@ public class Player : MonoBehaviour {
         WallJumpState = new PlayerWallJumpState(PlayerStateMachine, _jumpFallHash, this);
         DashState = new PlayerDashState(PlayerStateMachine, _dashHash, this);
         BasicAttackState = new PlayerBasicAttackState(PlayerStateMachine, _basicAttackHash, this);
+        JumpAttackState = new PlayerJumpAttackState(PlayerStateMachine, _jumpAttackHash, this);
 
         #endregion
     }
