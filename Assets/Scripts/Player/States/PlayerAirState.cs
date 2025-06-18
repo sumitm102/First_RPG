@@ -15,6 +15,12 @@ public class PlayerAirState : EntityState {
         if (player.MoveInput.x != 0)
             player.SetVelocity(player.MoveSpeed * (player.MoveInput.x * player.InAirMultiplier), rb.linearVelocityY);
 
+        if (inputSet.Player.Attack.WasPressedThisFrame())
+            stateMachine.ChangeState(player.JumpAttackState);
+        
+        
+        
+
     }
 
     public override void ExitState() {
