@@ -29,6 +29,8 @@ public class Player : MonoBehaviour {
     [SerializeField] private float _groundCheckDistance;
     [SerializeField] private LayerMask _detectionLayer;
     [SerializeField] private float _wallCheckDistance;
+    [SerializeField] private Transform _primaryWallCheck;
+    [SerializeField] private Transform _secondaryWallCheck;
     public bool GroundDetected { get; private set; }
     public bool WallDetected { get; private set; }
     
@@ -64,6 +66,7 @@ public class Player : MonoBehaviour {
 
     #region Components
 
+    [field:Header("Components")]
     [field: SerializeField] public Animator Anim { get; private set; }
     [field: SerializeField] public Rigidbody2D RB { get; private set; }
 
@@ -142,7 +145,8 @@ public class Player : MonoBehaviour {
 
     private void HandleCollisionDetection() {
         GroundDetected = Physics2D.Raycast(_groundCheckTransform.position, Vector3.down, _groundCheckDistance, _detectionLayer);
-        WallDetected = Physics2D.Raycast(transform.position, Vector3.right * FacingDir, _wallCheckDistance, _detectionLayer);
+        WallDetected = Physics2D.Raycast(_primaryWallCheck.position, Vector3.right * FacingDir, _wallCheckDistance, _detectionLayer) 
+                    && Physics2D.Raycast(_secondaryWallCheck.position, Vector3.right * FacingDir, _wallCheckDistance, _detectionLayer);
     }
 
     public void EnterAttackStateWithDelay() {
@@ -160,6 +164,7 @@ public class Player : MonoBehaviour {
 
     private void OnDrawGizmos() {
         Gizmos.DrawLine(_groundCheckTransform.position, _groundCheckTransform.position + new Vector3(0, -_groundCheckDistance));
-        Gizmos.DrawLine(transform.position, transform.position + new Vector3(FacingDir * _wallCheckDistance, 0));
+        Gizmos.DrawLine(_primaryWallCheck.position, _primaryWallCheck.position + new Vector3(FacingDir * _wallCheckDistance, 0));
+        Gizmos.DrawLine(_secondaryWallCheck.position, _secondaryWallCheck.position + new Vector3(FacingDir * _wallCheckDistance, 0));
     }
 }
