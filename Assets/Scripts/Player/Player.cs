@@ -17,8 +17,9 @@ public class Player : MonoBehaviour {
     [field: SerializeField] public float DashCooldown { get; private set; }
 
     [field: Header("Attack details")]
-    [field: SerializeField] public Vector2 AttackVelocity { get; private set; }
+    [field: SerializeField] public Vector2[] AttackVelocity { get; private set; }
     [field: SerializeField] public float AttackVelocityDuration { get; private set; } = 0.1f;
+    [field: SerializeField] public float ComboResetTime { get; private set; } = 1f;
 
     [Header("Collision Detection")]
     [SerializeField] private Transform _groundCheckTransform;

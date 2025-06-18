@@ -3,13 +3,32 @@ using UnityEngine;
 public class PlayerBasicAttackState : EntityState {
 
     private float _attackVelocityTimer;
+    private static readonly int _attackIndexHash = Animator.StringToHash("BasicAttackIndex");
+
+    private const int _FirstComboIndex = 1;
+    private int _comboIndex = _FirstComboIndex;
+    private int _comboLimit = 3;
+
+    private float _lastTimeAttacked;
     public PlayerBasicAttackState(StateMachine sm, int abn, Player p) : base(sm, abn, p) {
+
+
+        // Added as a precaution in case to resolve conflict between combo limit and velocity array length
+        if(_comboLimit != player.AttackVelocity.Length)
+            _comboLimit = player.AttackVelocity.Length;
     }
 
     public override void EnterState() {
         base.EnterState();
-        GenerateAttackVelocity();
+
+        ManageComboIndex();
+
+        anim.SetInteger(_attackIndexHash, _comboIndex);
+
+        ApplyAttackVelocity();
     }
+
+
     public override void UpdateState() {
         base.UpdateState();
         HandleAttackVelocity();
@@ -20,12 +39,16 @@ public class PlayerBasicAttackState : EntityState {
 
     public override void ExitState() {
         base.ExitState();
+
+        _comboIndex++;
+        _lastTimeAttacked = Time.time;
     }
 
-    private void GenerateAttackVelocity() {
+    private void ApplyAttackVelocity() {
         _attackVelocityTimer = player.AttackVelocityDuration;
+        Vector2 currentAttackVelocity = player.AttackVelocity[_comboIndex - 1];
 
-        player.SetVelocity(player.AttackVelocity.x * player.FacingDir, player.AttackVelocity.y);
+        player.SetVelocity(currentAttackVelocity.x * player.FacingDir, currentAttackVelocity.y);
     }
 
     private void HandleAttackVelocity() {
@@ -36,5 +59,11 @@ public class PlayerBasicAttackState : EntityState {
 
     }
 
+    private void ManageComboIndex() {
+
+        // Reset to the first combo if attack chain is completed or if the attack window is greater than the current time in game
+        if (_comboIndex > _comboLimit || Time.time > _lastTimeAttacked + player.ComboResetTime)
+            _comboIndex = _FirstComboIndex;
+    }
 
 }
