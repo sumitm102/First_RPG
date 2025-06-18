@@ -1,7 +1,6 @@
 using UnityEngine;
 
-public abstract class EntityState 
-{
+public abstract class EntityState {
     protected Player player;
     protected StateMachine stateMachine;
     protected int animBoolName;
@@ -53,10 +52,7 @@ public abstract class EntityState
     }
 
     private bool CanDash() {
-        if (player.WallDetected)
-            return false;
-
-        if (stateMachine.CurrentState == player.DashState)
+        if (player.WallDetected || stateMachine.CurrentState == player.DashState)
             return false;
 
         return true;

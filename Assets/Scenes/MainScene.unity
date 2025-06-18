@@ -491,8 +491,12 @@ MonoBehaviour:
   <DashDuration>k__BackingField: 0.25
   <DashSpeed>k__BackingField: 20
   <DashCooldown>k__BackingField: 0
-  <AttackVelocity>k__BackingField: {x: 3, y: 1.5}
+  <AttackVelocity>k__BackingField:
+  - {x: 3, y: 1.5}
+  - {x: 3, y: 2.5}
+  - {x: 5, y: 1.75}
   <AttackVelocityDuration>k__BackingField: 0.1
+  <ComboResetTime>k__BackingField: 1
   _groundCheckTransform: {fileID: 610861243}
   _groundCheckDistance: 0.08
   _detectionLayer:
