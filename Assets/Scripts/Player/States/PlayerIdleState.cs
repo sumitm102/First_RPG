@@ -15,6 +15,9 @@ public class PlayerIdleState : PlayerGroundedState {
     public override void UpdateState() {
         base.UpdateState();
 
+        // To stop transitioning to move state when the moving character detects a wall
+        if (player.MoveInput.x == player.FacingDir && player.WallDetected)
+            return;
        
         if (player.MoveInput.x != 0)
             player.PlayerStateMachine.ChangeState(player.MoveState);
