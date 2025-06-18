@@ -11,7 +11,7 @@ public class PlayerDashState : EntityState {
     public override void EnterState() {
         base.EnterState();
 
-        _dashDir = player.FacingDir;
+        _dashDir = player.MoveInput.x != 0 ? ((int)player.MoveInput.x) : player.FacingDir;
         stateTimer = player.DashDuration;
 
         _originalGravityScale = rb.gravityScale;
