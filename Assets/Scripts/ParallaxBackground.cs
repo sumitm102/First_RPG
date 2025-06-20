@@ -11,7 +11,7 @@ public class ParallaxBackground : MonoBehaviour
     private void Awake() {
         _mainCamera = Camera.main;
         _cameraHalfWidth = _mainCamera.orthographicSize * _mainCamera.aspect;
-        CalculateImageWidth();
+        InitializeLayerWidth();
     }
 
     // Using fixed update to avoid jittering when background is static
@@ -31,7 +31,7 @@ public class ParallaxBackground : MonoBehaviour
         }
     }
 
-    private void CalculateImageWidth() {
+    private void InitializeLayerWidth() {
         foreach (var layer in _backgroundLayers) {
             layer.CalculateImageWidth();
         }
