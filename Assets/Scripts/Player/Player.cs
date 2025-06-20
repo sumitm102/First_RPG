@@ -162,7 +162,7 @@ public class Player : MonoBehaviour {
             FlipCharacter();
     }
 
-    private void FlipCharacter() {
+    public void FlipCharacter() {
         transform.Rotate(0, 180, 0);
         _isFacingRight = !_isFacingRight;
         FacingDir = -FacingDir;
