@@ -6,7 +6,6 @@ public class PlayerFallState : PlayerAirState {
 
     public override void EnterState() {
         base.EnterState();
-        //rb.gravityScale = 4f;
     }
     public override void UpdateState() {
         base.UpdateState();
@@ -20,7 +19,6 @@ public class PlayerFallState : PlayerAirState {
 
     public override void ExitState() {
         base.ExitState();
-        //rb.gravityScale = 1f;
     }
 
 }

@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour {
     public PlayerInputSet InputSet { get; private set; }
@@ -22,6 +24,9 @@ public class Player : MonoBehaviour {
     [field: SerializeField] public Vector2 JumpAttackVelocity { get; private set; }
     [field: SerializeField] public float AttackVelocityDuration { get; private set; } = 0.1f;
     [field: SerializeField] public float ComboResetTime { get; private set; } = 1f;
+    [field: SerializeField] public bool AttackBuffered { get; private set; }
+    private float _attackBufferStartTime;
+    [field: SerializeField] public float _attackBufferDuration = 0.2f;
     private Coroutine _queuedAttackCo;
 
     [Header("Collision Detection")]
@@ -106,11 +111,31 @@ public class Player : MonoBehaviour {
 
         InputSet.Player.Movement.performed += ctx => MoveInput = ctx.ReadValue<Vector2>();
         InputSet.Player.Movement.canceled += ctx => MoveInput = Vector2.zero;
+
+        InputSet.Player.Attack.started += i => AttackBuffered = true;
+        InputSet.Player.Attack.canceled += i => AttackBuffered= false;
     }
 
     private void OnDisable() {
+        //InputSet.Player.Attack.started -= OnAttackPerformed;
         InputSet.Disable();
+    
     }
+
+    private void OnAttackPerformed(InputAction.CallbackContext context) {
+        AttackBuffered = true;
+        _attackBufferStartTime = Time.time;
+    }
+
+    public void UpdateAttackInputBuffer() {
+        if (AttackBuffered && Time.time - _attackBufferStartTime > _attackBufferDuration)
+            AttackBuffered = false;
+    }
+
+    public void DisableAttackBuffer() {
+        AttackBuffered = false;
+    }
+
 
     private void Start() {
         PlayerStateMachine.Initialize(IdleState);

@@ -11,7 +11,7 @@ public class PlayerGroundedState : EntityState {
         base.UpdateState();
 
 
-        // Using and operator to avoid flickering when player transitions from wall slide state to idle state
+        // Using and operator to avoid flickering when character transitions from wall slide state to idle state
         if (rb.linearVelocityY < 0 && !player.GroundDetected)
             stateMachine.ChangeState(player.FallState);
 
