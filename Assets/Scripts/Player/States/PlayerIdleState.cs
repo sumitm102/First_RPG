@@ -20,12 +20,15 @@ public class PlayerIdleState : PlayerGroundedState {
             return;
        
         if (player.MoveInput.x != 0)
-            player.PlayerStateMachine.ChangeState(player.MoveState);
+            stateMachine.ChangeState(player.MoveState);
 
     }
 
 
     public override void ExitState() {
         base.ExitState();
+
+        // To avoid facing left when character transitions to jump state from this one even if they are facing right
+        player.SetVelocity(0, rb.linearVelocityY);
     }
 }

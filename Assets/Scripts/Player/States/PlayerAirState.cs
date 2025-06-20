@@ -11,15 +11,16 @@ public class PlayerAirState : EntityState {
         base.UpdateState();
 
 
+        if (player.AttackBuffered) {
+            //player.DisableAttackBuffer();
+            stateMachine.ChangeState(player.JumpAttackState);
+        }
+
+       // player.UpdateAttackInputBuffer();
+        
         //To move while in air, a certain amount of move force is applied to the player based on the multiplier
         if (player.MoveInput.x != 0)
             player.SetVelocity(player.MoveSpeed * (player.MoveInput.x * player.InAirMultiplier), rb.linearVelocityY);
-
-        if (inputSet.Player.Attack.WasPressedThisFrame())
-            stateMachine.ChangeState(player.JumpAttackState);
-        
-        
-        
 
     }
 
