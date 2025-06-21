@@ -67,7 +67,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -81,7 +81,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -105,7 +105,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -161,7 +161,7 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 23
+        width: 24
         height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -181,7 +181,7 @@ TextureImporter:
       name: Skeleton Idle_1
       rect:
         serializedVersion: 2
-        x: 23
+        x: 24
         y: 0
         width: 24
         height: 32
@@ -203,7 +203,7 @@ TextureImporter:
       name: Skeleton Idle_2
       rect:
         serializedVersion: 2
-        x: 47
+        x: 48
         y: 0
         width: 24
         height: 32
@@ -225,7 +225,7 @@ TextureImporter:
       name: Skeleton Idle_3
       rect:
         serializedVersion: 2
-        x: 71
+        x: 72
         y: 0
         width: 24
         height: 32
@@ -269,7 +269,7 @@ TextureImporter:
       name: Skeleton Idle_5
       rect:
         serializedVersion: 2
-        x: 121
+        x: 120
         y: 0
         width: 24
         height: 32
@@ -291,7 +291,7 @@ TextureImporter:
       name: Skeleton Idle_6
       rect:
         serializedVersion: 2
-        x: 145
+        x: 144
         y: 0
         width: 24
         height: 32
@@ -335,7 +335,7 @@ TextureImporter:
       name: Skeleton Idle_8
       rect:
         serializedVersion: 2
-        x: 191
+        x: 192
         y: 0
         width: 24
         height: 32
@@ -357,7 +357,7 @@ TextureImporter:
       name: Skeleton Idle_9
       rect:
         serializedVersion: 2
-        x: 215
+        x: 216
         y: 0
         width: 24
         height: 32
@@ -379,7 +379,7 @@ TextureImporter:
       name: Skeleton Idle_10
       rect:
         serializedVersion: 2
-        x: 239
+        x: 240
         y: 0
         width: 24
         height: 32
@@ -401,7 +401,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 7d4d197dd1fc80a44b28312dd4ca8a41
     internalID: 0
     vertices: []
     indices: 
@@ -410,7 +410,18 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Skeleton Idle_0: 7928858964255100155
+      Skeleton Idle_1: -289379152601194012
+      Skeleton Idle_10: -5784503621931760760
+      Skeleton Idle_2: -8331204611373963175
+      Skeleton Idle_3: 5974531914738200450
+      Skeleton Idle_4: 1900126310482141809
+      Skeleton Idle_5: -9007221444457188966
+      Skeleton Idle_6: 6361432402118329833
+      Skeleton Idle_7: 1571032212639168507
+      Skeleton Idle_8: 7611122742130972421
+      Skeleton Idle_9: 5180031473007828922
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

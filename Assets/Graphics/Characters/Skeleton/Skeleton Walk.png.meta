@@ -73,7 +73,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -87,7 +87,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -111,7 +111,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -167,8 +167,8 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 20
-        height: 33
+        width: 22
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -189,8 +189,8 @@ TextureImporter:
         serializedVersion: 2
         x: 22
         y: 0
-        width: 20
-        height: 33
+        width: 22
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -211,8 +211,8 @@ TextureImporter:
         serializedVersion: 2
         x: 44
         y: 0
-        width: 20
-        height: 33
+        width: 22
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -231,10 +231,10 @@ TextureImporter:
       name: Skeleton Walk_3
       rect:
         serializedVersion: 2
-        x: 65
+        x: 66
         y: 0
         width: 22
-        height: 33
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -253,10 +253,10 @@ TextureImporter:
       name: Skeleton Walk_4
       rect:
         serializedVersion: 2
-        x: 87
+        x: 88
         y: 0
-        width: 23
-        height: 33
+        width: 22
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -275,10 +275,10 @@ TextureImporter:
       name: Skeleton Walk_5
       rect:
         serializedVersion: 2
-        x: 109
+        x: 110
         y: 0
-        width: 24
-        height: 33
+        width: 22
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -297,10 +297,10 @@ TextureImporter:
       name: Skeleton Walk_6
       rect:
         serializedVersion: 2
-        x: 131
+        x: 132
         y: 0
-        width: 24
-        height: 33
+        width: 22
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -319,10 +319,10 @@ TextureImporter:
       name: Skeleton Walk_7
       rect:
         serializedVersion: 2
-        x: 153
+        x: 154
         y: 0
-        width: 24
-        height: 33
+        width: 22
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -341,10 +341,10 @@ TextureImporter:
       name: Skeleton Walk_8
       rect:
         serializedVersion: 2
-        x: 175
+        x: 176
         y: 0
-        width: 24
-        height: 33
+        width: 22
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -363,10 +363,10 @@ TextureImporter:
       name: Skeleton Walk_9
       rect:
         serializedVersion: 2
-        x: 197
+        x: 198
         y: 0
-        width: 24
-        height: 33
+        width: 22
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -388,7 +388,7 @@ TextureImporter:
         x: 220
         y: 0
         width: 22
-        height: 33
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -407,10 +407,10 @@ TextureImporter:
       name: Skeleton Walk_11
       rect:
         serializedVersion: 2
-        x: 243
+        x: 242
         y: 0
-        width: 20
-        height: 33
+        width: 22
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -429,10 +429,10 @@ TextureImporter:
       name: Skeleton Walk_12
       rect:
         serializedVersion: 2
-        x: 265
+        x: 264
         y: 0
-        width: 19
-        height: 33
+        width: 22
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -451,7 +451,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 2dff6ca10f951d44584da8751aa5e8fb
     internalID: 0
     vertices: []
     indices: 
@@ -460,7 +460,20 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Skeleton Walk_0: 45966500872709769
+      Skeleton Walk_1: 7013577002690406627
+      Skeleton Walk_10: 1513826763441915127
+      Skeleton Walk_11: -2146757507701255462
+      Skeleton Walk_12: -4988383733850832283
+      Skeleton Walk_2: -2356003859601637949
+      Skeleton Walk_3: 2369481524001456022
+      Skeleton Walk_4: -1540590527562206909
+      Skeleton Walk_5: -7445728037447846149
+      Skeleton Walk_6: 4792086390759421477
+      Skeleton Walk_7: -3462787873181832886
+      Skeleton Walk_8: 7746255393700133122
+      Skeleton Walk_9: 4482783208499175354
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
