@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerWallJumpState : EntityState {
+public class PlayerWallJumpState : PlayerState {
     public PlayerWallJumpState(StateMachine sm, int abn, Player p) : base(sm, abn, p) {
     }
 

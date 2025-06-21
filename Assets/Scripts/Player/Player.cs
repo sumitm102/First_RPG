@@ -3,9 +3,8 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Player : MonoBehaviour {
+public class Player : Entity {
     public PlayerInputSet InputSet { get; private set; }
-    public StateMachine PlayerStateMachine { get; private set; }
 
 
     [field: Header("Movement details")]
@@ -24,21 +23,8 @@ public class Player : MonoBehaviour {
     [field: SerializeField] public Vector2 JumpAttackVelocity { get; private set; }
     [field: SerializeField] public float AttackVelocityDuration { get; private set; } = 0.1f;
     [field: SerializeField] public float ComboResetTime { get; private set; } = 1f;
-    [field: SerializeField] public bool AttackBuffered { get; private set; }
-    private float _attackBufferStartTime;
-    [field: SerializeField] public float _attackBufferDuration = 0.2f;
     private Coroutine _queuedAttackCo;
 
-    [Header("Collision Detection")]
-    [SerializeField] private Transform _groundCheckTransform;
-    [SerializeField] private float _groundCheckDistance;
-    [SerializeField] private LayerMask _detectionLayer;
-    [SerializeField] private float _wallCheckDistance;
-    [SerializeField] private Transform _primaryWallCheck;
-    [SerializeField] private Transform _secondaryWallCheck;
-    public bool GroundDetected { get; private set; }
-    public bool WallDetected { get; private set; }
-    
 
     #region States
 
@@ -54,7 +40,6 @@ public class Player : MonoBehaviour {
 
     #endregion
 
-
     #region Anim Bools
 
     private static readonly int _idleHash = Animator.StringToHash("Idle");
@@ -68,110 +53,48 @@ public class Player : MonoBehaviour {
 
     #endregion
 
-
-    #region Components
-
-    [field:Header("Components")]
-    [field: SerializeField] public Animator Anim { get; private set; }
-    [field: SerializeField] public Rigidbody2D RB { get; private set; }
-
-    #endregion
-
-    private bool _isFacingRight = true;
-    public int FacingDir { get; private set; } = 1;
-
     public Vector2 MoveInput { get; private set; }
 
 
-    private void Awake() {
+    protected override void Awake() {
+        base.Awake();
 
-        if (Anim == null) Anim = GetComponentInChildren<Animator>();
-        if (RB == null) RB = GetComponent<Rigidbody2D>();
-
-        PlayerStateMachine = new StateMachine();
         InputSet = new PlayerInputSet(); // Input needs to be initialized before the states
 
         #region State Initialization
 
-        IdleState = new PlayerIdleState(PlayerStateMachine, _idleHash, this);
-        MoveState = new PlayerMoveState(PlayerStateMachine, _moveHash, this);
-        JumpState = new PlayerJumpState(PlayerStateMachine, _jumpFallHash, this);
-        FallState = new PlayerFallState(PlayerStateMachine, _jumpFallHash, this);
-        WallSlideState = new PlayerWallSlideState(PlayerStateMachine, _wallSlideHash, this);
-        WallJumpState = new PlayerWallJumpState(PlayerStateMachine, _jumpFallHash, this);
-        DashState = new PlayerDashState(PlayerStateMachine, _dashHash, this);
-        BasicAttackState = new PlayerBasicAttackState(PlayerStateMachine, _basicAttackHash, this);
-        JumpAttackState = new PlayerJumpAttackState(PlayerStateMachine, _jumpAttackHash, this);
+        IdleState = new PlayerIdleState(StateMachine, _idleHash, this);
+        MoveState = new PlayerMoveState(StateMachine, _moveHash, this);
+        JumpState = new PlayerJumpState(StateMachine, _jumpFallHash, this);
+        FallState = new PlayerFallState(StateMachine, _jumpFallHash, this);
+        WallSlideState = new PlayerWallSlideState(StateMachine, _wallSlideHash, this);
+        WallJumpState = new PlayerWallJumpState(StateMachine, _jumpFallHash, this);
+        DashState = new PlayerDashState(StateMachine, _dashHash, this);
+        BasicAttackState = new PlayerBasicAttackState(StateMachine, _basicAttackHash, this);
+        JumpAttackState = new PlayerJumpAttackState(StateMachine, _jumpAttackHash, this);
 
         #endregion
     }
+
+    #region Input
 
     private void OnEnable() {
         InputSet.Enable();
 
         InputSet.Player.Movement.performed += ctx => MoveInput = ctx.ReadValue<Vector2>();
         InputSet.Player.Movement.canceled += ctx => MoveInput = Vector2.zero;
-
-        InputSet.Player.Attack.started += i => AttackBuffered = true;
-        InputSet.Player.Attack.canceled += i => AttackBuffered= false;
     }
 
     private void OnDisable() {
-        //InputSet.Player.Attack.started -= OnAttackPerformed;
         InputSet.Disable();
+    }
+
+    #endregion
     
-    }
+    protected override void Start() {
+        base.Start();
 
-    private void OnAttackPerformed(InputAction.CallbackContext context) {
-        AttackBuffered = true;
-        _attackBufferStartTime = Time.time;
-    }
-
-    public void UpdateAttackInputBuffer() {
-        if (AttackBuffered && Time.time - _attackBufferStartTime > _attackBufferDuration)
-            AttackBuffered = false;
-    }
-
-    public void DisableAttackBuffer() {
-        AttackBuffered = false;
-    }
-
-
-    private void Start() {
-        PlayerStateMachine.Initialize(IdleState);
-    }
-
-    private void Update() {
-        HandleCollisionDetection();
-        PlayerStateMachine.UpdateActiveState();
-    }
-
-    public void SetVelocity(float xVelocity, float yVelocity) {
-        RB.linearVelocity = new Vector2(xVelocity, yVelocity);
-        HandleFlip(xVelocity);
-    }
-
-    public void CallAnimationTrigger() {
-        PlayerStateMachine.CurrentState.CallAnimationTrigger();
-    }
-
-    private void HandleFlip(float xVelocity) {
-
-        // Flip character if horizontal velocity is towards the right but player is facing left or  if horizontal velocity is towards the left but the player is facing right
-        if ((xVelocity > 0 && !_isFacingRight) || (xVelocity < 0 && _isFacingRight))
-            FlipCharacter();
-    }
-
-    public void FlipCharacter() {
-        transform.Rotate(0, 180, 0);
-        _isFacingRight = !_isFacingRight;
-        FacingDir = -FacingDir;
-    }
-
-    private void HandleCollisionDetection() {
-        GroundDetected = Physics2D.Raycast(_groundCheckTransform.position, Vector3.down, _groundCheckDistance, _detectionLayer);
-        WallDetected = Physics2D.Raycast(_primaryWallCheck.position, Vector3.right * FacingDir, _wallCheckDistance, _detectionLayer) 
-                    && Physics2D.Raycast(_secondaryWallCheck.position, Vector3.right * FacingDir, _wallCheckDistance, _detectionLayer);
+        StateMachine.Initialize(IdleState);
     }
 
     public void EnterAttackStateWithDelay() {
@@ -184,12 +107,7 @@ public class Player : MonoBehaviour {
     }
     private IEnumerator EnterAttackStateWithDelayCo() {
         yield return new WaitForEndOfFrame();
-        PlayerStateMachine.ChangeState(BasicAttackState);
+        StateMachine.ChangeState(BasicAttackState);
     }
 
-    private void OnDrawGizmos() {
-        Gizmos.DrawLine(_groundCheckTransform.position, _groundCheckTransform.position + new Vector3(0, -_groundCheckDistance));
-        Gizmos.DrawLine(_primaryWallCheck.position, _primaryWallCheck.position + new Vector3(FacingDir * _wallCheckDistance, 0));
-        Gizmos.DrawLine(_secondaryWallCheck.position, _secondaryWallCheck.position + new Vector3(FacingDir * _wallCheckDistance, 0));
-    }
 }

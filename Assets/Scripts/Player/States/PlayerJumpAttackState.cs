@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerJumpAttackState : EntityState {
+public class PlayerJumpAttackState : PlayerState {
 
     private bool _touchedGround;
     private static readonly int _jumpAttackTriggerHash = Animator.StringToHash("JumpAttackTrigger");
