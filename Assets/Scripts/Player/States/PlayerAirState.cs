@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerAirState : EntityState {
+public class PlayerAirState : PlayerState {
     public PlayerAirState(StateMachine sm, int abn, Player p) : base(sm, abn, p) {
     }
 
@@ -11,12 +11,8 @@ public class PlayerAirState : EntityState {
         base.UpdateState();
 
 
-        if (player.AttackBuffered) {
-            //player.DisableAttackBuffer();
+        if (inputSet.Player.Attack.WasPressedThisFrame())
             stateMachine.ChangeState(player.JumpAttackState);
-        }
-
-       // player.UpdateAttackInputBuffer();
         
         //To move while in air, a certain amount of move force is applied to the player based on the multiplier
         if (player.MoveInput.x != 0)
