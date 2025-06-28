@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EnemyIdleState : EnemyState {
+public class EnemyIdleState : EnemyGroundedState {
     public EnemyIdleState(StateMachine sm, int abn, Enemy e) : base(sm, abn, e) {
     }
 
