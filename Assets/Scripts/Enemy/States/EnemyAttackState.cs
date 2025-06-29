@@ -11,7 +11,7 @@ public class EnemyAttackState : EnemyState {
         base.UpdateState();
 
         if (triggerCalled)
-            stateMachine.ChangeState(enemy.IdleState);
+            stateMachine.ChangeState(enemy.BattleState);
     }
 
     public override void ExitState() {

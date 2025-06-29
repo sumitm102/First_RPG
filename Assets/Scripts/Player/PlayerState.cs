@@ -27,9 +27,6 @@ public abstract class PlayerState : EntityState {
 
         base.UpdateState();
 
-        // For updating the JumpFall blend tree based on the player's current vertical velocity
-        anim.SetFloat(_yVelocityHash, rb.linearVelocityY);
-
         if (inputSet.Player.Dash.WasPressedThisFrame() && CanDash())
             stateMachine.ChangeState(player.DashState);
     }
@@ -45,5 +42,13 @@ public abstract class PlayerState : EntityState {
             return false;
 
         return true;
+    }
+
+    // For updating the JumpFall blend tree based on the player's current vertical velocity
+    // Gets called in the update method from entity state
+    public override void UpdateAnimationParameter() {
+        base.UpdateAnimationParameter();
+
+        anim.SetFloat(_yVelocityHash, rb.linearVelocityY);
     }
 }

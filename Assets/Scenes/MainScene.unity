@@ -8925,6 +8925,9 @@ MonoBehaviour:
   <MoveAnimSpeedMultiplier>k__BackingField: 1
   <BattleMoveSpeed>k__BackingField: 2
   <AttackDistance>k__BackingField: 2
+  <BattleTimeDuration>k__BackingField: 5
+  <MinRetreatDistance>k__BackingField: 1
+  <RetreatVelocity>k__BackingField: {x: 5, y: 3}
   <PlayerCheck>k__BackingField: {fileID: 2028693435}
   <PlayerDetectionLayer>k__BackingField:
     serializedVersion: 2
