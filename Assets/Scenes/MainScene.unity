@@ -7726,7 +7726,7 @@ MonoBehaviour:
   _groundCheckDistance: 0.08
   groundDetectionLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   _wallCheckDistance: 0.53
   _primaryWallCheck: {fileID: 1267775379}
   _secondaryWallCheck: {fileID: 315455923}
@@ -8914,7 +8914,7 @@ MonoBehaviour:
   _groundCheckDistance: 0.21
   groundDetectionLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   _wallCheckDistance: 0.45
   _primaryWallCheck: {fileID: 1157126345}
   _secondaryWallCheck: {fileID: 0}
@@ -8923,10 +8923,12 @@ MonoBehaviour:
   <MoveSpeed>k__BackingField: 1.4
   <IdleTime>k__BackingField: 3
   <MoveAnimSpeedMultiplier>k__BackingField: 1
+  <BattleMoveSpeed>k__BackingField: 2
+  <AttackDistance>k__BackingField: 2
   <PlayerCheck>k__BackingField: {fileID: 2028693435}
   <PlayerDetectionLayer>k__BackingField:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   <PlayerCheckDistance>k__BackingField: 10
 --- !u!4 &2028693435
 Transform:
