@@ -9,13 +9,13 @@ public class EnemyAttackState : EnemyState {
     }
     public override void UpdateState() {
         base.UpdateState();
+
+        if (triggerCalled)
+            stateMachine.ChangeState(enemy.IdleState);
     }
 
     public override void ExitState() {
         base.ExitState();
-
-        if (triggerCalled)
-            stateMachine.ChangeState(enemy.IdleState);
     }
 
 }

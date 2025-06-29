@@ -8,6 +8,10 @@ public class Enemy : Entity
     [field: SerializeField] public float IdleTime { get; private set; } = 2f;
     [field: SerializeField, Range(0, 2)] public float MoveAnimSpeedMultiplier { get; private set; } = 1f;
 
+    [field: Header("Battle details")]
+    [field: SerializeField] public float BattleMoveSpeed { get; private set; } = 3f;
+    [field: SerializeField] public float AttackDistance { get; private set; } = 2f;
+
     [field:Header("Player detection")]
     [field:SerializeField] public Transform PlayerCheck { get; private set; } 
     [field:SerializeField] public LayerMask PlayerDetectionLayer { get; private set;}
@@ -45,6 +49,9 @@ public class Enemy : Entity
 
         Gizmos.color = Color.yellow;
         Gizmos.DrawLine(PlayerCheck.position, new Vector3(PlayerCheck.position.x + (FacingDir * PlayerCheckDistance), PlayerCheck.position.y));
+
+        Gizmos.color = Color.blue;
+        Gizmos.DrawLine(PlayerCheck.position, new Vector3(PlayerCheck.position.x + (FacingDir * AttackDistance), PlayerCheck.position.y));
     }
 
 
