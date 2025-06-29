@@ -53,11 +53,11 @@ public class Entity : MonoBehaviour
         HandleFlip(xVelocity);
     }
 
-    public void CallAnimationTrigger() {
-        StateMachine.CurrentState.CallAnimationTrigger();
+    public void CurrentStateAnimationTrigger() {
+        StateMachine.CurrentState.AnimationTrigger();
     }
 
-    private void HandleFlip(float xVelocity) {
+    public void HandleFlip(float xVelocity) {
 
         // Flip character if horizontal velocity is towards the right but player is facing left or  if horizontal velocity is towards the left but the player is facing right
         if ((xVelocity > 0 && !_isFacingRight) || (xVelocity < 0 && _isFacingRight))
@@ -88,5 +88,6 @@ public class Entity : MonoBehaviour
         if(_secondaryWallCheck != null)
             Gizmos.DrawLine(_secondaryWallCheck.position, _secondaryWallCheck.position + new Vector3(FacingDir * _wallCheckDistance, 0));
     }
+
 
 }
