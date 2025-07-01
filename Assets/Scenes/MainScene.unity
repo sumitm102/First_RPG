@@ -7736,6 +7736,7 @@ GameObject:
   - component: {fileID: 966927549}
   - component: {fileID: 966927550}
   - component: {fileID: 966927551}
+  - component: {fileID: 966927552}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -7896,6 +7897,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHP: 100
   isDead: 0
+  _onDamageKnockback: {x: 1.5, y: 2.5}
+  _knockbackDuration: 0.2
+  _onHeavyDamageKnockback: {x: 7, y: 7}
+  _heavyKnockbackDuration: 0.5
+  _heavyDamageThreshold: 0.3
+--- !u!114 &966927552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 966927545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3596b0625ca42a9478da16f9ef43de91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sr: {fileID: 1135975773}
+  _onDamageVFXMat: {fileID: 2100000, guid: 7805b6acfd0049d4fa548b21a7df8a64, type: 2}
+  _onDamageVFXDuration: 0.15
 --- !u!1 &973214486
 GameObject:
   m_ObjectHideFlags: 0
@@ -8926,6 +8947,7 @@ GameObject:
   - component: {fileID: 2028693432}
   - component: {fileID: 2028693436}
   - component: {fileID: 2028693437}
+  - component: {fileID: 2028693438}
   m_Layer: 7
   m_Name: EnemySkeleton
   m_TagString: Untagged
@@ -9068,7 +9090,7 @@ MonoBehaviour:
   <TargetDetectionLayer>k__BackingField:
     serializedVersion: 2
     m_Bits: 64
-  <Damage>k__BackingField: 10
+  <Damage>k__BackingField: 40
 --- !u!114 &2028693437
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9083,6 +9105,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHP: 100
   isDead: 0
+  _onDamageKnockback: {x: 1.5, y: 2.5}
+  _knockbackDuration: 0.2
+  _onHeavyDamageKnockback: {x: 7, y: 7}
+  _heavyKnockbackDuration: 0.5
+  _heavyDamageThreshold: 0.3
+--- !u!114 &2028693438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2028693431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3596b0625ca42a9478da16f9ef43de91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sr: {fileID: 611722519}
+  _onDamageVFXMat: {fileID: 2100000, guid: 7805b6acfd0049d4fa548b21a7df8a64, type: 2}
+  _onDamageVFXDuration: 0.15
 --- !u!1 &2090614053
 GameObject:
   m_ObjectHideFlags: 0
