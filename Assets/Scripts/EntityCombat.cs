@@ -6,15 +6,20 @@ public class EntityCombat : MonoBehaviour
     [field: SerializeField] public Transform TargetCheckTransform { get; private set; }
     [field: SerializeField] public float TargetCheckRadius { get; private set; } = 1f;
     [field: SerializeField] public LayerMask TargetDetectionLayer { get; private set; }
+    [field: SerializeField] public int Damage { get; private set; } = 10;
 
     private Collider2D[] _targetColliders;
+    private EntityHealth _targetHealth;
 
 
     public void PerformAttack() {
         _targetColliders = GetDetectedColliders();
 
         foreach(var target in _targetColliders) {
-            Debug.Log("Attacking " + target.name);
+            _targetHealth = target.GetComponent<EntityHealth>();
+
+            if (_targetHealth != null)
+                _targetHealth.TakeDamage(Damage, transform);
         }
     }
     

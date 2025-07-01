@@ -11,8 +11,10 @@ public class EnemyBattleState : EnemyState {
     public override void EnterState() {
         base.EnterState();
 
-        if(_playerTransform == null)
-            _playerTransform = enemy.PlayerDetected().transform;
+        _lastTimeInBattle = Time.time;
+
+        if (_playerTransform == null)
+            _playerTransform = enemy.GetPlayerReference();
 
         // This makes sure enemy backs up if the player character is too close
         if (ShouldRetreat()) {
