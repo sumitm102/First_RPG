@@ -1,3 +1,4 @@
+using System.Collections;
 using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -28,6 +29,10 @@ public class Entity : MonoBehaviour
     private bool _isFacingRight = true;
     public int FacingDir { get; private set; } = 1;
 
+    // Knockback variables
+    private Coroutine _knockbackCoroutine;
+    private bool _isKnocked;
+
 
 
     protected virtual void Awake() {
@@ -49,6 +54,11 @@ public class Entity : MonoBehaviour
     }
 
     public void SetVelocity(float xVelocity, float yVelocity) {
+
+        // To stop movement if character is getting knockbacked
+        if (_isKnocked)
+            return;
+
         RB.linearVelocity = new Vector2(xVelocity, yVelocity);
         HandleFlip(xVelocity);
     }
@@ -80,6 +90,23 @@ public class Entity : MonoBehaviour
             WallDetected = Physics2D.Raycast(_primaryWallCheck.position, Vector3.right * FacingDir, _wallCheckDistance, groundDetectionLayer);
     }
 
+    public void ReceiveKnockback(Vector2 knockbackVelocity, float duration) {
+        if (_knockbackCoroutine != null)
+            StopCoroutine(_knockbackCoroutine);
+
+        _knockbackCoroutine = StartCoroutine(KnockbackCo(knockbackVelocity, duration));
+    }
+
+
+    private IEnumerator KnockbackCo(Vector2 knockbackVelocity, float duration) {
+        _isKnocked = true;
+        RB.linearVelocity = knockbackVelocity;
+
+        yield return new WaitForSeconds(duration);
+
+        RB.linearVelocity = Vector2.zero;
+        _isKnocked = false;
+    }
 
     protected virtual void OnDrawGizmos() {
         Gizmos.DrawLine(_groundCheckTransform.position, _groundCheckTransform.position + new Vector3(0, -_groundCheckDistance));

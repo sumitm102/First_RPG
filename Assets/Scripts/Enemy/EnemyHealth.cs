@@ -3,16 +3,19 @@ using UnityEngine;
 public class EnemyHealth : EntityHealth
 {
 
-    private Enemy enemy;
+    private Enemy _enemy;
 
-    private void Awake() {
-        enemy = GetComponent<Enemy>();
+    protected override void Awake() {
+        base.Awake();
+
+        if(_enemy == null)
+            _enemy = GetComponent<Enemy>();
     }
 
     public override void TakeDamage(int damage, Transform damageDealer) {
 
         if (damageDealer.CompareTag("Player"))
-            enemy.TryEnterBattleState(damageDealer);
+            _enemy.TryEnterBattleState(damageDealer);
         
 
         base.TakeDamage(damage, damageDealer);
