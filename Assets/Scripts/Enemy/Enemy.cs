@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class Enemy : Entity
 {
+
     [field: Header("Movement details")]
     [field: SerializeField] public float MoveSpeed { get; private set; } = 1.4f;
     [field: SerializeField] public float IdleTime { get; private set; } = 2f;
@@ -19,7 +20,8 @@ public class Enemy : Entity
     [field:SerializeField] public Transform PlayerCheck { get; private set; } 
     [field:SerializeField] public LayerMask PlayerDetectionLayer { get; private set;}
     [field: SerializeField] public float PlayerCheckDistance { get; private set; } = 10f;
-    
+    public Transform PlayerTransform { get; private set; }
+
 
     #region States
 
@@ -37,6 +39,13 @@ public class Enemy : Entity
         StateMachine.Initialize(IdleState);
     }
 
+    public Transform GetPlayerReference() {
+        if (PlayerTransform == null)
+            PlayerTransform = PlayerDetected().transform;
+
+        return PlayerTransform;
+    }
+
 
     public RaycastHit2D PlayerDetected() {
         RaycastHit2D hit =  Physics2D.Raycast(PlayerCheck.position, Vector3.right * FacingDir, PlayerCheckDistance, groundDetectionLayer | PlayerDetectionLayer);
@@ -46,6 +55,16 @@ public class Enemy : Entity
         
 
         return hit;
+    }
+
+    public void TryEnterBattleState(Transform damageDealer) {
+
+        // No need to implement the rest of the method if enemy is already in battle state or the attack state
+        if (StateMachine.CurrentState == BattleState || StateMachine.CurrentState == AttackState)
+            return;
+
+        PlayerTransform = damageDealer;
+        StateMachine.ChangeState(BattleState);
     }
 
     protected override void OnDrawGizmos() {
