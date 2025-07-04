@@ -29,6 +29,7 @@ public class Enemy : Entity
     public EnemyMoveState MoveState;
     public EnemyAttackState AttackState;
     public EnemyBattleState BattleState;
+    public EnemyDeadState DeadState;
 
     #endregion
 
@@ -36,7 +37,8 @@ public class Enemy : Entity
     protected override void Start() {
         base.Start();
 
-        StateMachine.Initialize(IdleState);
+        if(IdleState != null)
+            StateMachine.Initialize(IdleState);
     }
 
     public Transform GetPlayerReference() {
@@ -65,6 +67,13 @@ public class Enemy : Entity
 
         PlayerTransform = damageDealer;
         StateMachine.ChangeState(BattleState);
+    }
+
+    public override void EntityDeath() {
+        base.EntityDeath();
+
+        if(DeadState != null)
+            StateMachine.ChangeState(DeadState);
     }
 
     protected override void OnDrawGizmos() {
