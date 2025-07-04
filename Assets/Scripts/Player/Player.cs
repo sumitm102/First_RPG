@@ -37,6 +37,7 @@ public class Player : Entity {
     public PlayerDashState DashState { get; private set; }
     public PlayerBasicAttackState BasicAttackState { get; private set; }
     public PlayerJumpAttackState JumpAttackState { get; private set; }
+    public PlayerDeadState DeadState { get; private set; }
 
     #endregion
 
@@ -49,11 +50,18 @@ public class Player : Entity {
     private static readonly int _dashHash = Animator.StringToHash("Dash");
     private static readonly int _basicAttackHash = Animator.StringToHash("BasicAttack");
     private static readonly int _jumpAttackHash = Animator.StringToHash("JumpAttack");
+    private static readonly int _deadHash = Animator.StringToHash("Dead");
 
 
     #endregion
 
     public Vector2 MoveInput { get; private set; }
+
+    #region Action Events
+
+    public static event Action onPlayerDeath;
+
+    #endregion
 
 
     protected override void Awake() {
@@ -72,6 +80,7 @@ public class Player : Entity {
         DashState = new PlayerDashState(StateMachine, _dashHash, this);
         BasicAttackState = new PlayerBasicAttackState(StateMachine, _basicAttackHash, this);
         JumpAttackState = new PlayerJumpAttackState(StateMachine, _jumpAttackHash, this);
+        DeadState = new PlayerDeadState(StateMachine, _deadHash, this);
 
         #endregion
     }
@@ -108,6 +117,15 @@ public class Player : Entity {
     private IEnumerator EnterAttackStateWithDelayCo() {
         yield return new WaitForEndOfFrame();
         StateMachine.ChangeState(BasicAttackState);
+    }
+
+    public override void TryEnterDeadState() {
+        base.TryEnterDeadState();
+
+        if (DeadState != null || StateMachine.CurrentState != DeadState) {
+            onPlayerDeath?.Invoke();
+            StateMachine.ChangeState(DeadState);
+        }
     }
 
 }

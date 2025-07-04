@@ -108,7 +108,7 @@ public class Entity : MonoBehaviour
         _isKnocked = false;
     }
 
-    public virtual void EntityDeath() {
+    public virtual void TryEnterDeadState() {
 
     }
 
