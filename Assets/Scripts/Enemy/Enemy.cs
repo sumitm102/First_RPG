@@ -22,6 +22,8 @@ public class Enemy : Entity
     [field: SerializeField] public float PlayerCheckDistance { get; private set; } = 10f;
     public Transform PlayerTransform { get; private set; }
 
+    private Coroutine _handlePlayerDeathCo;
+
 
     #region States
 
@@ -50,6 +52,7 @@ public class Enemy : Entity
 
 
     public RaycastHit2D PlayerDetected() {
+
         RaycastHit2D hit =  Physics2D.Raycast(PlayerCheck.position, Vector3.right * FacingDir, PlayerCheckDistance, groundDetectionLayer | PlayerDetectionLayer);
 
         if (hit.collider == null || hit.collider.gameObject.layer != LayerMask.NameToLayer("Player"))
@@ -69,11 +72,35 @@ public class Enemy : Entity
         StateMachine.ChangeState(BattleState);
     }
 
-    public override void EntityDeath() {
-        base.EntityDeath();
+    public override void TryEnterDeadState() {
+        base.TryEnterDeadState();
 
-        if(DeadState != null)
+        if(DeadState != null || StateMachine.CurrentState != DeadState)
             StateMachine.ChangeState(DeadState);
+    }
+
+    #region Handle Player Death
+
+    private void HandlePlayerDeath() {
+        if (_handlePlayerDeathCo != null)
+            StopCoroutine(HandlePlayerDeathCo());
+
+        _handlePlayerDeathCo = StartCoroutine(HandlePlayerDeathCo());  
+    }
+
+    private IEnumerator HandlePlayerDeathCo() {
+        yield return new WaitForSeconds(0.3f);
+        StateMachine.ChangeState(IdleState);
+    }
+
+    #endregion
+
+    private void OnEnable() {
+            Player.onPlayerDeath += HandlePlayerDeath;
+    }
+
+    private void OnDisable() {
+            Player.onPlayerDeath -= HandlePlayerDeath;
     }
 
     protected override void OnDrawGizmos() {
@@ -88,6 +115,5 @@ public class Enemy : Entity
         Gizmos.color = Color.green;
         Gizmos.DrawLine(PlayerCheck.position, new Vector3(PlayerCheck.position.x + (FacingDir * MinRetreatDistance), PlayerCheck.position.y));
     }
-
 
 }

@@ -9091,7 +9091,7 @@ MonoBehaviour:
   <TargetDetectionLayer>k__BackingField:
     serializedVersion: 2
     m_Bits: 64
-  <Damage>k__BackingField: 10
+  <Damage>k__BackingField: 50
 --- !u!114 &2028693437
 MonoBehaviour:
   m_ObjectHideFlags: 0
