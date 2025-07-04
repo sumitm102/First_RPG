@@ -108,6 +108,10 @@ public class Entity : MonoBehaviour
         _isKnocked = false;
     }
 
+    public virtual void EntityDeath() {
+
+    }
+
     protected virtual void OnDrawGizmos() {
         Gizmos.DrawLine(_groundCheckTransform.position, _groundCheckTransform.position + new Vector3(0, -_groundCheckDistance));
         Gizmos.DrawLine(_primaryWallCheck.position, _primaryWallCheck.position + new Vector3(FacingDir * _wallCheckDistance, 0));

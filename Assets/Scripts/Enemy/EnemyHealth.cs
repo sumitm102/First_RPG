@@ -13,11 +13,14 @@ public class EnemyHealth : EntityHealth
     }
 
     public override void TakeDamage(int damage, Transform damageDealer) {
+        base.TakeDamage(damage, damageDealer);
+
+        if (isDead)
+            return;
 
         if (damageDealer.CompareTag("Player"))
             _enemy.TryEnterBattleState(damageDealer);
         
 
-        base.TakeDamage(damage, damageDealer);
     }
 }

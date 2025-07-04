@@ -7,6 +7,7 @@ public class EntityHealth : MonoBehaviour
     private EntityVFX _entityVFX;
 
     [SerializeField] protected int maxHP = 100;
+    [SerializeField] protected int currentHP;
     [SerializeField] protected bool isDead;
 
     [Header("On Damage Knockback")]
@@ -19,6 +20,8 @@ public class EntityHealth : MonoBehaviour
     [SerializeField, Range(0, 1)] private float _heavyDamageThreshold = 0.3f; // percentage of maxHP character will loose to get heavy knockback
 
     protected virtual void Awake() {
+
+        currentHP = maxHP;
 
         if (_entity == null)
             _entity = GetComponent<Entity>();
@@ -44,15 +47,15 @@ public class EntityHealth : MonoBehaviour
     }
 
     protected void ReduceHP(int damage) {
-        maxHP -= damage;
+        currentHP -= damage;
 
-        if (maxHP <= 0)
+        if (currentHP <= 0)
             Die();
     }
 
     private void Die() {
         isDead = true;
-        Debug.Log(this.gameObject.name + " Died.");
+        _entity.EntityDeath();
     }
 
     private Vector2 CalculateKnockbackVelocity(float damage, Transform damageDealer) {

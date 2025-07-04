@@ -7882,7 +7882,7 @@ MonoBehaviour:
   <TargetDetectionLayer>k__BackingField:
     serializedVersion: 2
     m_Bits: 128
-  <Damage>k__BackingField: 10
+  <Damage>k__BackingField: 35
 --- !u!114 &966927551
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7896,6 +7896,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHP: 100
+  currentHP: 0
   isDead: 0
   _onDamageKnockback: {x: 1.5, y: 2.5}
   _knockbackDuration: 0.2
@@ -9090,7 +9091,7 @@ MonoBehaviour:
   <TargetDetectionLayer>k__BackingField:
     serializedVersion: 2
     m_Bits: 64
-  <Damage>k__BackingField: 40
+  <Damage>k__BackingField: 10
 --- !u!114 &2028693437
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9104,6 +9105,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHP: 100
+  currentHP: 0
   isDead: 0
   _onDamageKnockback: {x: 1.5, y: 2.5}
   _knockbackDuration: 0.2
