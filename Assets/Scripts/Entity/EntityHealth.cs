@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class EntityHealth : MonoBehaviour
+public class EntityHealth : MonoBehaviour, IDamagable
 {
     private Entity _entity;
     private EntityVFX _entityVFX;
@@ -34,13 +34,14 @@ public class EntityHealth : MonoBehaviour
         if (isDead)
             return;
 
+        Vector2 knockbackVelocity = CalculateKnockbackVelocity(damage, damageDealer);
         float knockbackDuration = CalculateKnockbackDuration(damage);
 
         if (_entityVFX != null)
             _entityVFX.PlayOnDamageVFX();
 
         if (_entity != null)
-            _entity.ReceiveKnockback(CalculateKnockbackVelocity(damage, damageDealer), knockbackDuration);
+            _entity.ReceiveKnockback(knockbackVelocity, knockbackDuration);
 
 
         ReduceHP(damage);
