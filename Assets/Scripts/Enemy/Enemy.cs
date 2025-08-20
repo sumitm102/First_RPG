@@ -9,6 +9,7 @@ public class Enemy : Entity
     [field: SerializeField] public float IdleTime { get; private set; } = 2f;
     [field: SerializeField, Range(0, 2)] public float MoveAnimSpeedMultiplier { get; private set; } = 1f;
 
+
     [field: Header("Battle details")]
     [field: SerializeField] public float BattleMoveSpeed { get; private set; } = 3f;
     [field: SerializeField] public float AttackDistance { get; private set; } = 2f;
@@ -16,10 +17,18 @@ public class Enemy : Entity
     [field: SerializeField] public float MinRetreatDistance { get; private set; } = 1f;
     [field: SerializeField] public Vector2 RetreatVelocity { get; private set; }
 
+
+    [field: Header("Stunned state details")]
+    [field: SerializeField] public float StunnedDuration { get; private set; } = 1f;
+    [field: SerializeField] public Vector2 StunnedVelocity { get; private set; } = new Vector2(7f, 7f);
+    [field:SerializeField] public bool CanBeStunned { get; private set; }
+
+
     [field:Header("Player detection")]
     [field:SerializeField] public Transform PlayerCheck { get; private set; } 
     [field:SerializeField] public LayerMask PlayerDetectionLayer { get; private set;}
     [field: SerializeField] public float PlayerCheckDistance { get; private set; } = 10f;
+
     public Transform PlayerTransform { get; private set; }
 
     private Coroutine _handlePlayerDeathCo;
@@ -32,6 +41,7 @@ public class Enemy : Entity
     public EnemyAttackState AttackState;
     public EnemyBattleState BattleState;
     public EnemyDeadState DeadState;
+    public EnemyStunnedState StunnedState;
 
     #endregion
 
@@ -94,6 +104,10 @@ public class Enemy : Entity
     }
 
     #endregion
+
+
+    public void EnableCounterWindow(bool enable) => CanBeStunned = enable;
+
 
     private void OnEnable() {
             Player.onPlayerDeath += HandlePlayerDeath;
