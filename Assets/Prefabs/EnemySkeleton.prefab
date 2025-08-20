@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 8657485688486700705}
   - component: {fileID: 4062620715140695742}
   - component: {fileID: 6044130287538685578}
-  - component: {fileID: 2206753266008718396}
   m_Layer: 7
   m_Name: EnemySkeleton
   m_TagString: Untagged
@@ -71,6 +70,9 @@ MonoBehaviour:
   <BattleTimeDuration>k__BackingField: 5
   <MinRetreatDistance>k__BackingField: 1
   <RetreatVelocity>k__BackingField: {x: 5, y: 3}
+  <StunnedDuration>k__BackingField: 1
+  <StunnedVelocity>k__BackingField: {x: 7, y: 7}
+  <CanBeStunned>k__BackingField: 0
   <PlayerCheck>k__BackingField: {fileID: 1038935124946087782}
   <PlayerDetectionLayer>k__BackingField:
     serializedVersion: 2
@@ -178,21 +180,6 @@ MonoBehaviour:
   _onHeavyDamageKnockback: {x: 7, y: 7}
   _heavyKnockbackDuration: 0.5
   _heavyDamageThreshold: 0.3
---- !u!114 &2206753266008718396
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1102284660814084994}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3596b0625ca42a9478da16f9ef43de91, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _sr: {fileID: 2574498087411346478}
-  _onDamageVFXMat: {fileID: 2100000, guid: 7805b6acfd0049d4fa548b21a7df8a64, type: 2}
-  _onDamageVFXDuration: 0.15
 --- !u!1 &1466009026982478694
 GameObject:
   m_ObjectHideFlags: 0

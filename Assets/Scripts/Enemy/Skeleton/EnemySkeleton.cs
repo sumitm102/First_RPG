@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EnemySkeleton : Enemy
+public class EnemySkeleton : Enemy, ICounterable
 {
     #region Anim bools
 
@@ -9,6 +9,7 @@ public class EnemySkeleton : Enemy
     private static readonly int _attackHash = Animator.StringToHash("Attack");
     private static readonly int _battleHash = Animator.StringToHash("Battle");
     private static readonly int _deadHash = Animator.StringToHash("Dead"); // Parameter exists on animator but is currently not in use, since we don't want to apply any animation
+    private static readonly int _stunnedHash = Animator.StringToHash("Stunned");
 
     #endregion
 
@@ -20,5 +21,21 @@ public class EnemySkeleton : Enemy
         AttackState = new EnemyAttackState(StateMachine, _attackHash, this);
         BattleState = new EnemyBattleState(StateMachine, _battleHash, this);
         DeadState = new EnemyDeadState(StateMachine, _deadHash, this);
+        StunnedState = new EnemyStunnedState(StateMachine, _stunnedHash, this);
+    }
+
+    protected override void Update() {
+        base.Update();
+
+        if (Input.GetKeyDown(KeyCode.F))
+            HandleCounter();
+    }
+
+    public void HandleCounter() {
+
+        if (!CanBeStunned)
+            return;
+
+        StateMachine.ChangeState(StunnedState);
     }
 }
