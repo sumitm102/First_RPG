@@ -21,6 +21,9 @@ public class PlayerGroundedState : PlayerState {
         if (inputSet.Player.Attack.WasPressedThisFrame())
             stateMachine.ChangeState(player.BasicAttackState);
 
+        if (inputSet.Player.CounterAttack.WasPressedThisFrame())
+            stateMachine.ChangeState(player.CounterAttackState);
+
     }
 
     public override void ExitState() {

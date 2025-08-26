@@ -11,7 +11,12 @@ public class EnemySkeleton : Enemy, ICounterable
     private static readonly int _deadHash = Animator.StringToHash("Dead"); // Parameter exists on animator but is currently not in use, since we don't want to apply any animation
     private static readonly int _stunnedHash = Animator.StringToHash("Stunned");
 
+
+
     #endregion
+
+    public bool CanBeCountered { get => CanBeStunned; }
+
 
     protected override void Awake() {
         base.Awake();
@@ -24,16 +29,10 @@ public class EnemySkeleton : Enemy, ICounterable
         StunnedState = new EnemyStunnedState(StateMachine, _stunnedHash, this);
     }
 
-    protected override void Update() {
-        base.Update();
-
-        if (Input.GetKeyDown(KeyCode.F))
-            HandleCounter();
-    }
 
     public void HandleCounter() {
 
-        if (!CanBeStunned)
+        if (!CanBeCountered)
             return;
 
         StateMachine.ChangeState(StunnedState);

@@ -38,6 +38,7 @@ public class Player : Entity {
     public PlayerBasicAttackState BasicAttackState { get; private set; }
     public PlayerJumpAttackState JumpAttackState { get; private set; }
     public PlayerDeadState DeadState { get; private set; }
+    public PlayerCounterAttackState CounterAttackState { get; private set; }
 
     #endregion
 
@@ -51,6 +52,7 @@ public class Player : Entity {
     private static readonly int _basicAttackHash = Animator.StringToHash("BasicAttack");
     private static readonly int _jumpAttackHash = Animator.StringToHash("JumpAttack");
     private static readonly int _deadHash = Animator.StringToHash("Dead");
+    private static readonly int _counterAttackHash = Animator.StringToHash("CounterAttack");
 
 
     #endregion
@@ -81,6 +83,7 @@ public class Player : Entity {
         BasicAttackState = new PlayerBasicAttackState(StateMachine, _basicAttackHash, this);
         JumpAttackState = new PlayerJumpAttackState(StateMachine, _jumpAttackHash, this);
         DeadState = new PlayerDeadState(StateMachine, _deadHash, this);
+        CounterAttackState = new PlayerCounterAttackState(StateMachine, _counterAttackHash, this);
 
         #endregion
     }
