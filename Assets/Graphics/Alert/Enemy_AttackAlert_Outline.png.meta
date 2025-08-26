@@ -335,7 +335,15 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Enemy_AttackAlert_Outline_0: -1460114320316644248
+      Enemy_AttackAlert_Outline_1: 6037657260665563384
+      Enemy_AttackAlert_Outline_2: 3084388393096246226
+      Enemy_AttackAlert_Outline_3: -6558722525409247296
+      Enemy_AttackAlert_Outline_4: -5056620864572294909
+      Enemy_AttackAlert_Outline_5: 8436336418516199104
+      Enemy_AttackAlert_Outline_6: 199579530897463545
+      Enemy_AttackAlert_Outline_7: 6947890740666807062
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

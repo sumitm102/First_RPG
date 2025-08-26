@@ -197,7 +197,7 @@ GameObject:
   - component: {fileID: 5255171354695682485}
   - component: {fileID: 4006880819638601890}
   - component: {fileID: 9205512437413240549}
-  - component: {fileID: 1938079080588074177}
+  - component: {fileID: 243660480552183167}
   - component: {fileID: 3660344504111482020}
   - component: {fileID: 5967111348683528676}
   m_Layer: 6
@@ -328,7 +328,7 @@ CapsuleCollider2D:
   m_Offset: {x: 0.03037405, y: -0.24476051}
   m_Size: {x: 0.86096096, y: 2.098154}
   m_Direction: 0
---- !u!114 &1938079080588074177
+--- !u!114 &243660480552183167
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -337,7 +337,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6798972382744166182}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75e27305b8becbd49831615c0539108d, type: 3}
+  m_Script: {fileID: 11500000, guid: fbe2aa1064db81947afd9ed3f135a987, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   <TargetCheckTransform>k__BackingField: {fileID: 751566318390924665}
@@ -346,6 +346,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   <Damage>k__BackingField: 35
+  <CounterRecovery>k__BackingField: 0.25
 --- !u!114 &3660344504111482020
 MonoBehaviour:
   m_ObjectHideFlags: 0
