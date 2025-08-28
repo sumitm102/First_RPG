@@ -157,3 +157,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _autoDestroy: 1
   _destroyDelay: 1
+  _enableRandomOffset: 1
+  _enableRandomRotation: 1
+  _xMinOffset: -0.3
+  _xMaxOffset: 0.3
+  _yMinOffset: -0.3
+  _yMaxOffset: 0.3

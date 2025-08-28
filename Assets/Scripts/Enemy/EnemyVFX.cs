@@ -6,6 +6,12 @@ public class EnemyVFX : EntityVFX
     [SerializeField] private GameObject _attackAlert;
 
 
-    public void EnableAttackAlert(bool enable) => _attackAlert.SetActive(enable);
+    public void EnableAttackAlert(bool enable) {
+
+        if (_attackAlert == null)
+            return;
+
+        _attackAlert.SetActive(enable);
+    }
     
 }

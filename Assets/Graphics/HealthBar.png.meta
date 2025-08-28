@@ -1,31 +1,13 @@
 fileFormatVersion: 2
-guid: 820e9b38c44311c47a73120f953ca279
+guid: f4cbaaf6365ba8342a6cf168dfc4b3ec
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1460114320316644248
-    second: Enemy_AttackAlert_Outline_0
+      213: -8227546954408941770
+    second: HealthBar_0
   - first:
-      213: 6037657260665563384
-    second: Enemy_AttackAlert_Outline_1
-  - first:
-      213: 3084388393096246226
-    second: Enemy_AttackAlert_Outline_2
-  - first:
-      213: -6558722525409247296
-    second: Enemy_AttackAlert_Outline_3
-  - first:
-      213: -5056620864572294909
-    second: Enemy_AttackAlert_Outline_4
-  - first:
-      213: 8436336418516199104
-    second: Enemy_AttackAlert_Outline_5
-  - first:
-      213: 199579530897463545
-    second: Enemy_AttackAlert_Outline_6
-  - first:
-      213: 6947890740666807062
-    second: Enemy_AttackAlert_Outline_7
+      213: -3178617384780871938
+    second: HealthBar_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -147,89 +129,45 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Enemy_AttackAlert_Outline_0
+      name: HealthBar_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 128
-        width: 128
-        height: 128
+        x: 20
+        y: 70
+        width: 156
+        height: 133
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 864c01ef2c1acbbe0800000000000000
-      internalID: -1460114320316644248
+      spriteID: 637ab99e2a1e1dd80800000000000000
+      internalID: -8227546954408941770
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy_AttackAlert_Outline_1
+      name: HealthBar_1
       rect:
         serializedVersion: 2
-        x: 128
-        y: 128
-        width: 128
-        height: 128
+        x: 226
+        y: 84
+        width: 274
+        height: 69
       alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 18, y: 19, z: 17, w: 15}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8f867892a411ac350800000000000000
-      internalID: 6037657260665563384
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Enemy_AttackAlert_Outline_2
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 2d3f6d7d6e2fdca20800000000000000
-      internalID: 3084388393096246226
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Enemy_AttackAlert_Outline_3
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 0
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 0cff0acdc9cbaf4a0800000000000000
-      internalID: -6558722525409247296
+      spriteID: ef6414f545843e3d0800000000000000
+      internalID: -3178617384780871938
       vertices: []
       indices: 
       edges: []
@@ -238,7 +176,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 463d80d97129a5042a6e81bbb8a3094e
+    spriteID: a19f787ef396e2242904b36937c69dfd
     internalID: 0
     vertices: []
     indices: 
@@ -248,10 +186,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Enemy_AttackAlert_Outline_0: -1460114320316644248
-      Enemy_AttackAlert_Outline_1: 6037657260665563384
-      Enemy_AttackAlert_Outline_2: 3084388393096246226
-      Enemy_AttackAlert_Outline_3: -6558722525409247296
+      HealthBar_0: -8227546954408941770
+      HealthBar_1: -3178617384780871938
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
