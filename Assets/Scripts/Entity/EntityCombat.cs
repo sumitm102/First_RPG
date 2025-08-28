@@ -9,7 +9,16 @@ public class EntityCombat : MonoBehaviour
     [field: SerializeField] public int Damage { get; private set; } = 10;
 
     private Collider2D[] _targetColliders;
-    private EntityHealth _targetHealth;
+
+    // May not be necessary
+    //private EntityHealth _targetHealth;
+    private EntityVFX _vfx;
+
+    private void Awake() {
+        _vfx = GetComponent<EntityVFX>();
+    }
+
+
 
 
     public void PerformAttack() {
@@ -17,8 +26,11 @@ public class EntityCombat : MonoBehaviour
 
         foreach(var target in _targetColliders) {
 
-            if (target.TryGetComponent<IDamagable>(out var damagable))
+            if (target.TryGetComponent<IDamagable>(out var damagable)) {
                 damagable.TakeDamage(Damage, transform);
+
+                _vfx.CreateOnHitVFX(target.transform);
+            }
 
             //if (target.TryGetComponent<EntityHealth>(out var targetHealth))
             //    targetHealth.TakeDamage(Damage, transform);
