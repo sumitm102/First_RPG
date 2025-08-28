@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EntityHealth : MonoBehaviour, IDamagable
 {
@@ -19,15 +20,25 @@ public class EntityHealth : MonoBehaviour, IDamagable
     [SerializeField] private float _heavyKnockbackDuration = 0.5f;
     [SerializeField, Range(0, 1)] private float _heavyDamageThreshold = 0.3f; // percentage of maxHP character will loose to get heavy knockback
 
+    #region UI variables
+
+    private Slider _heathBar;
+
+    #endregion
+
     protected virtual void Awake() {
 
         currentHP = maxHP;
+        UpdateHealthBar();
 
         if (_entity == null)
             _entity = GetComponent<Entity>();
 
         if (_entityVFX == null)
             _entityVFX = GetComponent<EntityVFX>();
+
+        if(_heathBar == null)
+            _heathBar = GetComponentInChildren<Slider>();
     }
 
     public virtual void TakeDamage(int damage, Transform damageDealer) {
@@ -49,6 +60,7 @@ public class EntityHealth : MonoBehaviour, IDamagable
 
     protected void ReduceHP(int damage) {
         currentHP -= damage;
+        UpdateHealthBar();
 
         if (currentHP <= 0)
             Die();
@@ -57,6 +69,13 @@ public class EntityHealth : MonoBehaviour, IDamagable
     private void Die() {
         isDead = true;
         _entity.TryEnterDeadState();
+    }
+
+    private void UpdateHealthBar() {
+        if (_heathBar == null)
+            return;
+
+        _heathBar.value = (currentHP * 1f) / maxHP;
     }
 
     private Vector2 CalculateKnockbackVelocity(float damage, Transform damageDealer) {

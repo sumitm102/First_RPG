@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
@@ -32,6 +33,8 @@ public class Entity : MonoBehaviour
     // Knockback variables
     private Coroutine _knockbackCoroutine;
     private bool _isKnocked;
+
+    public event Action onFlipped;
 
 
 
@@ -78,6 +81,8 @@ public class Entity : MonoBehaviour
         transform.Rotate(0, 180, 0);
         _isFacingRight = !_isFacingRight;
         FacingDir = -FacingDir;
+
+        onFlipped?.Invoke();
     }
 
     private void HandleCollisionDetection() {
