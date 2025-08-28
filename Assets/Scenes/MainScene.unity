@@ -8527,6 +8527,8 @@ MonoBehaviour:
   _sr: {fileID: 0}
   _onDamageVFXMat: {fileID: 2100000, guid: 7805b6acfd0049d4fa548b21a7df8a64, type: 2}
   _onDamageVFXDuration: 0.2
+  _hitVFXColor: {r: 1, g: 1, b: 1, a: 1}
+  _hitVFX: {fileID: 0}
 --- !u!1 &2090614053
 GameObject:
   m_ObjectHideFlags: 0
@@ -8663,6 +8665,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemySkeleton
       objectReference: {fileID: 0}
+    - target: {fileID: 7716633974962583603, guid: 9c8c5273388b6a144aa04aad409d56d4, type: 3}
+      propertyPath: _hitVFX
+      value: 
+      objectReference: {fileID: 6646761547182616872, guid: f8839fde554c0534e97af1bdc5a7651d, type: 3}
+    - target: {fileID: 7716633974962583603, guid: 9c8c5273388b6a144aa04aad409d56d4, type: 3}
+      propertyPath: _hitVFXColor.b
+      value: 0.8264111
+      objectReference: {fileID: 0}
+    - target: {fileID: 7716633974962583603, guid: 9c8c5273388b6a144aa04aad409d56d4, type: 3}
+      propertyPath: _hitVFXColor.g
+      value: 0.8264111
+      objectReference: {fileID: 0}
+    - target: {fileID: 7716633974962583603, guid: 9c8c5273388b6a144aa04aad409d56d4, type: 3}
+      propertyPath: _hitVFXColor.r
+      value: 0.8616352
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8676,6 +8694,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5967111348683528676, guid: 1a3dc3cff0f8de44abb4a0834ff417d6, type: 3}
+      propertyPath: _hitVFX
+      value: 
+      objectReference: {fileID: 6646761547182616872, guid: f8839fde554c0534e97af1bdc5a7651d, type: 3}
+    - target: {fileID: 5967111348683528676, guid: 1a3dc3cff0f8de44abb4a0834ff417d6, type: 3}
+      propertyPath: _hitVFXColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5967111348683528676, guid: 1a3dc3cff0f8de44abb4a0834ff417d6, type: 3}
+      propertyPath: _hitVFXColor.g
+      value: 0.8042327
+      objectReference: {fileID: 0}
+    - target: {fileID: 5967111348683528676, guid: 1a3dc3cff0f8de44abb4a0834ff417d6, type: 3}
+      propertyPath: _hitVFXColor.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6798972382744166182, guid: 1a3dc3cff0f8de44abb4a0834ff417d6, type: 3}
       propertyPath: m_Name
       value: Player
