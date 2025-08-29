@@ -90,6 +90,7 @@ GameObject:
   - component: {fileID: 4062620715140695742}
   - component: {fileID: 6044130287538685578}
   - component: {fileID: 7716633974962583603}
+  - component: {fileID: 6789660472379850358}
   m_Layer: 7
   m_Name: EnemySkeleton
   m_TagString: Untagged
@@ -251,7 +252,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9eb44b5704ae844ab63bdd0837662a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 100
   currentHP: 0
   isDead: 0
   _onDamageKnockback: {x: 1.5, y: 2.5}
@@ -277,6 +277,53 @@ MonoBehaviour:
   _hitVFXColor: {r: 0.8616352, g: 0.8264111, b: 0.8264111, a: 1}
   _hitVFX: {fileID: 6646761547182616872, guid: f8839fde554c0534e97af1bdc5a7651d, type: 3}
   _attackAlert: {fileID: 0}
+--- !u!114 &6789660472379850358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1102284660814084994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 440567c87d2660d47b226ab0bcb07c2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth:
+    baseValue: 100
+  majorStats:
+    strength:
+      baseValue: 0
+    agility:
+      baseValue: 0
+    intelligence:
+      baseValue: 0
+    vitality:
+      baseValue: 0
+  offenseStats:
+    damage:
+      baseValue: 10
+    critPower:
+      baseValue: 0
+    critChance:
+      baseValue: 0
+    fireDamage:
+      baseValue: 0
+    iceDamage:
+      baseValue: 0
+    lightningDamage:
+      baseValue: 0
+  defenceStats:
+    armor:
+      baseValue: 0
+    evasion:
+      baseValue: 0
+    fireRes:
+      baseValue: 0
+    iceRes:
+      baseValue: 0
+    lightningRes:
+      baseValue: 0
 --- !u!1 &1186559432114652589
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,8 +6,8 @@ public class EntityHealth : MonoBehaviour, IDamagable
 {
     private Entity _entity;
     private EntityVFX _entityVFX;
+    private EntityStats _entityStats;
 
-    [SerializeField] protected int maxHP = 100;
     [SerializeField] protected int currentHP;
     [SerializeField] protected bool isDead;
 
@@ -28,17 +28,20 @@ public class EntityHealth : MonoBehaviour, IDamagable
 
     protected virtual void Awake() {
 
-        currentHP = maxHP;
-        UpdateHealthBar();
-
         if (_entity == null)
             _entity = GetComponent<Entity>();
 
         if (_entityVFX == null)
             _entityVFX = GetComponent<EntityVFX>();
 
+        if(_entityStats == null)
+            _entityStats = GetComponent<EntityStats>();
+
         if(_heathBar == null)
             _heathBar = GetComponentInChildren<Slider>();
+
+        currentHP = _entityStats.GetMaxHealth();
+        UpdateHealthBar();
     }
 
     public virtual void TakeDamage(int damage, Transform damageDealer) {
@@ -75,7 +78,7 @@ public class EntityHealth : MonoBehaviour, IDamagable
         if (_heathBar == null)
             return;
 
-        _heathBar.value = (currentHP * 1f) / maxHP;
+        _heathBar.value = (currentHP * 1f) / _entityStats.GetMaxHealth();
     }
 
     private Vector2 CalculateKnockbackVelocity(float damage, Transform damageDealer) {
@@ -87,7 +90,7 @@ public class EntityHealth : MonoBehaviour, IDamagable
 
         return knockbackVelocity;
     }
-    private bool IsHeaveDamage(float damage) => damage / maxHP > _heavyDamageThreshold;
+    private bool IsHeaveDamage(float damage) => damage / _entityStats.GetMaxHealth() > _heavyDamageThreshold;
 
     private float CalculateKnockbackDuration(float damage) => IsHeaveDamage(damage) ? _heavyKnockbackDuration : _knockbackDuration;
 
