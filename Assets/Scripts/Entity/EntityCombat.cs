@@ -27,9 +27,11 @@ public class EntityCombat : MonoBehaviour
         foreach(var target in _targetColliders) {
 
             if (target.TryGetComponent<IDamagable>(out var damagable)) {
-                damagable.TakeDamage(Damage, transform);
 
-                _vfx.CreateOnHitVFX(target.transform);
+                bool targetTookDamage = damagable.TakeDamage(Damage, transform);
+
+                if (targetTookDamage)
+                    _vfx.CreateOnHitVFX(target.transform);
             }
 
             //if (target.TryGetComponent<EntityHealth>(out var targetHealth))

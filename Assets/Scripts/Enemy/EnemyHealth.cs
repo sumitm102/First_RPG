@@ -12,14 +12,20 @@ public class EnemyHealth : EntityHealth
             _enemy = GetComponent<Enemy>();
     }
 
-    public override void TakeDamage(int damage, Transform damageDealer) {
-        base.TakeDamage(damage, damageDealer);
+    public override bool TakeDamage(float damage, Transform damageDealer) {
+        bool tookDamage = base.TakeDamage(damage, damageDealer);
 
-        if (isDead)
-            return;
+        if (!tookDamage)
+            return false;
 
-        if (damageDealer.CompareTag("Player"))
+        // Commented this since both approach accomplish the same result
+        //if (damageDealer.CompareTag("Player"))
+        //    _enemy.TryEnterBattleState(damageDealer);
+
+        if (damageDealer.TryGetComponent<Player>(out Player player))
             _enemy.TryEnterBattleState(damageDealer);
+
+        return true;
         
 
     }
