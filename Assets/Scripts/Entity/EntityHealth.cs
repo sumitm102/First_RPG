@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class EntityHealth : MonoBehaviour, IDamagable
 {
@@ -8,7 +9,7 @@ public class EntityHealth : MonoBehaviour, IDamagable
     private EntityVFX _entityVFX;
     private EntityStats _entityStats;
 
-    [SerializeField] protected int currentHP;
+    [SerializeField] protected float currentHP;
     [SerializeField] protected bool isDead;
 
     [Header("On Damage Knockback")]
@@ -44,9 +45,14 @@ public class EntityHealth : MonoBehaviour, IDamagable
         UpdateHealthBar();
     }
 
-    public virtual void TakeDamage(int damage, Transform damageDealer) {
+    public virtual bool TakeDamage(float damage, Transform damageDealer) {
         if (isDead)
-            return;
+            return false;
+
+        if (AttackEvaded()) {
+            Debug.Log($"{gameObject.name} evaded an attack");
+            return false;
+        }
 
         Vector2 knockbackVelocity = CalculateKnockbackVelocity(damage, damageDealer);
         float knockbackDuration = CalculateKnockbackDuration(damage);
@@ -59,9 +65,14 @@ public class EntityHealth : MonoBehaviour, IDamagable
 
 
         ReduceHP(damage);
+
+        return true;
     }
 
-    protected void ReduceHP(int damage) {
+    private bool AttackEvaded() => Random.Range(0, 100f) < _entityStats.GetEvasion();
+    
+
+    protected void ReduceHP(float damage) {
         currentHP -= damage;
         UpdateHealthBar();
 
@@ -78,7 +89,7 @@ public class EntityHealth : MonoBehaviour, IDamagable
         if (_heathBar == null)
             return;
 
-        _heathBar.value = (currentHP * 1f) / _entityStats.GetMaxHealth();
+        _heathBar.value = currentHP / _entityStats.GetMaxHealth();
     }
 
     private Vector2 CalculateKnockbackVelocity(float damage, Transform damageDealer) {

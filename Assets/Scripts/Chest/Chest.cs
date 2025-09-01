@@ -17,7 +17,7 @@ public class Chest : MonoBehaviour, IDamagable
         _entityVFX = GetComponent<EntityVFX>();
     }
 
-    public void TakeDamage(int damage, Transform damageDealer) {
+    public bool TakeDamage(float damage, Transform damageDealer) {
 
         if (_anim != null)
             _anim.SetBool(_chestOpenHash, true);
@@ -31,6 +31,8 @@ public class Chest : MonoBehaviour, IDamagable
             _entityVFX.PlayOnDamageVFX();
 
         // Drop items
+
+        return true;
     }
 
 }
