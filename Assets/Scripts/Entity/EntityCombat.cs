@@ -6,16 +6,18 @@ public class EntityCombat : MonoBehaviour
     [field: SerializeField] public Transform TargetCheckTransform { get; private set; }
     [field: SerializeField] public float TargetCheckRadius { get; private set; } = 1f;
     [field: SerializeField] public LayerMask TargetDetectionLayer { get; private set; }
-    [field: SerializeField] public int Damage { get; private set; } = 10;
 
     private Collider2D[] _targetColliders;
 
     // May not be necessary
     //private EntityHealth _targetHealth;
+
     private EntityVFX _vfx;
+    private EntityStats _entityStats;
 
     private void Awake() {
         _vfx = GetComponent<EntityVFX>();
+        _entityStats = GetComponent<EntityStats>();
     }
 
 
@@ -28,14 +30,13 @@ public class EntityCombat : MonoBehaviour
 
             if (target.TryGetComponent<IDamagable>(out var damagable)) {
 
-                bool targetTookDamage = damagable.TakeDamage(Damage, transform);
+                float damage = _entityStats.GetPhysicalDamage(out bool isCritDamage);
+
+                bool targetTookDamage = damagable.TakeDamage(damage, transform);
 
                 if (targetTookDamage)
-                    _vfx.CreateOnHitVFX(target.transform);
+                    _vfx.CreateOnHitVFX(target.transform, isCritDamage);
             }
-
-            //if (target.TryGetComponent<EntityHealth>(out var targetHealth))
-            //    targetHealth.TakeDamage(Damage, transform);
         }
     }
     

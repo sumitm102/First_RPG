@@ -239,7 +239,6 @@ MonoBehaviour:
   <TargetDetectionLayer>k__BackingField:
     serializedVersion: 2
     m_Bits: 64
-  <Damage>k__BackingField: 10
 --- !u!114 &6044130287538685578
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -276,6 +275,7 @@ MonoBehaviour:
   _onDamageVFXDuration: 0.15
   _hitVFXColor: {r: 0.8616352, g: 0.8264111, b: 0.8264111, a: 1}
   _hitVFX: {fileID: 6646761547182616872, guid: f8839fde554c0534e97af1bdc5a7651d, type: 3}
+  _critHitVFX: {fileID: 6871185043425471792, guid: 7fc92fdd35c147041b746cd93abf263b, type: 3}
   _attackAlert: {fileID: 0}
 --- !u!114 &6789660472379850358
 MonoBehaviour:
@@ -306,7 +306,7 @@ MonoBehaviour:
     critPower:
       baseValue: 0
     critChance:
-      baseValue: 0
+      baseValue: 100
     fireDamage:
       baseValue: 0
     iceDamage:
