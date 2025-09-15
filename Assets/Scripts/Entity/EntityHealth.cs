@@ -54,8 +54,15 @@ public class EntityHealth : MonoBehaviour, IDamagable
             return false;
         }
 
-        Vector2 knockbackVelocity = CalculateKnockbackVelocity(damage, damageDealer);
-        float knockbackDuration = CalculateKnockbackDuration(damage);
+        EntityStats damageDealerStats = damageDealer.GetComponent<EntityStats>();
+        float armorReduction = damageDealerStats != null ? damageDealerStats.GetArmorReduction() : 0;
+        
+
+        float mitigation = _entityStats.GetArmorMitigation(armorReduction);
+        float finalDamage = damage * (1f - mitigation);
+
+        Vector2 knockbackVelocity = CalculateKnockbackVelocity(finalDamage, damageDealer);
+        float knockbackDuration = CalculateKnockbackDuration(finalDamage);
 
         if (_entityVFX != null)
             _entityVFX.PlayOnDamageVFX();
@@ -64,7 +71,8 @@ public class EntityHealth : MonoBehaviour, IDamagable
             _entity.ReceiveKnockback(knockbackVelocity, knockbackDuration);
 
 
-        ReduceHP(damage);
+        ReduceHealth(finalDamage);
+        Debug.Log("Damage taken: " + finalDamage);
 
         return true;
     }
@@ -72,7 +80,7 @@ public class EntityHealth : MonoBehaviour, IDamagable
     private bool AttackEvaded() => Random.Range(0, 100f) < _entityStats.GetEvasion();
     
 
-    protected void ReduceHP(float damage) {
+    protected void ReduceHealth(float damage) {
         currentHP -= damage;
         UpdateHealthBar();
 
