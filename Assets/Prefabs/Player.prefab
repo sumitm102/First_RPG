@@ -881,6 +881,8 @@ MonoBehaviour:
       baseValue: 100
     critChance:
       baseValue: 40
+    armorReduction:
+      baseValue: 0
     fireDamage:
       baseValue: 0
     iceDamage:

@@ -30,9 +30,10 @@ public class EntityCombat : MonoBehaviour
 
             if (target.TryGetComponent<IDamagable>(out var damagable)) {
 
-                float damage = _entityStats.GetPhysicalDamage(out bool isCritDamage);
+                float physicalDamage = _entityStats.GetPhysicalDamage(out bool isCritDamage);
+                float elementalDamage = _entityStats.GetElementalDamage(out ElementType elementType);
 
-                bool targetTookDamage = damagable.TakeDamage(damage, transform);
+                bool targetTookDamage = damagable.TakeDamage(physicalDamage, elementalDamage, elementType, transform);
 
                 if (targetTookDamage)
                     _vfx.CreateOnHitVFX(target.transform, isCritDamage);
