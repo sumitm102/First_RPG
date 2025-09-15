@@ -17,7 +17,7 @@ public class EntityStats : MonoBehaviour
     }
 
     public float GetEvasion() {
-        int baseEvasion = defenceStats.evasion.GetValue();
+        float baseEvasion = defenceStats.evasion.GetValue();
         float bonusEvasion = majorStats.agility.GetValue() * 0.5f; // Each agility point gives 0.5% bonus to evasion
 
         float totalEvasion = baseEvasion + bonusEvasion;
@@ -45,5 +45,26 @@ public class EntityStats : MonoBehaviour
         float finalDamage = isCritDamage ?  totalBaseDamage * totalCritPower : totalBaseDamage;
 
         return finalDamage;
+    }
+
+    public float GetArmorMitigation(float armorReduction) {
+        float baseArmor = defenceStats.armor.GetValue();
+        float bonusArmor = majorStats.vitality.GetValue(); // Each vitality gives 1% bonus to armor
+        float totalArmor = baseArmor + bonusArmor;
+
+        float reductionMultiplier = Mathf.Clamp01(1 - armorReduction);
+        float effectiveArmor = totalArmor * reductionMultiplier;
+
+        float mitigation = effectiveArmor / (effectiveArmor + 100); // 100 is the scaling constant. Also, makes it easier to calculate mitigation
+        float mitigationLimit = 0.85f; // Mitigation will be capped at this value
+        float finalMitigation = Mathf.Clamp(mitigation, 0, mitigationLimit);
+
+        return finalMitigation;
+    }
+
+    public float GetArmorReduction() {
+        float finalReduction = offenseStats.armorReduction.GetValue() / 100f;
+
+        return finalReduction;
     }
 }

@@ -290,7 +290,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth:
-    baseValue: 100
+    baseValue: 10000
   majorStats:
     strength:
       baseValue: 0
@@ -302,11 +302,11 @@ MonoBehaviour:
       baseValue: 0
   offenseStats:
     damage:
-      baseValue: 10
+      baseValue: 150
     critPower:
       baseValue: 0
     critChance:
-      baseValue: 100
+      baseValue: 0
     fireDamage:
       baseValue: 0
     iceDamage:

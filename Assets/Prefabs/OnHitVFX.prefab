@@ -163,3 +163,5 @@ MonoBehaviour:
   _xMaxOffset: 0.3
   _yMinOffset: -0.3
   _yMaxOffset: 0.3
+  _minRotation: 0
+  _maxRotation: 360
