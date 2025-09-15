@@ -8745,6 +8745,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemySkeleton
       objectReference: {fileID: 0}
+    - target: {fileID: 6789660472379850358, guid: 9c8c5273388b6a144aa04aad409d56d4, type: 3}
+      propertyPath: offenseStats.iceDamage.baseValue
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6789660472379850358, guid: 9c8c5273388b6a144aa04aad409d56d4, type: 3}
+      propertyPath: offenseStats.fireDamage.baseValue
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8444133876684392322, guid: 9c8c5273388b6a144aa04aad409d56d4, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0

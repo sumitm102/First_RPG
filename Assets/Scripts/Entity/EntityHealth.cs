@@ -45,7 +45,7 @@ public class EntityHealth : MonoBehaviour, IDamagable
         UpdateHealthBar();
     }
 
-    public virtual bool TakeDamage(float damage, Transform damageDealer) {
+    public virtual bool TakeDamage(float physicalDamage, float elementalDamage, ElementType elementType, Transform damageDealer) {
         if (isDead)
             return false;
 
@@ -55,32 +55,41 @@ public class EntityHealth : MonoBehaviour, IDamagable
         }
 
         EntityStats damageDealerStats = damageDealer.GetComponent<EntityStats>();
+
+
+        // The final physical damage taken is calculated based the damage dealer's armor reduction stat and entity's own armor mitigation stat
         float armorReduction = damageDealerStats != null ? damageDealerStats.GetArmorReduction() : 0;
-        
-
         float mitigation = _entityStats.GetArmorMitigation(armorReduction);
-        float finalDamage = damage * (1f - mitigation);
+        float physicalDamageTaken = physicalDamage * (1f - mitigation);
 
-        Vector2 knockbackVelocity = CalculateKnockbackVelocity(finalDamage, damageDealer);
-        float knockbackDuration = CalculateKnockbackDuration(finalDamage);
+        // The final elemental damage taken is calculated based on the entity's own elemental resistance to the highest elemental damage dealt by the damage dealer
+        float elementalResistance = _entityStats.GetElementalResistance(elementType);
+        float elementalDamageTaken = elementalDamage * (1f - elementalResistance);
 
-        if (_entityVFX != null)
-            _entityVFX.PlayOnDamageVFX();
+        TakeKnockback(damageDealer, physicalDamageTaken);
+        ReduceHealth(physicalDamageTaken + elementalDamageTaken);
+
+        return true;
+    }
+
+    private void TakeKnockback(Transform damageDealer, float finalPhysicalDamage) {
+        Vector2 knockbackVelocity = CalculateKnockbackVelocity(finalPhysicalDamage, damageDealer);
+        float knockbackDuration = CalculateKnockbackDuration(finalPhysicalDamage);
+
 
         if (_entity != null)
             _entity.ReceiveKnockback(knockbackVelocity, knockbackDuration);
-
-
-        ReduceHealth(finalDamage);
-        Debug.Log("Damage taken: " + finalDamage);
-
-        return true;
     }
 
     private bool AttackEvaded() => Random.Range(0, 100f) < _entityStats.GetEvasion();
     
 
     protected void ReduceHealth(float damage) {
+
+        // Character flashes when taking damage
+        if (_entityVFX != null)
+            _entityVFX.PlayOnDamageVFX();
+
         currentHP -= damage;
         UpdateHealthBar();
 

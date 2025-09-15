@@ -12,8 +12,8 @@ public class EnemyHealth : EntityHealth
             _enemy = GetComponent<Enemy>();
     }
 
-    public override bool TakeDamage(float damage, Transform damageDealer) {
-        bool tookDamage = base.TakeDamage(damage, damageDealer);
+    public override bool TakeDamage(float damage, float elementalDamage, ElementType elementType, Transform damageDealer) {
+        bool tookDamage = base.TakeDamage(damage, elementalDamage, elementType, damageDealer);
 
         if (!tookDamage)
             return false;
