@@ -7,6 +7,12 @@ public class EntityCombat : MonoBehaviour
     [field: SerializeField] public float TargetCheckRadius { get; private set; } = 1f;
     [field: SerializeField] public LayerMask TargetDetectionLayer { get; private set; }
 
+
+    [field: Header("Status effect details")]
+    [field: SerializeField] public float DefaultDuration { get; private set; } = 3f;
+    [field: SerializeField] public float ChillSlowMultiplier { get; private set; } = 0.2f;
+
+
     private Collider2D[] _targetColliders;
 
     // May not be necessary
@@ -35,10 +41,24 @@ public class EntityCombat : MonoBehaviour
 
                 bool targetTookDamage = damagable.TakeDamage(physicalDamage, elementalDamage, elementType, transform);
 
-                if (targetTookDamage)
+                if (elementType != ElementType.None)
+                    ApplyStatusEffect(target.transform, elementType);
+
+                if (targetTookDamage) {
+                    _vfx.UpdateOnHitColor(elementType);
                     _vfx.CreateOnHitVFX(target.transform, isCritDamage);
+                }
             }
         }
+    }
+
+    public void ApplyStatusEffect(Transform target, ElementType elementType) {
+        EntityStatusHandler entityStatusHandler = target.GetComponent<EntityStatusHandler>();
+        if (entityStatusHandler == null)
+            return;
+
+        if (elementType == ElementType.Ice && entityStatusHandler.CanStatusEffectBeApplied(elementType))
+            entityStatusHandler.ApplyChilledEffect(DefaultDuration, ChillSlowMultiplier);
     }
     
     protected Collider2D[] GetDetectedColliders() {

@@ -36,6 +36,8 @@ public class Entity : MonoBehaviour
 
     public event Action onFlipped;
 
+    private Coroutine _slowDownCoroutine;
+
 
 
     protected virtual void Awake() {
@@ -115,6 +117,17 @@ public class Entity : MonoBehaviour
 
     public virtual void TryEnterDeadState() {
 
+    }
+
+    public virtual void SlowDownEntity(float duration, float slowMultiplier) {
+        if(_slowDownCoroutine != null)
+            StopCoroutine(_slowDownCoroutine);
+
+        _slowDownCoroutine = StartCoroutine(SlowDownEntityCo(duration, slowMultiplier));
+    }
+
+    protected virtual IEnumerator SlowDownEntityCo(float duration, float slowMultiplier) {
+        yield return null;
     }
 
     protected virtual void OnDrawGizmos() {

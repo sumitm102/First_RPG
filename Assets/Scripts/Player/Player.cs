@@ -131,4 +131,40 @@ public class Player : Entity {
         }
     }
 
+    protected override IEnumerator SlowDownEntityCo(float duration, float slowMultiplier) {
+        float originalMoveSpeed = MoveSpeed;
+        float originalJumpForce = JumpForce;
+        float originalDashSpeed = DashSpeed;
+        float originalAnimSpeed = Anim.speed;
+        Vector2 originalWallJumpForce = WallJumpForce;
+        Vector2 originalJumpAttackVelocity = JumpAttackVelocity;
+
+        // Arrays are reference types, so it had to be copied here to get back to the original values
+        Vector2[] originalAttackVelocity = new Vector2 [AttackVelocity.Length];
+        Array.Copy(AttackVelocity, originalAttackVelocity, AttackVelocity.Length);
+
+        float speedMultiplier = 1f - slowMultiplier;
+        MoveSpeed *= speedMultiplier;
+        JumpForce *= speedMultiplier;
+        DashSpeed *= speedMultiplier;
+        Anim.speed *= speedMultiplier;
+        WallJumpForce *= speedMultiplier;
+        JumpAttackVelocity *= speedMultiplier;
+
+        for(int i  = 0; i < AttackVelocity.Length; i++)
+            AttackVelocity[i] *= speedMultiplier;
+
+        yield return new WaitForSeconds(duration);
+
+        MoveSpeed = originalMoveSpeed;
+        JumpForce = originalJumpForce;
+        DashSpeed = originalDashSpeed;
+        Anim.speed = originalAnimSpeed;
+        WallJumpForce = originalWallJumpForce;
+        JumpAttackVelocity = originalJumpAttackVelocity;
+
+        for (int i = 0; i < AttackVelocity.Length; i++)
+            AttackVelocity[i] = originalAttackVelocity[i];
+    }
+
 }
