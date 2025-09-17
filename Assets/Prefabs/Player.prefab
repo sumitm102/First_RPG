@@ -667,6 +667,7 @@ GameObject:
   - component: {fileID: 3660344504111482020}
   - component: {fileID: 5967111348683528676}
   - component: {fileID: 519533497720172548}
+  - component: {fileID: 1349299021041077195}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -813,6 +814,8 @@ MonoBehaviour:
   <TargetDetectionLayer>k__BackingField:
     serializedVersion: 2
     m_Bits: 128
+  <DefaultDuration>k__BackingField: 3
+  <ChillSlowMultiplier>k__BackingField: 0.4
   <CounterRecovery>k__BackingField: 0.25
 --- !u!114 &3660344504111482020
 MonoBehaviour:
@@ -851,6 +854,7 @@ MonoBehaviour:
   _hitVFXColor: {r: 1, g: 0.8042327, b: 0, a: 1}
   _hitVFX: {fileID: 6646761547182616872, guid: f8839fde554c0534e97af1bdc5a7651d, type: 3}
   _critHitVFX: {fileID: 6871185043425471792, guid: 7fc92fdd35c147041b746cd93abf263b, type: 3}
+  _chillVFXColor: {r: 0.39982584, g: 0.68093055, b: 0.9559748, a: 1}
 --- !u!114 &519533497720172548
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -886,7 +890,7 @@ MonoBehaviour:
     fireDamage:
       baseValue: 0
     iceDamage:
-      baseValue: 0
+      baseValue: 10
     lightningDamage:
       baseValue: 0
   defenceStats:
@@ -900,6 +904,18 @@ MonoBehaviour:
       baseValue: 0
     lightningRes:
       baseValue: 0
+--- !u!114 &1349299021041077195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6798972382744166182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c29c78b19182fd04ebc4a660137090c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8306389575047528816
 GameObject:
   m_ObjectHideFlags: 0

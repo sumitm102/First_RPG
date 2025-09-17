@@ -108,6 +108,24 @@ public class Enemy : Entity
 
     public void EnableCounterWindow(bool enable) => CanBeStunned = enable;
 
+    protected override IEnumerator SlowDownEntityCo(float duration, float slowMultiplier) {
+
+        float originalMoveSpeed = MoveSpeed;
+        float originalBattleMoveSpeed = BattleMoveSpeed;
+        float originalAnimSpeed = Anim.speed;
+
+        float speedMultiplier = 1f - slowMultiplier;
+        MoveSpeed *= speedMultiplier;
+        BattleMoveSpeed *= speedMultiplier;
+        Anim.speed *= speedMultiplier;
+
+        yield return new WaitForSeconds(duration);
+
+        MoveSpeed = originalMoveSpeed;
+        BattleMoveSpeed = originalBattleMoveSpeed;
+        Anim.speed = originalAnimSpeed;
+    }
+
 
     private void OnEnable() {
             Player.onPlayerDeath += HandlePlayerDeath;

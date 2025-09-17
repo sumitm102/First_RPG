@@ -8609,6 +8609,7 @@ MonoBehaviour:
   _hitVFXColor: {r: 1, g: 1, b: 1, a: 1}
   _hitVFX: {fileID: 0}
   _critHitVFX: {fileID: 0}
+  _chillVFXColor: {r: 0, g: 1, b: 1, a: 1}
 --- !u!1 &2090614053
 GameObject:
   m_ObjectHideFlags: 0
@@ -8744,14 +8745,6 @@ PrefabInstance:
     - target: {fileID: 1102284660814084994, guid: 9c8c5273388b6a144aa04aad409d56d4, type: 3}
       propertyPath: m_Name
       value: EnemySkeleton
-      objectReference: {fileID: 0}
-    - target: {fileID: 6789660472379850358, guid: 9c8c5273388b6a144aa04aad409d56d4, type: 3}
-      propertyPath: offenseStats.iceDamage.baseValue
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 6789660472379850358, guid: 9c8c5273388b6a144aa04aad409d56d4, type: 3}
-      propertyPath: offenseStats.fireDamage.baseValue
-      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8444133876684392322, guid: 9c8c5273388b6a144aa04aad409d56d4, type: 3}
       propertyPath: m_AnchorMax.x
