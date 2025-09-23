@@ -84,7 +84,7 @@ public class EntityHealth : MonoBehaviour, IDamagable
     private bool AttackEvaded() => Random.Range(0, 100f) < _entityStats.GetEvasion();
     
 
-    protected void ReduceHealth(float damage) {
+    public void ReduceHealth(float damage) {
 
         // Character flashes when taking damage
         if (_entityVFX != null)
