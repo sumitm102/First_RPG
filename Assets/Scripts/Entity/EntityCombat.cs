@@ -37,7 +37,7 @@ public class EntityCombat : MonoBehaviour
             if (target.TryGetComponent<IDamagable>(out var damagable)) {
 
                 float physicalDamage = _entityStats.GetPhysicalDamage(out bool isCritDamage);
-                float elementalDamage = _entityStats.GetElementalDamage(out ElementType elementType);
+                float elementalDamage = _entityStats.GetElementalDamage(out ElementType elementType, 0.6f);
 
                 bool targetTookDamage = damagable.TakeDamage(physicalDamage, elementalDamage, elementType, transform);
 
@@ -52,13 +52,19 @@ public class EntityCombat : MonoBehaviour
         }
     }
 
-    public void ApplyStatusEffect(Transform target, ElementType elementType) {
+    public void ApplyStatusEffect(Transform target, ElementType elementType, float scaleFactor = 1f) {
         EntityStatusHandler entityStatusHandler = target.GetComponent<EntityStatusHandler>();
+
         if (entityStatusHandler == null)
             return;
 
         if (elementType == ElementType.Ice && entityStatusHandler.CanStatusEffectBeApplied(elementType))
             entityStatusHandler.ApplyChilledEffect(DefaultDuration, ChillSlowMultiplier);
+
+        if(elementType == ElementType.Fire && entityStatusHandler.CanStatusEffectBeApplied(elementType)) {
+            float fireDamage = _entityStats.offenseStats.fireDamage.GetValue() * scaleFactor;
+            entityStatusHandler.ApplyBurnEffect(DefaultDuration, fireDamage);
+        }
     }
     
     protected Collider2D[] GetDetectedColliders() {
