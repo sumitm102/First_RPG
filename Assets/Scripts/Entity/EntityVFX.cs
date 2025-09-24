@@ -19,6 +19,7 @@ public class EntityVFX : MonoBehaviour
     [Header("Element Colors")]
     [SerializeField] private Color _chillVFXColor = Color.cyan;
     [SerializeField] private Color _burnVFXColor = Color.red;
+    [SerializeField] private Color _electrifyVFXColor = Color.yellow;
     private Color _originalHitVFXColor;
 
     private Entity _entity;
@@ -65,8 +66,14 @@ public class EntityVFX : MonoBehaviour
 
     public void UpdateOnHitColor(ElementType elementType) {
         switch(elementType) {
+            case ElementType.Fire:
+                _hitVFXColor = _burnVFXColor;
+                break;
             case ElementType.Ice:
                 _hitVFXColor = _chillVFXColor;
+                break;
+            case ElementType.Lightning:
+                _hitVFXColor = _electrifyVFXColor;
                 break;
             case ElementType.None:
                 _hitVFXColor = _originalHitVFXColor;
@@ -75,14 +82,21 @@ public class EntityVFX : MonoBehaviour
     }
 
     public void PlayOnStatusVFX(float duration, ElementType elementType) {
+        Color statusEffectColor = Color.white;
+
         switch (elementType) {
-            case ElementType.Ice:
-                StartCoroutine(PlayStatusVFXCo(duration, _chillVFXColor));
-                break;
             case ElementType.Fire:
-                StartCoroutine(PlayStatusVFXCo(duration, _burnVFXColor));
+                statusEffectColor = _burnVFXColor;
+                break;
+            case ElementType.Ice:
+                statusEffectColor = _chillVFXColor;
+                break;
+            case ElementType.Lightning:
+                statusEffectColor= _electrifyVFXColor;
                 break;
         }
+
+        StartCoroutine(PlayStatusVFXCo(duration, statusEffectColor));
     }
 
     private IEnumerator PlayStatusVFXCo(float duration, Color statusEffectColor) {
@@ -104,5 +118,15 @@ public class EntityVFX : MonoBehaviour
         }
 
         _sr.color = Color.white;
+    }
+
+    public void StopAllVFX() {
+
+        // Stops all coroutines on this script
+        StopAllCoroutines();
+
+        // In case the coroutine stops while there is an ongoing visual effect
+        _sr.color = Color.white;
+        _sr.material = _originalMat;
     }
 }

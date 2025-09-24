@@ -8611,6 +8611,7 @@ MonoBehaviour:
   _critHitVFX: {fileID: 0}
   _chillVFXColor: {r: 0, g: 1, b: 1, a: 1}
   _burnVFXColor: {r: 1, g: 0, b: 0, a: 1}
+  _electrifyVFXColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!1 &2090614053
 GameObject:
   m_ObjectHideFlags: 0
@@ -8747,14 +8748,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemySkeleton
       objectReference: {fileID: 0}
-    - target: {fileID: 6789660472379850358, guid: 9c8c5273388b6a144aa04aad409d56d4, type: 3}
-      propertyPath: offenseStats.fireDamage.baseValue
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7716633974962583603, guid: 9c8c5273388b6a144aa04aad409d56d4, type: 3}
-      propertyPath: _burnVFXColor.g
-      value: 0.24313726
-      objectReference: {fileID: 0}
     - target: {fileID: 8444133876684392322, guid: 9c8c5273388b6a144aa04aad409d56d4, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -8776,22 +8769,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 519533497720172548, guid: 1a3dc3cff0f8de44abb4a0834ff417d6, type: 3}
-      propertyPath: defenceStats.armor.baseValue
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 519533497720172548, guid: 1a3dc3cff0f8de44abb4a0834ff417d6, type: 3}
-      propertyPath: offenseStats.iceDamage.baseValue
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 519533497720172548, guid: 1a3dc3cff0f8de44abb4a0834ff417d6, type: 3}
-      propertyPath: offenseStats.fireDamage.baseValue
-      value: 5000
-      objectReference: {fileID: 0}
-    - target: {fileID: 5967111348683528676, guid: 1a3dc3cff0f8de44abb4a0834ff417d6, type: 3}
-      propertyPath: _burnVFXColor.g
-      value: 0.24354252
-      objectReference: {fileID: 0}
     - target: {fileID: 6798972382744166182, guid: 1a3dc3cff0f8de44abb4a0834ff417d6, type: 3}
       propertyPath: m_Name
       value: Player
