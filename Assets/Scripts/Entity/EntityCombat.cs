@@ -11,6 +11,12 @@ public class EntityCombat : MonoBehaviour
     [field: Header("Status effect details")]
     [field: SerializeField] public float DefaultDuration { get; private set; } = 3f;
     [field: SerializeField] public float ChillSlowMultiplier { get; private set; } = 0.2f;
+    [field: SerializeField] public float ElectrifyChargeAmount { get; private set; } = 0.4f;
+
+    [field: Space]
+    [field: SerializeField] public float FireScaleFactor { get; private set; } = 0.8f;
+    [field: SerializeField] public float LightningScaleFactor { get; private set; } = 2f;
+
 
 
     private Collider2D[] _targetColliders;
@@ -18,11 +24,11 @@ public class EntityCombat : MonoBehaviour
     // May not be necessary
     //private EntityHealth _targetHealth;
 
-    private EntityVFX _vfx;
+    private EntityVFX _entityVFX;
     private EntityStats _entityStats;
 
     private void Awake() {
-        _vfx = GetComponent<EntityVFX>();
+        _entityVFX = GetComponent<EntityVFX>();
         _entityStats = GetComponent<EntityStats>();
     }
 
@@ -37,7 +43,7 @@ public class EntityCombat : MonoBehaviour
             if (target.TryGetComponent<IDamagable>(out var damagable)) {
 
                 float physicalDamage = _entityStats.GetPhysicalDamage(out bool isCritDamage);
-                float elementalDamage = _entityStats.GetElementalDamage(out ElementType elementType, 0.6f);
+                float elementalDamage = _entityStats.GetElementalDamage(out ElementType elementType, 0.6f); // Perform 60% of the original elemental damage
 
                 bool targetTookDamage = damagable.TakeDamage(physicalDamage, elementalDamage, elementType, transform);
 
@@ -45,25 +51,36 @@ public class EntityCombat : MonoBehaviour
                     ApplyStatusEffect(target.transform, elementType);
 
                 if (targetTookDamage) {
-                    _vfx.UpdateOnHitColor(elementType);
-                    _vfx.CreateOnHitVFX(target.transform, isCritDamage);
+                    _entityVFX.UpdateOnHitColor(elementType);
+                    _entityVFX.CreateOnHitVFX(target.transform, isCritDamage);
                 }
             }
         }
     }
 
     public void ApplyStatusEffect(Transform target, ElementType elementType, float scaleFactor = 1f) {
-        EntityStatusHandler entityStatusHandler = target.GetComponent<EntityStatusHandler>();
 
-        if (entityStatusHandler == null)
+        if (!target.TryGetComponent<EntityStatusHandler>(out EntityStatusHandler targetStatusHandler))
             return;
 
-        if (elementType == ElementType.Ice && entityStatusHandler.CanStatusEffectBeApplied(elementType))
-            entityStatusHandler.ApplyChilledEffect(DefaultDuration, ChillSlowMultiplier);
+        if (elementType == ElementType.Ice && targetStatusHandler.CanStatusEffectBeApplied(elementType)) {
 
-        if(elementType == ElementType.Fire && entityStatusHandler.CanStatusEffectBeApplied(elementType)) {
+            targetStatusHandler.ApplyChillEffect(DefaultDuration, ChillSlowMultiplier);
+        }
+        else if (elementType == ElementType.Fire && targetStatusHandler.CanStatusEffectBeApplied(elementType)) {
+
+            scaleFactor = FireScaleFactor;
             float fireDamage = _entityStats.offenseStats.fireDamage.GetValue() * scaleFactor;
-            entityStatusHandler.ApplyBurnEffect(DefaultDuration, fireDamage);
+
+            targetStatusHandler.ApplyBurnEffect(DefaultDuration, fireDamage);
+        }
+        else if (elementType == ElementType.Lightning && targetStatusHandler.CanStatusEffectBeApplied(elementType)) {
+
+            scaleFactor = LightningScaleFactor;
+            float finalBuildUpLightningDamage = _entityStats.offenseStats.lightningDamage.GetValue() * scaleFactor;
+
+            targetStatusHandler.ApplyElectrifyEffect(DefaultDuration, finalBuildUpLightningDamage, ElectrifyChargeAmount);
+
         }
     }
     

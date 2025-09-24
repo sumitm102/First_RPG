@@ -242,6 +242,9 @@ MonoBehaviour:
     m_Bits: 64
   <DefaultDuration>k__BackingField: 3
   <ChillSlowMultiplier>k__BackingField: 0.4
+  <ElectrifyChargeAmount>k__BackingField: 0.4
+  <FireScaleFactor>k__BackingField: 0.8
+  <LightningScaleFactor>k__BackingField: 2
 --- !u!114 &6044130287538685578
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -254,7 +257,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9eb44b5704ae844ab63bdd0837662a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHP: 0
+  currentHealth: 0
   isDead: 0
   _onDamageKnockback: {x: 1.5, y: 2.5}
   _knockbackDuration: 0.2
@@ -280,6 +283,8 @@ MonoBehaviour:
   _hitVFX: {fileID: 6646761547182616872, guid: f8839fde554c0534e97af1bdc5a7651d, type: 3}
   _critHitVFX: {fileID: 6871185043425471792, guid: 7fc92fdd35c147041b746cd93abf263b, type: 3}
   _chillVFXColor: {r: 0.4, g: 0.68235296, b: 0.95686275, a: 1}
+  _burnVFXColor: {r: 1, g: 0.24313726, b: 0, a: 1}
+  _electrifyVFXColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   _attackAlert: {fileID: 0}
 --- !u!114 &6789660472379850358
 MonoBehaviour:
@@ -314,9 +319,9 @@ MonoBehaviour:
     armorReduction:
       baseValue: 0
     fireDamage:
-      baseValue: 10
+      baseValue: 0
     iceDamage:
-      baseValue: 20
+      baseValue: 0
     lightningDamage:
       baseValue: 0
   defenceStats:
@@ -329,7 +334,7 @@ MonoBehaviour:
     iceRes:
       baseValue: 0
     lightningRes:
-      baseValue: 0
+      baseValue: 40
 --- !u!114 &5755326045372325516
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -342,6 +347,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c29c78b19182fd04ebc4a660137090c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _lightningStrikeVFX: {fileID: 8025110722390184153, guid: f0fe096bb7cc0ba49b859c8ee32e2b74, type: 3}
+  _currentCharge: 0
+  _maximumCharge: 1
 --- !u!1 &1186559432114652589
 GameObject:
   m_ObjectHideFlags: 0
