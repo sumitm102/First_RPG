@@ -7,9 +7,12 @@ public abstract class EntityState
 
     protected Animator anim;
     protected Rigidbody2D rb;
+    protected EntityStats stats;
 
     protected float stateTimer;
     protected bool triggerCalled;
+
+    private static readonly int _attackSpeedMultiplierHash = Animator.StringToHash("AttackSpeedMultiplier");
 
 
     public EntityState(StateMachine sm, int abn) {
@@ -47,5 +50,10 @@ public abstract class EntityState
 
     public virtual void UpdateAnimationParameter() {
 
+    }
+
+    public void SyncAttackSpeed() {
+        float attackSpeed = stats.offenseStats.attackSpeed.GetValue();
+        anim.SetFloat(_attackSpeedMultiplierHash, attackSpeed);
     }
 }

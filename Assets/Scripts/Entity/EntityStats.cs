@@ -2,13 +2,13 @@ using UnityEngine;
 
 public class EntityStats : MonoBehaviour
 {
-    public Stat maxHealth;
+    public StatResourcesGroup resourceGroup;
     public StatMajorGroup majorStats;
     public StatOffenseGroup offenseStats;
     public StatDefenseGroup defenceStats;
 
     public float GetMaxHealth() {
-        float baseMaxHealth = maxHealth.GetValue();
+        float baseMaxHealth = resourceGroup.maxHealth.GetValue();
         float bonusMaxHealth = majorStats.vitality.GetValue() * 5f; // Each vitality point gives +5 to max health
 
         float finalMaxHealth = baseMaxHealth + bonusMaxHealth;
