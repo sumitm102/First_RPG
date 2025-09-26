@@ -43,11 +43,11 @@ public class EntityCombat : MonoBehaviour
             if (target.TryGetComponent<IDamagable>(out var damagable)) {
 
                 float physicalDamage = _entityStats.GetPhysicalDamage(out bool isCritDamage);
-                float elementalDamage = _entityStats.GetElementalDamage(out ElementType elementType, 0.6f); // Perform 60% of the original elemental damage
+                float elementalDamage = _entityStats.GetElementalDamage(out E_ElementType elementType, 0.6f); // Perform 60% of the original elemental damage
 
                 bool targetTookDamage = damagable.TakeDamage(physicalDamage, elementalDamage, elementType, transform);
 
-                if (elementType != ElementType.None)
+                if (elementType != E_ElementType.None)
                     ApplyStatusEffect(target.transform, elementType);
 
                 if (targetTookDamage) {
@@ -58,23 +58,23 @@ public class EntityCombat : MonoBehaviour
         }
     }
 
-    public void ApplyStatusEffect(Transform target, ElementType elementType, float scaleFactor = 1f) {
+    public void ApplyStatusEffect(Transform target, E_ElementType elementType, float scaleFactor = 1f) {
 
         if (!target.TryGetComponent<EntityStatusHandler>(out EntityStatusHandler targetStatusHandler))
             return;
 
-        if (elementType == ElementType.Ice && targetStatusHandler.CanStatusEffectBeApplied(elementType)) {
+        if (elementType == E_ElementType.Ice && targetStatusHandler.CanStatusEffectBeApplied(elementType)) {
 
             targetStatusHandler.ApplyChillEffect(DefaultDuration, ChillSlowMultiplier);
         }
-        else if (elementType == ElementType.Fire && targetStatusHandler.CanStatusEffectBeApplied(elementType)) {
+        else if (elementType == E_ElementType.Fire && targetStatusHandler.CanStatusEffectBeApplied(elementType)) {
 
             scaleFactor = FireScaleFactor;
             float fireDamage = _entityStats.offenseStats.fireDamage.GetValue() * scaleFactor;
 
             targetStatusHandler.ApplyBurnEffect(DefaultDuration, fireDamage);
         }
-        else if (elementType == ElementType.Lightning && targetStatusHandler.CanStatusEffectBeApplied(elementType)) {
+        else if (elementType == E_ElementType.Lightning && targetStatusHandler.CanStatusEffectBeApplied(elementType)) {
 
             scaleFactor = LightningScaleFactor;
             float finalBuildUpLightningDamage = _entityStats.offenseStats.lightningDamage.GetValue() * scaleFactor;

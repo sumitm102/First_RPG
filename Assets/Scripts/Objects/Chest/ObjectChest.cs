@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Chest : MonoBehaviour, IDamagable
+public class ObjectChest : MonoBehaviour, IDamagable
 {
     private readonly static int _chestOpenHash = Animator.StringToHash("ChestOpen");
 
@@ -17,7 +17,7 @@ public class Chest : MonoBehaviour, IDamagable
         _entityVFX = GetComponent<EntityVFX>();
     }
 
-    public bool TakeDamage(float damage, float elementalDamage, ElementType element, Transform damageDealer) {
+    public bool TakeDamage(float damage, float elementalDamage, E_ElementType element, Transform damageDealer) {
 
         if (_anim != null)
             _anim.SetBool(_chestOpenHash, true);

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public enum ElementType {
+public enum E_ElementType {
     None,
     Fire,
     Ice,

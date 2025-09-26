@@ -64,34 +64,34 @@ public class EntityVFX : MonoBehaviour
         _sr.material = _originalMat;
     }
 
-    public void UpdateOnHitColor(ElementType elementType) {
+    public void UpdateOnHitColor(E_ElementType elementType) {
         switch(elementType) {
-            case ElementType.Fire:
+            case E_ElementType.Fire:
                 _hitVFXColor = _burnVFXColor;
                 break;
-            case ElementType.Ice:
+            case E_ElementType.Ice:
                 _hitVFXColor = _chillVFXColor;
                 break;
-            case ElementType.Lightning:
+            case E_ElementType.Lightning:
                 _hitVFXColor = _electrifyVFXColor;
                 break;
-            case ElementType.None:
+            case E_ElementType.None:
                 _hitVFXColor = _originalHitVFXColor;
                 break;
         }
     }
 
-    public void PlayOnStatusVFX(float duration, ElementType elementType) {
+    public void PlayOnStatusVFX(float duration, E_ElementType elementType) {
         Color statusEffectColor = Color.white;
 
         switch (elementType) {
-            case ElementType.Fire:
+            case E_ElementType.Fire:
                 statusEffectColor = _burnVFXColor;
                 break;
-            case ElementType.Ice:
+            case E_ElementType.Ice:
                 statusEffectColor = _chillVFXColor;
                 break;
-            case ElementType.Lightning:
+            case E_ElementType.Lightning:
                 statusEffectColor= _electrifyVFXColor;
                 break;
         }
