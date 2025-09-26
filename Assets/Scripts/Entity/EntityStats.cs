@@ -2,13 +2,13 @@ using UnityEngine;
 
 public class EntityStats : MonoBehaviour
 {
-    public StatResourcesGroup resourceGroup;
+    public StatResourcesGroup resourceStats;
     public StatMajorGroup majorStats;
     public StatOffenseGroup offenseStats;
     public StatDefenseGroup defenceStats;
 
     public float GetMaxHealth() {
-        float baseMaxHealth = resourceGroup.maxHealth.GetValue();
+        float baseMaxHealth = resourceStats.maxHealth.GetValue();
         float bonusMaxHealth = majorStats.vitality.GetValue() * 5f; // Each vitality point gives +5 to max health
 
         float finalMaxHealth = baseMaxHealth + bonusMaxHealth;
@@ -68,29 +68,29 @@ public class EntityStats : MonoBehaviour
         return finalReduction;
     }
 
-    public float GetElementalDamage(out ElementType elementType, float scaleFactor = 1f) {
+    public float GetElementalDamage(out E_ElementType elementType, float scaleFactor = 1f) {
         float fireDamage = offenseStats.fireDamage.GetValue();
         float iceDamage = offenseStats.iceDamage.GetValue();
         float lightningDamage = offenseStats.lightningDamage.GetValue();
 
         float bonusElementalDamage = majorStats.intelligence.GetValue(); // Each intelligence point gives +1 to elemenal damage
 
-        elementType = ElementType.Fire;
+        elementType = E_ElementType.Fire;
         float highestElementalDamage = fireDamage;
 
         // Not using cascaded if-else statement since these two checks are able to determine the hight elemental damage properly
         if (iceDamage > highestElementalDamage) {
-            elementType = ElementType.Ice;
+            elementType = E_ElementType.Ice;
             highestElementalDamage = iceDamage;
         }
         if (lightningDamage > highestElementalDamage) {
-            elementType = ElementType.Lightning;
+            elementType = E_ElementType.Lightning;
             highestElementalDamage = lightningDamage;
         }
 
         // No need to apply bonus damage if highest elemental damage doesn't exist
         if (highestElementalDamage <= 0) {
-            elementType = ElementType.None;
+            elementType = E_ElementType.None;
             return 0;
         }
 
@@ -106,18 +106,18 @@ public class EntityStats : MonoBehaviour
         return finalElementalDamage * scaleFactor;
     }
 
-    public float GetElementalResistance(ElementType elementType) {
+    public float GetElementalResistance(E_ElementType elementType) {
         float baseElementalResistance = 0;
         float bonusElementalResistance = majorStats.intelligence.GetValue() * 0.5f; // Each intelligence points gives 0.5% bonus to elemental resistance
 
         switch (elementType) {
-            case ElementType.Fire:
+            case E_ElementType.Fire:
                 baseElementalResistance = defenceStats.fireRes.GetValue();
                 break;
-            case ElementType.Ice:
+            case E_ElementType.Ice:
                 baseElementalResistance = defenceStats.iceRes.GetValue();
                 break;
-            case ElementType.Lightning:
+            case E_ElementType.Lightning:
                 baseElementalResistance = defenceStats.lightningRes.GetValue();
                 break;
         }
@@ -128,5 +128,42 @@ public class EntityStats : MonoBehaviour
         float finalElementalResistance = Mathf.Clamp(totalElementalResistance, 0, elementalResistanceLimit) / 100f; // Dividing by 100 to convert into a multiplier
 
         return finalElementalResistance;
+    }
+
+    public Stat GetStatByType(E_StatType statType) {
+        switch (statType) {
+
+            // Resource Stats
+            case E_StatType.MaxHealth: return resourceStats.maxHealth;
+            case E_StatType.HealthRegen: return resourceStats.healthRegen;
+
+            // Major Stats
+            case E_StatType.Strength: return majorStats.strength;
+            case E_StatType.Agility: return majorStats.agility;
+            case E_StatType.Intelligence: return majorStats.intelligence;
+            case E_StatType.Vitality: return majorStats.vitality;
+
+            // Offense Stats
+            case E_StatType.AttackSpeed: return offenseStats.attackSpeed;
+            case E_StatType.Damage: return offenseStats.damage;
+            case E_StatType.CritChance: return offenseStats.critChance;
+            case E_StatType.CritPower: return offenseStats.critPower;
+            case E_StatType.ArmorReduction: return offenseStats.armorReduction;
+            case E_StatType.FireDamage: return offenseStats.fireDamage;
+            case E_StatType.IceDamage: return offenseStats.iceDamage;
+            case E_StatType.LightningDamage: return offenseStats.lightningDamage;
+
+            // Defence Stats
+            case E_StatType.Armor: return defenceStats.armor;
+            case E_StatType.Evasion: return defenceStats.evasion;
+            case E_StatType.FireResistance: return defenceStats.fireRes;
+            case E_StatType.IceResistance: return defenceStats.iceRes;
+            case E_StatType.LightningResistance: return defenceStats.lightningRes;
+
+            default:
+                Debug.LogWarning($"Stat type {statType} has not been implemented");
+                return null;
+        }
+
     }
 }

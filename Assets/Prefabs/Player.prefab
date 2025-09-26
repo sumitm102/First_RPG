@@ -875,48 +875,67 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 440567c87d2660d47b226ab0bcb07c2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resourceGroup:
+  resourceStats:
     maxHealth:
-      baseValue: 10000
+      _baseValue: 10000
+      _modifiers: []
     healthRegen:
-      baseValue: 400
+      _baseValue: 0
+      _modifiers: []
   majorStats:
     strength:
-      baseValue: 0
+      _baseValue: 0
+      _modifiers: []
     agility:
-      baseValue: 0
+      _baseValue: 0
+      _modifiers: []
     intelligence:
-      baseValue: 0
+      _baseValue: 0
+      _modifiers: []
     vitality:
-      baseValue: 0
+      _baseValue: 0
+      _modifiers: []
   offenseStats:
     attackSpeed:
-      baseValue: 1
+      _baseValue: 1
+      _modifiers: []
     damage:
-      baseValue: 0
+      _baseValue: 10
+      _modifiers: []
     critPower:
-      baseValue: 100
+      _baseValue: 0
+      _modifiers: []
     critChance:
-      baseValue: 40
+      _baseValue: 0
+      _modifiers: []
     armorReduction:
-      baseValue: 0
+      _baseValue: 0
+      _modifiers: []
     fireDamage:
-      baseValue: 0
+      _baseValue: 0
+      _modifiers: []
     iceDamage:
-      baseValue: 0
+      _baseValue: 0
+      _modifiers: []
     lightningDamage:
-      baseValue: 0
+      _baseValue: 0
+      _modifiers: []
   defenceStats:
     armor:
-      baseValue: 0
+      _baseValue: 0
+      _modifiers: []
     evasion:
-      baseValue: 0
+      _baseValue: 0
+      _modifiers: []
     fireRes:
-      baseValue: 0
+      _baseValue: 0
+      _modifiers: []
     iceRes:
-      baseValue: 0
+      _baseValue: 0
+      _modifiers: []
     lightningRes:
-      baseValue: 0
+      _baseValue: 0
+      _modifiers: []
 --- !u!114 &1349299021041077195
 MonoBehaviour:
   m_ObjectHideFlags: 0

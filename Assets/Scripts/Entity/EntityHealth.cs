@@ -51,7 +51,7 @@ public class EntityHealth : MonoBehaviour, IDamagable
         InvokeRepeating(nameof(RegenerateHealth),0, _regenInterval);
     }
 
-    public virtual bool TakeDamage(float physicalDamage, float elementalDamage, ElementType elementType, Transform damageDealer) {
+    public virtual bool TakeDamage(float physicalDamage, float elementalDamage, E_ElementType elementType, Transform damageDealer) {
         if (isDead)
             return false;
 
@@ -119,7 +119,7 @@ public class EntityHealth : MonoBehaviour, IDamagable
         if (!_canRegenerateHealth)
             return;
 
-        float regenAmount = _entityStats.resourceGroup.healthRegen.GetValue();
+        float regenAmount = _entityStats.resourceStats.healthRegen.GetValue();
         IncreaseHealth(regenAmount);
     }
     public void IncreaseHealth(float regenAmount) {

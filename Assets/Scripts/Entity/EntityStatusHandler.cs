@@ -7,7 +7,7 @@ public class EntityStatusHandler : MonoBehaviour
     private EntityVFX _entityVFX;
     private EntityStats _entityStats;
     private EntityHealth _entityHealth;
-    private ElementType _currentEffect = ElementType.None;
+    private E_ElementType _currentEffect = E_ElementType.None;
 
     [Header("Electrify effect details")]
     [SerializeField] private GameObject _lightningStrikeVFX;
@@ -25,7 +25,7 @@ public class EntityStatusHandler : MonoBehaviour
     #region Applying Chill Effect
 
     public void ApplyChillEffect(float duration, float slowMultiplier) {
-        float iceResistance = _entityStats.GetElementalResistance(ElementType.Ice);
+        float iceResistance = _entityStats.GetElementalResistance(E_ElementType.Ice);
         float reducedDuration = duration * (1f - iceResistance);
 
         StartCoroutine(ChillEffectCo(reducedDuration, slowMultiplier));
@@ -34,12 +34,12 @@ public class EntityStatusHandler : MonoBehaviour
     private IEnumerator ChillEffectCo(float duration, float slowMultiplier) {
 
         _entity.SlowDownEntity(duration, slowMultiplier);
-        _currentEffect = ElementType.Ice;
+        _currentEffect = E_ElementType.Ice;
         _entityVFX.PlayOnStatusVFX(duration, _currentEffect);
 
         yield return new WaitForSeconds(duration);
 
-        _currentEffect = ElementType.None;
+        _currentEffect = E_ElementType.None;
     }
 
     #endregion
@@ -47,14 +47,14 @@ public class EntityStatusHandler : MonoBehaviour
     #region Applying Burn Effect
 
     public void ApplyBurnEffect(float duration, float totalDamage) {
-        float fireResistance = _entityStats.GetElementalResistance(ElementType.Fire);
+        float fireResistance = _entityStats.GetElementalResistance(E_ElementType.Fire);
         float reducedDamage = totalDamage * (1f - fireResistance);
 
         StartCoroutine(BurnEffectCo(duration, reducedDamage));
     }
 
     private IEnumerator BurnEffectCo(float duration, float totalDamage) {
-        _currentEffect = ElementType.Fire;
+        _currentEffect = E_ElementType.Fire;
         _entityVFX.PlayOnStatusVFX(duration, _currentEffect);
 
         int ticksPerSecond = 2;
@@ -69,7 +69,7 @@ public class EntityStatusHandler : MonoBehaviour
             yield return new WaitForSeconds(tickInterval);
         }
 
-        _currentEffect = ElementType.None;
+        _currentEffect = E_ElementType.None;
     }
 
     #endregion
@@ -78,7 +78,7 @@ public class EntityStatusHandler : MonoBehaviour
     #region Applying Electrify Effect
     public void ApplyElectrifyEffect(float duration, float damage, float charge) {
 
-        float lightningResistance = _entityStats.GetElementalResistance(ElementType.Lightning);
+        float lightningResistance = _entityStats.GetElementalResistance(E_ElementType.Lightning);
         float finalCharge = charge * (1f - lightningResistance); // Lightning resistance reduces individual charge amount
         _currentCharge += finalCharge;
 
@@ -97,7 +97,7 @@ public class EntityStatusHandler : MonoBehaviour
     }
 
     private IEnumerator ElectrifyEffectCo(float duration) {
-        _currentEffect = ElementType.Lightning;
+        _currentEffect = E_ElementType.Lightning;
         _entityVFX.PlayOnStatusVFX(duration, _currentEffect);
 
         yield return new WaitForSeconds(duration);
@@ -105,19 +105,19 @@ public class EntityStatusHandler : MonoBehaviour
     }
 
     private void StopElectrifyEffect() {
-        _currentEffect = ElementType.None;
+        _currentEffect = E_ElementType.None;
         _currentCharge = 0;
         _entityVFX.StopAllVFX();
     }
 
     #endregion
 
-    public bool CanStatusEffectBeApplied(ElementType elementType) {
+    public bool CanStatusEffectBeApplied(E_ElementType elementType) {
 
         // This is so that lightning can be applied one after another for build up
-        if(elementType == ElementType.Lightning && _currentEffect == ElementType.Lightning) 
+        if(elementType == E_ElementType.Lightning && _currentEffect == E_ElementType.Lightning) 
             return true;
 
-        return _currentEffect == ElementType.None;
+        return _currentEffect == E_ElementType.None;
     }
 }
