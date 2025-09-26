@@ -6,6 +6,7 @@ public class EnemyAttackState : EnemyState {
 
     public override void EnterState() {
         base.EnterState();
+        SyncAttackSpeed();
     }
     public override void UpdateState() {
         base.UpdateState();

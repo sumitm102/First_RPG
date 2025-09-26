@@ -24,6 +24,7 @@ public class Entity : MonoBehaviour
     [field: Header("Components")]
     [field: SerializeField] public Animator Anim { get; private set; }
     [field: SerializeField] public Rigidbody2D RB { get; private set; }
+    [field: SerializeField] public EntityStats Stats { get; private set; }
 
     #endregion
 
@@ -44,6 +45,8 @@ public class Entity : MonoBehaviour
 
         if (Anim == null) Anim = GetComponentInChildren<Animator>();
         if (RB == null) RB = GetComponent<Rigidbody2D>();
+        if (Stats == null) Stats = GetComponent<EntityStats>();
+
 
         StateMachine = new StateMachine();
     }

@@ -21,6 +21,10 @@ public class EntityHealth : MonoBehaviour, IDamagable
     [SerializeField] private float _heavyKnockbackDuration = 0.5f;
     [SerializeField, Range(0, 1)] private float _heavyDamageThreshold = 0.3f; // percentage of maxHP character will loose to get heavy knockback
 
+    [Header("Health Regen")]
+    [SerializeField] private float _regenInterval = 1f;
+    [SerializeField] private bool _canRegenerateHealth = true;
+
     #region UI variables
 
     private Slider _heathBar;
@@ -43,6 +47,8 @@ public class EntityHealth : MonoBehaviour, IDamagable
 
         currentHealth = _entityStats.GetMaxHealth();
         UpdateHealthBar();
+
+        InvokeRepeating(nameof(RegenerateHealth),0, _regenInterval);
     }
 
     public virtual bool TakeDamage(float physicalDamage, float elementalDamage, ElementType elementType, Transform damageDealer) {
@@ -91,11 +97,48 @@ public class EntityHealth : MonoBehaviour, IDamagable
             _entityVFX.PlayOnDamageVFX();
 
         currentHealth -= damage;
+
+
         UpdateHealthBar();
 
-        if (currentHealth <= 0)
+        if (currentHealth <= 0) {
+            _canRegenerateHealth = false;
             Die();
+        }
+        else {
+            _canRegenerateHealth = true;
+        }
+
+    
     }
+
+
+    #region Regenerate Health Methods
+
+    private void RegenerateHealth() {
+        if (!_canRegenerateHealth)
+            return;
+
+        float regenAmount = _entityStats.resourceGroup.healthRegen.GetValue();
+        IncreaseHealth(regenAmount);
+    }
+    public void IncreaseHealth(float regenAmount) {
+
+        if (isDead)
+            return;
+
+        float newHealth = currentHealth + regenAmount;
+        float maxHealth = _entityStats.GetMaxHealth();
+
+        currentHealth = Mathf.Min(newHealth, maxHealth);
+
+        _canRegenerateHealth = currentHealth >= maxHealth ? false : true;
+
+        UpdateHealthBar();
+
+    }
+
+    #endregion
 
     private void Die() {
         isDead = true;

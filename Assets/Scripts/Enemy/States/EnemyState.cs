@@ -13,6 +13,7 @@ public class EnemyState : EntityState {
 
         anim = enemy.Anim;
         rb = enemy.RB;
+        stats = enemy.Stats;
     }
 
     public override void UpdateAnimationParameter() {

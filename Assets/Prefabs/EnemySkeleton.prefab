@@ -143,6 +143,7 @@ MonoBehaviour:
   _secondaryWallCheck: {fileID: 0}
   <Anim>k__BackingField: {fileID: 3293848870052522363}
   <RB>k__BackingField: {fileID: 580641988329339383}
+  <Stats>k__BackingField: {fileID: 0}
   <MoveSpeed>k__BackingField: 1.4
   <IdleTime>k__BackingField: 3
   <MoveAnimSpeedMultiplier>k__BackingField: 1
@@ -264,6 +265,8 @@ MonoBehaviour:
   _onHeavyDamageKnockback: {x: 7, y: 7}
   _heavyKnockbackDuration: 0.5
   _heavyDamageThreshold: 0.3
+  _regenInterval: 1
+  _canRegenerateHealth: 1
 --- !u!114 &7716633974962583603
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -298,8 +301,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 440567c87d2660d47b226ab0bcb07c2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth:
-    baseValue: 10000
+  resourceGroup:
+    maxHealth:
+      baseValue: 1000
+    healthRegen:
+      baseValue: 0
   majorStats:
     strength:
       baseValue: 0
@@ -310,8 +316,10 @@ MonoBehaviour:
     vitality:
       baseValue: 0
   offenseStats:
+    attackSpeed:
+      baseValue: 1
     damage:
-      baseValue: 150
+      baseValue: 400
     critPower:
       baseValue: 0
     critChance:
@@ -334,7 +342,7 @@ MonoBehaviour:
     iceRes:
       baseValue: 0
     lightningRes:
-      baseValue: 40
+      baseValue: 0
 --- !u!114 &5755326045372325516
 MonoBehaviour:
   m_ObjectHideFlags: 0
