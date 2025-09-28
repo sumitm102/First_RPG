@@ -303,7 +303,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resourceStats:
     maxHealth:
-      _baseValue: 10000
+      _baseValue: 100
       _modifiers: []
     healthRegen:
       _baseValue: 0
@@ -326,10 +326,10 @@ MonoBehaviour:
       _baseValue: 1
       _modifiers: []
     damage:
-      _baseValue: 500
+      _baseValue: 0
       _modifiers: []
     critPower:
-      _baseValue: 0
+      _baseValue: 150
       _modifiers: []
     critChance:
       _baseValue: 0
@@ -362,6 +362,7 @@ MonoBehaviour:
     lightningRes:
       _baseValue: 0
       _modifiers: []
+  defaultStatSetup: {fileID: 11400000, guid: 7c650259479f6af45b6d9be889957603, type: 2}
 --- !u!114 &5755326045372325516
 MonoBehaviour:
   m_ObjectHideFlags: 0

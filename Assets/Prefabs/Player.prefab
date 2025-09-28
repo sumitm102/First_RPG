@@ -936,6 +936,7 @@ MonoBehaviour:
     lightningRes:
       _baseValue: 0
       _modifiers: []
+  defaultStatSetup: {fileID: 11400000, guid: d82753a505261dc4eb3370c5a8217065, type: 2}
 --- !u!114 &1349299021041077195
 MonoBehaviour:
   m_ObjectHideFlags: 0
