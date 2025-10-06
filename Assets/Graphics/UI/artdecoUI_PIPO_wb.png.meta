@@ -160,7 +160,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      artdecoUI_PIPO_wb_0: 5457132565505971404
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
