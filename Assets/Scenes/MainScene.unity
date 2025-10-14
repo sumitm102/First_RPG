@@ -7609,7 +7609,7 @@ GameObject:
   - component: {fileID: 685146521}
   - component: {fileID: 685146522}
   m_Layer: 5
-  m_Name: UITreeNode
+  m_Name: UITreeNode - Time Echo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7648,6 +7648,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b1e60bd1bcdc0f438beb2967a959a52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _skillData: {fileID: 11400000, guid: c29de0eb7e604274b83f6d386e538a00, type: 2}
+  _skillName: Time Echo
   _skillIcon: {fileID: 2109114739}
   _lockedColorHex: '#AAA6A6'
   isUnlocked: 0
