@@ -4,6 +4,9 @@ using UnityEngine.UI;
 
 public class UITreeNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler
 {
+    private UI _ui;
+    private RectTransform _rect;
+
     [SerializeField] private SO_SkillData _skillData;
     [SerializeField] private string _skillName;
 
@@ -15,18 +18,13 @@ public class UITreeNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     public bool isLocked;
 
     private void Awake() {
+        _ui = GetComponentInParent<UI>();
+        _rect = GetComponent<RectTransform>();
+
         UpdateIconColor(GetColorByHex(_lockedColorHex));
         _lastColor = GetColorByHex(_lockedColorHex);
     }
 
-    private void OnValidate() {
-        if (_skillData == null)
-            return;
-
-        _skillName = _skillData.skillName;
-        _skillIcon.sprite = _skillData.skillIcon;
-        gameObject.name = "UITreeNode - " + _skillData.skillName;
-    }
 
     private bool CanSkillBeUnlocked() {
         if (isLocked || isUnlocked)
@@ -59,11 +57,14 @@ public class UITreeNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     }
 
     public void OnPointerEnter(PointerEventData eventData) {
+        _ui.skillTooltip.ShowTooltip(true, _rect, _skillData);
+
         if(!isUnlocked)
             UpdateIconColor(Color.white * 0.9f);
     }
 
     public void OnPointerExit(PointerEventData eventData) {
+        _ui.skillTooltip.ShowTooltip(false, _rect);
 
         if(!isUnlocked)
             UpdateIconColor(_lastColor);
@@ -74,5 +75,14 @@ public class UITreeNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         ColorUtility.TryParseHtmlString(hexNumber, out var color);
 
         return color;
+    }
+
+    private void OnValidate() {
+        if (_skillData == null)
+            return;
+
+        _skillName = _skillData.skillName;
+        _skillIcon.sprite = _skillData.skillIcon;
+        gameObject.name = "UITreeNode - " + _skillData.skillName;
     }
 }
