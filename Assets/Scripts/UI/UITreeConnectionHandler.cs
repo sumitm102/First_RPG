@@ -22,6 +22,9 @@ public class UITreeConnectionHandler : MonoBehaviour
         if(_rect == null)
             _rect = GetComponent<RectTransform>();
 
+        if (_connectionDetails.Length <= 0)
+            return;
+
         if (_connectionDetails.Length != _connections.Length) {
             Debug.Log("Amount of details should be same as amount of connections. - " + gameObject.name);
             return;
@@ -39,7 +42,7 @@ public class UITreeConnectionHandler : MonoBehaviour
             Vector2 targetPosition = connection.GetConnectionPoint(_rect);
 
             connection.DirectConnection(detail.direction, detail.length);
-            detail.childNode.SetPosition(targetPosition);
+            detail.childNode?.SetPosition(targetPosition);
 
         }
     }
