@@ -6,20 +6,26 @@ public class UITreeNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 {
     private UI _ui;
     private RectTransform _rect;
+    private UISkillTree _skillTree;
 
-    [SerializeField] private SO_SkillData _skillData;
+    [Header("Skill details")]
+    public SO_SkillData skillData;
     [SerializeField] private string _skillName;
-
     [SerializeField] private Image _skillIcon;
+    [SerializeField] private int _skillCost;
     [SerializeField] private string _lockedColorHex = "#AAA6A6";
     private Color _lastColor;
 
+    [Header("Unlock details")]
+    public UITreeNode[] neededNodes;
+    public UITreeNode[] conflictingNodes;
     public bool isUnlocked;
     public bool isLocked;
 
     private void Awake() {
         _ui = GetComponentInParent<UI>();
         _rect = GetComponent<RectTransform>();
+        _skillTree = GetComponentInParent<UISkillTree>();
 
         UpdateIconColor(GetColorByHex(_lockedColorHex));
         _lastColor = GetColorByHex(_lockedColorHex);
@@ -30,14 +36,35 @@ public class UITreeNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         if (isLocked || isUnlocked)
             return false;
 
+        if (!_skillTree.HasEnoughSkillPoints(skillData.cost))
+            return false;
+
+        foreach(var node in neededNodes) {
+            if(!node.isUnlocked)
+                return false;
+        }
+
+        foreach (var node in conflictingNodes) {
+            if(node.isUnlocked)
+                return false;
+        }
+
         return true;
+    }
+
+    private void LockConflictingNodes() {
+        foreach (var node in conflictingNodes)
+            node.isLocked = true;   
     }
 
     private void Unlock() {
 
         isUnlocked = true;
-
         UpdateIconColor(Color.white);
+        _skillTree.RemoveSkillPoints(skillData.cost);
+        LockConflictingNodes();
+
+
     }
 
     private void UpdateIconColor(Color color) {
@@ -57,7 +84,7 @@ public class UITreeNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     }
 
     public void OnPointerEnter(PointerEventData eventData) {
-        _ui.skillTooltip.ShowTooltip(true, _rect, _skillData);
+        _ui.skillTooltip.ShowTooltip(true, _rect, this);
 
         if(!isUnlocked)
             UpdateIconColor(Color.white * 0.9f);
@@ -78,11 +105,12 @@ public class UITreeNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     }
 
     private void OnValidate() {
-        if (_skillData == null)
+        if (skillData == null)
             return;
 
-        _skillName = _skillData.skillName;
-        _skillIcon.sprite = _skillData.skillIcon;
-        gameObject.name = "UITreeNode - " + _skillData.skillName;
+        _skillName = skillData.skillName;
+        _skillIcon.sprite = skillData.skillIcon;
+        _skillCost = skillData.cost;
+        gameObject.name = "UITreeNode - " + skillData.skillName;
     }
 }
