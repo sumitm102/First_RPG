@@ -7,6 +7,7 @@ public class UITreeNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     private UI _ui;
     private RectTransform _rect;
     private UISkillTree _skillTree;
+    private UITreeConnectionHandler _connectionHandler;
 
     [Header("Skill details")]
     public SO_SkillData skillData;
@@ -26,6 +27,7 @@ public class UITreeNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         _ui = GetComponentInParent<UI>();
         _rect = GetComponent<RectTransform>();
         _skillTree = GetComponentInParent<UISkillTree>();
+        _connectionHandler = GetComponent<UITreeConnectionHandler>();
 
         UpdateIconColor(GetColorByHex(_lockedColorHex));
         _lastColor = GetColorByHex(_lockedColorHex);
@@ -63,8 +65,17 @@ public class UITreeNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         UpdateIconColor(Color.white);
         _skillTree.RemoveSkillPoints(skillData.cost);
         LockConflictingNodes();
+        _connectionHandler.ConnectionImageUnlocked(true);
+    }
 
+    public void RefundPoints() {
+        isUnlocked = false;
+        isLocked = false;
 
+        UpdateIconColor(GetColorByHex(_lockedColorHex));
+
+        _skillTree.AddSkillPoints(skillData.cost);
+        _connectionHandler.ConnectionImageUnlocked(false);
     }
 
     private void UpdateIconColor(Color color) {
@@ -79,6 +90,8 @@ public class UITreeNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     public void OnPointerDown(PointerEventData eventData) {
         if (CanSkillBeUnlocked())
             Unlock();
+        else if (isLocked)
+            _ui.skillTooltip.TextBlinkEffect();
         else
             Debug.Log("Cannot be unlocked");
     }
@@ -86,15 +99,24 @@ public class UITreeNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     public void OnPointerEnter(PointerEventData eventData) {
         _ui.skillTooltip.ShowTooltip(true, _rect, this);
 
-        if(!isUnlocked)
-            UpdateIconColor(Color.white * 0.9f);
+        if (isUnlocked || isLocked)
+            return;
+        
+        Color color = Color.white * 0.9f;
+        color.a = 1f;
+
+        UpdateIconColor(color);
+        
     }
 
     public void OnPointerExit(PointerEventData eventData) {
         _ui.skillTooltip.ShowTooltip(false, _rect);
 
-        if(!isUnlocked)
-            UpdateIconColor(_lastColor);
+        if (isUnlocked || isLocked)
+            return;
+
+
+         UpdateIconColor(_lastColor);
     }
 
     private Color GetColorByHex(string hexNumber) {

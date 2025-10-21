@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UITreeConnection : MonoBehaviour
 {
@@ -7,14 +8,16 @@ public class UITreeConnection : MonoBehaviour
     [SerializeField] private RectTransform _childNodeConnectionPoint;
 
 
-    public void DirectConnection(NodeDirectionType direction, float length) {
+    public void DirectConnection(NodeDirectionType direction, float length, float rotationOffset) {
         bool shouldBeActive = direction != NodeDirectionType.None;
         float finalLength = shouldBeActive ? length : 0f;
         float angle = GetDirectionAngle(direction);
 
-        _rotationPoint.localRotation = Quaternion.Euler(0f, 0f, angle);
+        _rotationPoint.localRotation = Quaternion.Euler(0f, 0f, angle + rotationOffset);
         _connectionLength.sizeDelta = new Vector2(finalLength, _connectionLength.sizeDelta.y);
     }
+
+    public Image GetConnectionImage() => _connectionLength.GetComponent<Image>();
 
     public Vector2 GetConnectionPoint(RectTransform rect) {
         RectTransformUtility.ScreenPointToLocalPointInRectangle(rect.parent as RectTransform, _childNodeConnectionPoint.position, null, out var localPosition);
