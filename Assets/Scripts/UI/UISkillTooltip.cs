@@ -1,9 +1,12 @@
+using System.Collections;
 using System.Text;
 using TMPro;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class UISkillTooltip : UITooltip
 {
+    private UI _ui;
     private UISkillTree _skillTree;
 
     [SerializeField] private TextMeshProUGUI _skillName;
@@ -14,12 +17,16 @@ public class UISkillTooltip : UITooltip
     [SerializeField] private string _notMetRequirementHex;
     [SerializeField] private string _importantInfoHex;
     [SerializeField] private Color _exampleColor;
-    [SerializeField] private string skillLockedText = "You've taken a different path - this skill is now locked.";
+    [SerializeField] private string _skillLockedText = "You've taken a different path - this skill is now locked.";
+
+    private Coroutine _textEffectCo;
 
 
     protected override void Awake() {
         base.Awake();
-        _skillTree = GetComponentInParent<UISkillTree>();
+
+        _ui = GetComponentInParent<UI>();
+        _skillTree = _ui.GetComponentInChildren<UISkillTree>();
     }
 
     public override void ShowTooltip(bool show, RectTransform targetRect) {
@@ -35,7 +42,7 @@ public class UISkillTooltip : UITooltip
         _skillName.text = treeNode.skillData.skillName;
         _skillDescription.text = treeNode.skillData.description;
 
-        string skillLockedText = $"<color={_importantInfoHex}>{this.skillLockedText}</color>";
+        string skillLockedText = $"<color={_importantInfoHex}>{this._skillLockedText}</color>";
         string requirementsText = treeNode.isLocked ? skillLockedText : GetRequirements(treeNode.skillData.cost, treeNode.neededNodes, treeNode.conflictingNodes);
         _skillRequirements.text = requirementsText;
     }
@@ -66,5 +73,26 @@ public class UISkillTooltip : UITooltip
         return sb.ToString();
 
         
+    }
+
+    private string GetColoredText(string color, string text) {
+        return $"<color={color}>{text}</color>";
+    }
+
+    public void TextBlinkEffect() {
+        if (_textEffectCo != null)
+            StopCoroutine(_textEffectCo);
+
+        _textEffectCo = StartCoroutine(TextBlinkEffectCo(_skillRequirements, 0.15f, 3));
+    }
+
+    private IEnumerator TextBlinkEffectCo(TextMeshProUGUI text, float blinkInterval, int blinkCount) {
+        for (int i = 0; i < blinkCount; i++) {
+            text.text = GetColoredText(_notMetRequirementHex, _skillLockedText);
+            yield return new WaitForSeconds(blinkInterval);
+
+            text.text = GetColoredText(_importantInfoHex, _skillLockedText);
+            yield return new WaitForSeconds(blinkInterval);
+        }
     }
 }
