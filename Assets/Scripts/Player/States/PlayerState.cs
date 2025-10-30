@@ -3,6 +3,7 @@ using UnityEngine;
 public abstract class PlayerState : EntityState {
     protected Player player;
     protected PlayerInputSet inputSet;
+    protected PlayerSkillManager skillManager;
 
 
     private static readonly int _yVelocityHash = Animator.StringToHash("yVelocity");
@@ -14,6 +15,7 @@ public abstract class PlayerState : EntityState {
         rb = player.RB;
         inputSet = player.InputSet;
         stats = player.Stats;
+        skillManager = player.SkillManager;
     }
 
 
@@ -28,8 +30,11 @@ public abstract class PlayerState : EntityState {
 
         base.UpdateState();
 
-        if (inputSet.Player.Dash.WasPressedThisFrame() && CanDash())
+        if (inputSet.Player.Dash.WasPressedThisFrame() && CanDash()) {
+
+            skillManager.DashSkill.SetSkillOnCooldown();
             stateMachine.ChangeState(player.DashState);
+        }
     }
 
 
@@ -39,7 +44,7 @@ public abstract class PlayerState : EntityState {
     }
 
     private bool CanDash() {
-        if (player.WallDetected || stateMachine.CurrentState == player.DashState)
+        if (player.WallDetected || stateMachine.CurrentState == player.DashState || !skillManager.DashSkill.CanUseSkill())
             return false;
 
         return true;
