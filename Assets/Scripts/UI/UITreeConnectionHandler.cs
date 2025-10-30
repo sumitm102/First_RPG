@@ -84,7 +84,14 @@ public class UITreeConnectionHandler : MonoBehaviour
         _connectionImage.color = unlocked ? Color.white : _originalColor;
     }
     public void SetConnectionImage(Image image) => _connectionImage = image;
-    public void SetPosition(Vector2 position) => _rect.anchoredPosition = position;
+    public void SetPosition(Vector2 position) {
+        if(_rect == null) {
+            Debug.Log("Rect Transfrom of " + this.gameObject.name + " is null");
+            return;
+        }
+
+        _rect.anchoredPosition = position;
+    }
     
 
 }

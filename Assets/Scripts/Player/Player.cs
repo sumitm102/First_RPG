@@ -57,7 +57,9 @@ public class Player : Entity {
 
     #endregion
 
+
     public Vector2 MoveInput { get; private set; }
+
 
     #region Action Events
 
@@ -65,6 +67,8 @@ public class Player : Entity {
 
     #endregion
 
+
+    public UI UI { get; private set; }
 
     protected override void Awake() {
         base.Awake();
@@ -86,6 +90,8 @@ public class Player : Entity {
         CounterAttackState = new PlayerCounterAttackState(StateMachine, _counterAttackHash, this);
 
         #endregion
+
+        UI = FindAnyObjectByType<UI>();
     }
 
     #region Input
@@ -95,6 +101,8 @@ public class Player : Entity {
 
         InputSet.Player.Movement.performed += ctx => MoveInput = ctx.ReadValue<Vector2>();
         InputSet.Player.Movement.canceled += ctx => MoveInput = Vector2.zero;
+
+        InputSet.Player.ToggleSkillTreeUI.performed += ctx => UI.ToggleSkillTreeUI();
     }
 
     private void OnDisable() {
