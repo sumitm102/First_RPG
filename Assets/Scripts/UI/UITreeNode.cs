@@ -101,11 +101,8 @@ public class UITreeNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
         if (isUnlocked || isLocked)
             return;
-        
-        Color color = Color.white * 0.9f;
-        color.a = 1f;
 
-        UpdateIconColor(color);
+        ToggleNodeHightlight(true);
         
     }
 
@@ -116,7 +113,16 @@ public class UITreeNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
             return;
 
 
-         UpdateIconColor(_lastColor);
+        ToggleNodeHightlight(false);
+    }
+
+    private void ToggleNodeHightlight(bool highlight) {
+        Color highlightColor = Color.white * 0.9f;
+        highlightColor.a = 1f;
+
+        Color colorToApply = highlight ? highlightColor : _lastColor;
+
+        UpdateIconColor(colorToApply);
     }
 
     private Color GetColorByHex(string hexNumber) {
@@ -124,6 +130,15 @@ public class UITreeNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         ColorUtility.TryParseHtmlString(hexNumber, out var color);
 
         return color;
+    }
+
+    private void OnDisable() {
+        if (isLocked)
+            UpdateIconColor(GetColorByHex(_lockedColorHex));
+        else if (isUnlocked)
+            UpdateIconColor(Color.white);
+        else
+            UpdateIconColor(GetColorByHex(_lockedColorHex));
     }
 
     private void OnValidate() {
