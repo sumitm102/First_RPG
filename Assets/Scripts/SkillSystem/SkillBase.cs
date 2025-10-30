@@ -1,0 +1,30 @@
+using UnityEngine;
+
+public class SkillBase : MonoBehaviour
+{
+    [Header("General details")]
+    [SerializeField] private float _cooldown;
+    private float _lastTimeSkillUsed;
+
+
+    protected virtual void Awake() {
+        _lastTimeSkillUsed -= _cooldown;
+    }
+
+    public bool CanUseSkill() {
+        if (IsSkillOnCooldown()) {
+            Debug.Log("Skill is on cooldown");
+            return false;
+        }
+
+        return true;
+    }
+
+    private bool IsSkillOnCooldown() => Time.time < _lastTimeSkillUsed + _cooldown;
+
+    public void SetSkillOnCooldown() => _lastTimeSkillUsed = Time.time;
+
+    public void ReduceCooldownBy(float cooldownReduction) => _lastTimeSkillUsed += cooldownReduction;
+
+    public void ResetCooldown() => _lastTimeSkillUsed = Time.time;
+}

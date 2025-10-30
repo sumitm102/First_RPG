@@ -69,11 +69,14 @@ public class Player : Entity {
 
 
     public UI UI { get; private set; }
+    public PlayerSkillManager SkillManager { get; private set; }
 
     protected override void Awake() {
         base.Awake();
 
         InputSet = new PlayerInputSet(); // Input needs to be initialized before the states
+        UI = FindAnyObjectByType<UI>();
+        SkillManager = GetComponent<PlayerSkillManager>();
 
         #region State Initialization
 
@@ -91,7 +94,6 @@ public class Player : Entity {
 
         #endregion
 
-        UI = FindAnyObjectByType<UI>();
     }
 
     #region Input
