@@ -7,4 +7,14 @@ public class PlayerSkillManager : MonoBehaviour
     private void Awake() {
         DashSkill = GetComponentInChildren<SkillDash>();
     }
+
+    public SkillBase GetSkillByType(E_SkillType skillType) {
+        switch (skillType) {
+            case E_SkillType.Dash: return DashSkill;
+
+            default:
+                Debug.Log($"Skill type {skillType} is not implemented");
+                return null;
+        }
+    }
 }

@@ -4,6 +4,8 @@ using UnityEngine;
 public class SO_SkillData : ScriptableObject
 {
     public int cost;
+    public E_SkillType skillType;
+    public E_SkillUpgradeType upgradeType;
 
     [Header("Skill description")]
     public string skillName;
