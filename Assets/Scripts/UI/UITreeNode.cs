@@ -63,9 +63,13 @@ public class UITreeNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
         isUnlocked = true;
         UpdateIconColor(Color.white);
-        _skillTree.RemoveSkillPoints(skillData.cost);
         LockConflictingNodes();
+
+        _skillTree.RemoveSkillPoints(skillData.cost);
         _connectionHandler.ConnectionImageUnlocked(true);
+
+        // Getting skill type from skill data SO and then setting it in its skill base script
+        _skillTree.PlayerSkillManager.GetSkillByType(skillData.skillType).SetSkillUpgrade(skillData.upgradeType);
     }
 
     public void RefundPoints() {

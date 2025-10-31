@@ -5,8 +5,13 @@ public class UISkillTree : MonoBehaviour
     [SerializeField] private int _skillPoints;
     [SerializeField] private UITreeConnectionHandler[] _parentNodes;
 
+    public PlayerSkillManager PlayerSkillManager { get; private set; }
+
+    public void Awake() {
+        PlayerSkillManager = FindFirstObjectByType<PlayerSkillManager>();
+    }
     private void Start() {
-        UpDateAllConnections();
+        UpDateAllConnections(); 
     }
 
     public bool HasEnoughSkillPoints(int cost) {
