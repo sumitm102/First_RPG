@@ -5,7 +5,7 @@ public class EntityVFX : MonoBehaviour
 {
 
     [Header("On Taking Damage VFX")]
-    [SerializeField] private SpriteRenderer _sr;
+    [SerializeField] protected SpriteRenderer sr;
     [SerializeField] private Material _onDamageVFXMat;
     [SerializeField] private float _onDamageVFXDuration = 0.2f;
     private Material _originalMat;
@@ -25,13 +25,13 @@ public class EntityVFX : MonoBehaviour
     private Entity _entity;
 
     private void Awake() {
-        if(_sr == null)
-            _sr = GetComponentInChildren<SpriteRenderer>();
+        if(sr == null)
+            sr = GetComponentInChildren<SpriteRenderer>();
 
         if(_entity == null)
             _entity = GetComponent<Entity>();
 
-        _originalMat = _sr.material;
+        _originalMat = sr.material;
         _originalHitVFXColor = _hitVFXColor;
     }
 
@@ -57,11 +57,11 @@ public class EntityVFX : MonoBehaviour
     }
 
     private IEnumerator OnDamageVFXCo() {
-        _sr.material = _onDamageVFXMat;
+        sr.material = _onDamageVFXMat;
 
         yield return new WaitForSeconds(_onDamageVFXDuration);
 
-        _sr.material = _originalMat;
+        sr.material = _originalMat;
     }
 
     public void UpdateOnHitColor(E_ElementType elementType) {
@@ -109,7 +109,7 @@ public class EntityVFX : MonoBehaviour
         bool toggle = false;
 
         while (timeHasPassed < duration) {
-            _sr.color = toggle ? lightColor : darkColor;
+            sr.color = toggle ? lightColor : darkColor;
             toggle = !toggle;
 
             yield return new WaitForSeconds(tickInterval);
@@ -117,7 +117,7 @@ public class EntityVFX : MonoBehaviour
             timeHasPassed += tickInterval;
         }
 
-        _sr.color = Color.white;
+        sr.color = Color.white;
     }
 
     public void StopAllVFX() {
@@ -126,7 +126,7 @@ public class EntityVFX : MonoBehaviour
         StopAllCoroutines();
 
         // In case the coroutine stops while there is an ongoing visual effect
-        _sr.color = Color.white;
-        _sr.material = _originalMat;
+        sr.color = Color.white;
+        sr.material = _originalMat;
     }
 }

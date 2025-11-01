@@ -665,7 +665,7 @@ GameObject:
   - component: {fileID: 9205512437413240549}
   - component: {fileID: 243660480552183167}
   - component: {fileID: 3660344504111482020}
-  - component: {fileID: 5967111348683528676}
+  - component: {fileID: 9196903123795792986}
   - component: {fileID: 519533497720172548}
   - component: {fileID: 1349299021041077195}
   - component: {fileID: 8102399762747660400}
@@ -844,7 +844,7 @@ MonoBehaviour:
   _heavyDamageThreshold: 0.3
   _regenInterval: 1
   _canRegenerateHealth: 1
---- !u!114 &5967111348683528676
+--- !u!114 &9196903123795792986
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -853,18 +853,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 6798972382744166182}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3596b0625ca42a9478da16f9ef43de91, type: 3}
+  m_Script: {fileID: 11500000, guid: 6bb877dc397585b468fca37a9cddcd59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sr: {fileID: 3230285862113117299}
+  sr: {fileID: 0}
   _onDamageVFXMat: {fileID: 2100000, guid: 7805b6acfd0049d4fa548b21a7df8a64, type: 2}
   _onDamageVFXDuration: 0.15
-  _hitVFXColor: {r: 1, g: 0.8042327, b: 0, a: 1}
+  _hitVFXColor: {r: 1, g: 0.80392164, b: 0, a: 1}
   _hitVFX: {fileID: 6646761547182616872, guid: f8839fde554c0534e97af1bdc5a7651d, type: 3}
   _critHitVFX: {fileID: 6871185043425471792, guid: 7fc92fdd35c147041b746cd93abf263b, type: 3}
-  _chillVFXColor: {r: 0.39982584, g: 0.68093055, b: 0.9559748, a: 1}
-  _burnVFXColor: {r: 1, g: 0.24354252, b: 0, a: 1}
-  _electrifyVFXColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  _chillVFXColor: {r: 0.40000004, g: 0.68235296, b: 0.9568628, a: 1}
+  _burnVFXColor: {r: 1, g: 0.24313727, b: 0, a: 1}
+  _electrifyVFXColor: {r: 1, g: 0.9215687, b: 0.015686275, a: 1}
+  _imageEchoInterval: 0.09
+  _imageEchoPrefab: {fileID: 8616711344792091448, guid: 914a4b04a0099134c882433212009be4, type: 3}
 --- !u!114 &519533497720172548
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1010,6 +1012,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d618df17ad217d544891fb9de7ed47da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skillType: 0
+  upgradeType: 0
   _cooldown: 3
 --- !u!1 &8306389575047528816
 GameObject:
