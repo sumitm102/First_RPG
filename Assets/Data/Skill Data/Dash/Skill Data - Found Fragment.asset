@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cost: 3
   skillType: 0
-  upgradeType: 4
+  upgradeData:
+    upgradeType: 4
+    cooldown: 3
   skillName: Fround Fragment
   description: 'Create a time shard on arrival.
 

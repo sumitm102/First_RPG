@@ -15,8 +15,9 @@ public class SkillBase : MonoBehaviour
         _lastTimeSkillUsed -= _cooldown;
     }
 
-    public void SetSkillUpgrade(E_SkillUpgradeType upgrade) {
-        upgradeType = upgrade;
+    public void SetSkillUpgrade(UpgradeData upgradeData) {
+        upgradeType = upgradeData.upgradeType;
+        _cooldown = upgradeData.cooldown;
     }
 
     public bool CanUseSkill() {
@@ -27,6 +28,8 @@ public class SkillBase : MonoBehaviour
 
         return true;
     }
+
+    protected bool Unlocked(E_SkillUpgradeType upgradeTypeToCheck) => upgradeType == upgradeTypeToCheck;
 
     private bool IsSkillOnCooldown() => Time.time < _lastTimeSkillUsed + _cooldown;
 

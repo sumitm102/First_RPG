@@ -1,11 +1,9 @@
 using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class Player : Entity {
     public PlayerInputSet InputSet { get; private set; }
-
 
     [field: Header("Movement details")]
     [field: SerializeField] public float MoveSpeed { get; private set; } = 8f;
@@ -13,10 +11,12 @@ public class Player : Entity {
     [field: SerializeField, Range(0, 1)] public float InAirMultiplier { get; private set; } = 0.65f; // Range should be from 0 to 1
     [field: SerializeField, Range(0, 1)] public float SlowedWallSlideMultiplier { get; private set; } = 0.3f; // Range should be from 0 to 1
     [field: SerializeField] public Vector2 WallJumpForce { get; private set; }
+
     [field: Space]
     [field: SerializeField] public float DashDuration { get; private set; } = 0.25f;
     [field: SerializeField] public float DashSpeed { get; private set; } = 20f;
     [field: SerializeField] public float DashCooldown { get; private set; }
+
 
     [field: Header("Attack details")]
     [field: SerializeField] public Vector2[] AttackVelocity { get; private set; }
@@ -69,7 +69,13 @@ public class Player : Entity {
 
 
     public UI UI { get; private set; }
+
+    #region Components
+
     public PlayerSkillManager SkillManager { get; private set; }
+    public PlayerVFX VFX { get; private set; }
+
+    #endregion
 
     protected override void Awake() {
         base.Awake();
@@ -77,6 +83,7 @@ public class Player : Entity {
         InputSet = new PlayerInputSet(); // Input needs to be initialized before the states
         UI = FindAnyObjectByType<UI>();
         SkillManager = GetComponent<PlayerSkillManager>();
+        VFX = GetComponent<PlayerVFX>();
 
         #region State Initialization
 

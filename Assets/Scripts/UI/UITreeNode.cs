@@ -69,7 +69,7 @@ public class UITreeNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         _connectionHandler.ConnectionImageUnlocked(true);
 
         // Getting skill type from skill data SO and then setting it in its skill base script
-        _skillTree.PlayerSkillManager.GetSkillByType(skillData.skillType).SetSkillUpgrade(skillData.upgradeType);
+        _skillTree.PlayerSkillManager.GetSkillByType(skillData.skillType).SetSkillUpgrade(skillData.upgradeData);
     }
 
     public void RefundPoints() {

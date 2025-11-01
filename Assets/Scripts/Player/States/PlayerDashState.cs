@@ -11,6 +11,11 @@ public class PlayerDashState : PlayerState {
     public override void EnterState() {
         base.EnterState();
 
+        // Applies different skills based on its upgrade
+        skillManager.DashSkill.OnStartEffect();
+
+        player.VFX.ImageEchoEffect(player.DashDuration);
+
         _dashDir = player.MoveInput.x != 0 ? ((int)player.MoveInput.x) : player.FacingDir;
         stateTimer = player.DashDuration;
 
@@ -35,6 +40,9 @@ public class PlayerDashState : PlayerState {
 
     public override void ExitState() {
         base.ExitState();
+
+        // Applies different skills based on its upgrade
+        skillManager.DashSkill.OnEndEffect();
 
         rb.gravityScale = _originalGravityScale;
         player.SetVelocity(0, 0);

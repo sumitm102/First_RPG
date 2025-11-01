@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cost: 2
   skillType: 0
-  upgradeType: 3
+  upgradeData:
+    upgradeType: 3
+    cooldown: 3
   skillName: Time Lost Shard
   description: 'Create a time shard before you dash.
 
