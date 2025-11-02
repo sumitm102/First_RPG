@@ -80,6 +80,15 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Spell"",
+                    ""type"": ""Button"",
+                    ""id"": ""550cceb6-eefa-4a43-961a-9a58e05960f0"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -192,6 +201,17 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
                     ""action"": ""ToggleSkillTreeUI"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""14942254-0cd7-4410-9ba5-8730482676a8"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard & Mouse"",
+                    ""action"": ""Spell"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -223,6 +243,7 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
         m_Player_CounterAttack = m_Player.FindAction("CounterAttack", throwIfNotFound: true);
         m_Player_ToggleSkillTreeUI = m_Player.FindAction("ToggleSkillTreeUI", throwIfNotFound: true);
+        m_Player_Spell = m_Player.FindAction("Spell", throwIfNotFound: true);
     }
 
     ~@PlayerInputSet()
@@ -295,6 +316,7 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Attack;
     private readonly InputAction m_Player_CounterAttack;
     private readonly InputAction m_Player_ToggleSkillTreeUI;
+    private readonly InputAction m_Player_Spell;
     public struct PlayerActions
     {
         private @PlayerInputSet m_Wrapper;
@@ -305,6 +327,7 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
         public InputAction @Attack => m_Wrapper.m_Player_Attack;
         public InputAction @CounterAttack => m_Wrapper.m_Player_CounterAttack;
         public InputAction @ToggleSkillTreeUI => m_Wrapper.m_Player_ToggleSkillTreeUI;
+        public InputAction @Spell => m_Wrapper.m_Player_Spell;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -332,6 +355,9 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
             @ToggleSkillTreeUI.started += instance.OnToggleSkillTreeUI;
             @ToggleSkillTreeUI.performed += instance.OnToggleSkillTreeUI;
             @ToggleSkillTreeUI.canceled += instance.OnToggleSkillTreeUI;
+            @Spell.started += instance.OnSpell;
+            @Spell.performed += instance.OnSpell;
+            @Spell.canceled += instance.OnSpell;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -354,6 +380,9 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
             @ToggleSkillTreeUI.started -= instance.OnToggleSkillTreeUI;
             @ToggleSkillTreeUI.performed -= instance.OnToggleSkillTreeUI;
             @ToggleSkillTreeUI.canceled -= instance.OnToggleSkillTreeUI;
+            @Spell.started -= instance.OnSpell;
+            @Spell.performed -= instance.OnSpell;
+            @Spell.canceled -= instance.OnSpell;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -388,5 +417,6 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
         void OnAttack(InputAction.CallbackContext context);
         void OnCounterAttack(InputAction.CallbackContext context);
         void OnToggleSkillTreeUI(InputAction.CallbackContext context);
+        void OnSpell(InputAction.CallbackContext context);
     }
 }

@@ -867,6 +867,7 @@ MonoBehaviour:
   _electrifyVFXColor: {r: 1, g: 0.9215687, b: 0.015686275, a: 1}
   _imageEchoInterval: 0.09
   _imageEchoPrefab: {fileID: 8616711344792091448, guid: 914a4b04a0099134c882433212009be4, type: 3}
+  _imageEchoEnabled: 1
 --- !u!114 &519533497720172548
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -978,6 +979,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3269753940522658086}
   - component: {fileID: 2328816501330762926}
+  - component: {fileID: 1653524058227593170}
   m_Layer: 6
   m_Name: SkillContainer
   m_TagString: Untagged
@@ -1015,6 +1017,23 @@ MonoBehaviour:
   skillType: 0
   upgradeType: 0
   _cooldown: 3
+--- !u!114 &1653524058227593170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7474007025058361552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c99aa280592cdac4b89ccbccfed84df0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillType: 0
+  upgradeType: 0
+  _cooldown: 1
+  _shardPrefab: {fileID: 6288423565403261269, guid: 20faf460d97977e4db581de4c6e74251, type: 3}
+  _detonationTime: 2
 --- !u!1 &8306389575047528816
 GameObject:
   m_ObjectHideFlags: 0
