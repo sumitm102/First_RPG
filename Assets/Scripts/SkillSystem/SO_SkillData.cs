@@ -5,6 +5,7 @@ using System;
 public class SO_SkillData : ScriptableObject
 {
     public int cost;
+    public bool isUnlockedByDefault;
     public E_SkillType skillType;
     public UpgradeData upgradeData;
 

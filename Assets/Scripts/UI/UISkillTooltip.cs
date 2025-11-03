@@ -60,6 +60,10 @@ public class UISkillTooltip : UITooltip
         sb.AppendLine(finalCostText);
 
         foreach(var node in neededNodes) {
+
+            if (node == null)
+                continue;
+
             string nodeColor = node.isUnlocked ? _metRequirementHex : _notMetRequirementHex;
             string nodeText = $"- {node.skillData.skillName}";
             string finalNodeText = GetColoredText(nodeColor, nodeText);
@@ -74,6 +78,10 @@ public class UISkillTooltip : UITooltip
         sb.AppendLine(GetColoredText(_importantInfoHex, "Locks out: "));
 
         foreach (var node in conflictingNodes) {
+
+            if (node == null)
+                continue;
+
             string nodeText = $"- {node.skillData.skillName}";
             string finalNodeText = GetColoredText(_importantInfoHex, nodeText);
 

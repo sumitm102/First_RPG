@@ -13,6 +13,7 @@ public class PlayerSkillManager : MonoBehaviour
     public SkillBase GetSkillByType(E_SkillType skillType) {
         switch (skillType) {
             case E_SkillType.Dash: return DashSkill;
+            case E_SkillType.TimeShard: return ShardSkill;
 
             default:
                 Debug.Log($"Skill type {skillType} is not implemented");

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
@@ -28,6 +29,9 @@ public class UITreeConnectionHandler : MonoBehaviour
     private void Awake() {
         if(_connectionImage != null)
             _originalColor = _connectionImage.color;
+
+        if (_rect == null)
+            _rect = GetComponent<RectTransform>();
     }
 
     private void OnValidate() {
@@ -49,32 +53,43 @@ public class UITreeConnectionHandler : MonoBehaviour
 
     private void UpdateConnections() {
         for(int i = 0; i < _connectionDetails.Length; i++) {
-            var detail = _connectionDetails[i];
+            var nodeDetail = _connectionDetails[i];
             var connection = _connections[i];
             Vector2 targetPosition = connection.GetConnectionPoint(_rect);
             Image connectionImage = connection.GetConnectionImage();
 
-            connection.DirectConnection(detail.direction, detail.length, detail.rotation);
+            connection.DirectConnection(nodeDetail.direction, nodeDetail.length, nodeDetail.rotation);
 
-            if (detail.childNode == null)
+            if (nodeDetail.childNode == null)
                 continue;
 
-            detail.childNode.SetPosition(targetPosition);
-            detail.childNode.SetConnectionImage(connectionImage);
+            nodeDetail.childNode.SetPosition(targetPosition);
+            nodeDetail.childNode.SetConnectionImage(connectionImage);
 
             // This is so that the child nodes always stay below the parent node
-            detail.childNode.transform.SetAsLastSibling();
+            nodeDetail.childNode.transform.SetAsLastSibling();
 
         }
     }
 
-    public void UpdateAllConnections() {
+    public void UpdateAllChildConnections() {
         UpdateConnections();
 
         foreach(var node in _connectionDetails) 
-            if(node != null)
-                node.childNode.UpdateConnections();
-        
+            if (node.childNode != null) 
+                node.childNode.UpdateConnections();  
+    }
+
+    public UITreeNode[] GetChildNodes() {
+        List<UITreeNode> childrenToReturn = new List<UITreeNode>();
+
+        foreach(var node in _connectionDetails) {
+            
+            if(node.childNode != null && node.childNode.TryGetComponent<UITreeNode>(out var uiTreeNodeOfChildren))
+                childrenToReturn.Add(uiTreeNodeOfChildren);
+        }
+
+        return childrenToReturn.ToArray();
     }
 
     public void ConnectionImageUnlocked(bool unlocked) {

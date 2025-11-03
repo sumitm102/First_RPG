@@ -6,6 +6,9 @@ public class SkillShard : SkillBase
     [SerializeField] private float _detonationTime = 2f;
 
     public void CreateShard() {
+        if (upgradeType == E_SkillUpgradeType.None)
+            return;
+
         GameObject shardSkill = Instantiate(_shardPrefab, transform.position, Quaternion.identity);
 
         if(shardSkill.TryGetComponent<SkillObjectShard>(out var shardObject)) {

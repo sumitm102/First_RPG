@@ -11,7 +11,7 @@ public class UISkillTree : MonoBehaviour
         PlayerSkillManager = FindFirstObjectByType<PlayerSkillManager>();
     }
     private void Start() {
-        UpDateAllConnections(); 
+        UpdateAllConnections(); 
     }
 
     public bool HasEnoughSkillPoints(int cost) {
@@ -35,9 +35,9 @@ public class UISkillTree : MonoBehaviour
     }
 
     [ContextMenu("Update All Connections")]
-    public void UpDateAllConnections() {
+    public void UpdateAllConnections() {
         foreach(var node in _parentNodes) {
-            node.UpdateAllConnections();
+            node.UpdateAllChildConnections();
         }
     }
 }
