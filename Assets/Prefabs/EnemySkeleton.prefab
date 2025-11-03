@@ -279,7 +279,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36a6c1ee74aeb6b4685e2edeb6ff252b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sr: {fileID: 2574498087411346478}
+  sr: {fileID: 0}
   _onDamageVFXMat: {fileID: 2100000, guid: 7805b6acfd0049d4fa548b21a7df8a64, type: 2}
   _onDamageVFXDuration: 0.15
   _hitVFXColor: {r: 0.8616352, g: 0.8264111, b: 0.8264111, a: 1}

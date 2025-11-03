@@ -28,9 +28,18 @@ public class UITreeNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         _rect = GetComponent<RectTransform>();
         _skillTree = GetComponentInParent<UISkillTree>();
         _connectionHandler = GetComponent<UITreeConnectionHandler>();
+   
+    }
 
-        UpdateIconColor(GetColorByHex(_lockedColorHex));
-        _lastColor = GetColorByHex(_lockedColorHex);
+    private void Start() {
+
+        // Checking this inside start method since using skill manager in the unlock method may result in a null reference exception 
+        if (skillData.isUnlockedByDefault)
+            Unlock();
+        else {
+            UpdateIconColor(GetColorByHex(_lockedColorHex));
+            _lastColor = GetColorByHex(_lockedColorHex);
+        }
     }
 
 
@@ -55,8 +64,17 @@ public class UITreeNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     }
 
     private void LockConflictingNodes() {
-        foreach (var node in conflictingNodes)
-            node.isLocked = true;   
+        foreach (var node in conflictingNodes) {
+            node.isLocked = true;
+            node.LockConflictingChildNodes();
+        }
+    }
+
+    public void LockConflictingChildNodes() {
+        isLocked = true; // Locks itself
+
+        foreach(var node in _connectionHandler.GetChildNodes())
+            node.LockConflictingChildNodes();
     }
 
     private void Unlock() {
