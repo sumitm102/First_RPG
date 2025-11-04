@@ -5,19 +5,23 @@ public class SkillBase : MonoBehaviour
     [Header("General details")]
     [SerializeField] protected E_SkillType skillType;
     [SerializeField] protected E_SkillUpgradeType upgradeType;
-    [SerializeField] private float _cooldown;
+    [SerializeField] protected float cooldown;
     private float _lastTimeSkillUsed;
 
 
     protected virtual void Awake() {
 
         // To make sure skills can be used immediately after starting the game
-        _lastTimeSkillUsed -= _cooldown;
+        _lastTimeSkillUsed -= cooldown;
+    }
+
+    public virtual void TryUseSkill() {
+
     }
 
     public void SetSkillUpgrade(UpgradeData upgradeData) {
         upgradeType = upgradeData.upgradeType;
-        _cooldown = upgradeData.cooldown;
+        cooldown = upgradeData.cooldown;
     }
 
     public bool CanUseSkill() {
@@ -34,7 +38,7 @@ public class SkillBase : MonoBehaviour
 
     protected bool Unlocked(E_SkillUpgradeType upgradeTypeToCheck) => upgradeType == upgradeTypeToCheck;
 
-    private bool IsSkillOnCooldown() => Time.time < _lastTimeSkillUsed + _cooldown;
+    private bool IsSkillOnCooldown() => Time.time < _lastTimeSkillUsed + cooldown;
 
     public void SetSkillOnCooldown() => _lastTimeSkillUsed = Time.time;
 

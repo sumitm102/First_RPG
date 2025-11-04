@@ -10,18 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e1f7a715018874844a6b1006977e0c60, type: 3}
-  m_Name: Skill Data - Quick Dash
+  m_Name: Skill Data - Mirrored Shards
   m_EditorClassIdentifier: 
-  cost: 0
-  isUnlockedByDefault: 1
-  skillType: 0
+  cost: 3
+  isUnlockedByDefault: 0
+  skillType: 2
   upgradeData:
-    upgradeType: 1
-    cooldown: 3
-  skillName: Quick Dash
-  description: 'Dash to avoid attacks.
-
-    You cannot take damage while dashing.
-
-'
-  skillIcon: {fileID: -1313581570, guid: 3e085576af1e4484da5338302a2c3e88, type: 3}
+    upgradeType: 8
+    cooldown: 4
+  skillName: Mirrored Shards
+  description: Time shard now has 3 charges.
+  skillIcon: {fileID: -1273692985, guid: 3e085576af1e4484da5338302a2c3e88, type: 3}
