@@ -10,18 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e1f7a715018874844a6b1006977e0c60, type: 3}
-  m_Name: Skill Data - Quick Dash
+  m_Name: Skill Data - Irritated Shard
   m_EditorClassIdentifier: 
-  cost: 0
-  isUnlockedByDefault: 1
-  skillType: 0
+  cost: 2
+  isUnlockedByDefault: 0
+  skillType: 2
   upgradeData:
-    upgradeType: 1
-    cooldown: 3
-  skillName: Quick Dash
-  description: 'Dash to avoid attacks.
-
-    You cannot take damage while dashing.
-
-'
-  skillIcon: {fileID: -1313581570, guid: 3e085576af1e4484da5338302a2c3e88, type: 3}
+    upgradeType: 7
+    cooldown: 4
+  skillName: Irritated Shard
+  description: Shard will fly towards closest enemy
+  skillIcon: {fileID: 686901599, guid: 3e085576af1e4484da5338302a2c3e88, type: 3}

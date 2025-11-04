@@ -4,6 +4,21 @@ public class SkillObjectShard : SkillObjectBase
 {
     [SerializeField] private GameObject _vfxPrefab;
 
+    private Transform _target;
+    private float _speed;
+
+    private void Update() {
+        if (_target == null)
+            return;
+
+        transform.position = Vector3.MoveTowards(transform.position, _target.position, _speed * Time.deltaTime);
+    }
+
+    public void MoveTowardsClosestTarget(float speed) {
+        _target = FindClosestTarget();
+        _speed = speed;
+    }
+
     public void SetupShard(float detonationTime) {
 
         // After some time execute the function to automatically destroy the shard

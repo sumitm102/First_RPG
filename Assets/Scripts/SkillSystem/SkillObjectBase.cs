@@ -18,6 +18,24 @@ public class SkillObjectBase : MonoBehaviour
         }
     }
 
+    protected Transform FindClosestTarget() {
+        Transform target = null;
+        float closestDistance = Mathf.Infinity;
+
+        // Checking for all enemies within a 10 meter radius of the player
+        foreach(var enemy in  EnemiesAround(transform, 10f)) {
+            float distance = Vector2.Distance(transform.position, enemy.transform.position);
+            
+            if(distance < closestDistance) {
+                closestDistance = distance;
+                target = enemy.transform;
+            }
+        }
+
+        return target;
+
+    }
+
     protected virtual void OnDrawGizmos() {
         if(targetCheck == null)
             targetCheck = transform;
