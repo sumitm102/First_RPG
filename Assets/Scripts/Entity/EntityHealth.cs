@@ -161,6 +161,18 @@ public class EntityHealth : MonoBehaviour, IDamagable
 
         return knockbackVelocity;
     }
+
+    #region Used in skills
+
+    public float GetHPPercent() => currentHealth / _entityStats.GetMaxHealth();
+
+    public void SetHPToPercent(float percent) {
+        currentHealth = _entityStats.GetMaxHealth() * Mathf.Clamp01(percent);
+        UpdateHealthBar();
+    }
+
+    #endregion
+
     private bool IsHeaveDamage(float damage) => damage / _entityStats.GetMaxHealth() > _heavyDamageThreshold;
 
     private float CalculateKnockbackDuration(float damage) => IsHeaveDamage(damage) ? _heavyKnockbackDuration : _knockbackDuration;

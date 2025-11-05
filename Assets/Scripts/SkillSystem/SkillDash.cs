@@ -3,20 +3,20 @@ using UnityEngine;
 public class SkillDash : SkillBase
 {
     public void OnStartEffect() {
-        if(Unlocked(E_SkillUpgradeType.Dash_CloneOnStart) || Unlocked(E_SkillUpgradeType.Dash_CloneOnStartAndArrival)) 
+        if(IsUpgradeUnlocked(E_SkillUpgradeType.Dash_CloneOnStart) || IsUpgradeUnlocked(E_SkillUpgradeType.Dash_CloneOnStartAndArrival)) 
             CreateClone();
         
 
-        if (Unlocked(E_SkillUpgradeType.Dash_ShardOnStart) || Unlocked(E_SkillUpgradeType.Dash_ShardOnStartAndArrival)) 
+        if (IsUpgradeUnlocked(E_SkillUpgradeType.Dash_ShardOnStart) || IsUpgradeUnlocked(E_SkillUpgradeType.Dash_ShardOnStartAndArrival)) 
             CreateShard();
         
     }
 
     public void OnEndEffect() {
-        if (Unlocked(E_SkillUpgradeType.Dash_CloneOnStartAndArrival))
+        if (IsUpgradeUnlocked(E_SkillUpgradeType.Dash_CloneOnStartAndArrival))
             CreateClone();
 
-        if (Unlocked(E_SkillUpgradeType.Dash_ShardOnStartAndArrival))
+        if (IsUpgradeUnlocked(E_SkillUpgradeType.Dash_ShardOnStartAndArrival))
             CreateShard();
     }
     

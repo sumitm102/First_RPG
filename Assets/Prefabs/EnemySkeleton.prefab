@@ -326,7 +326,7 @@ MonoBehaviour:
       _baseValue: 1
       _modifiers: []
     damage:
-      _baseValue: 0
+      _baseValue: 10
       _modifiers: []
     critPower:
       _baseValue: 150
