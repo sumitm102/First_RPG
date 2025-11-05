@@ -882,7 +882,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resourceStats:
     maxHealth:
-      _baseValue: 10000
+      _baseValue: 100
       _modifiers: []
     healthRegen:
       _baseValue: 0
@@ -905,10 +905,10 @@ MonoBehaviour:
       _baseValue: 1
       _modifiers: []
     damage:
-      _baseValue: 10
+      _baseValue: 0
       _modifiers: []
     critPower:
-      _baseValue: 0
+      _baseValue: 150
       _modifiers: []
     critChance:
       _baseValue: 0
@@ -1016,7 +1016,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillType: 0
   upgradeType: 0
-  _cooldown: 3
+  cooldown: 0
 --- !u!114 &1653524058227593170
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1031,9 +1031,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillType: 0
   upgradeType: 0
-  _cooldown: 1
+  cooldown: 0
   _shardPrefab: {fileID: 6288423565403261269, guid: 20faf460d97977e4db581de4c6e74251, type: 3}
-  _detonationTime: 2
+  _shardDefaultDuration: 2
+  _shardSpeed: 7
+  _maxCharges: 3
+  _currentCharges: 0
+  _isRecharging: 0
+  _shardExtendedDuration: 10
+  _savedHPPercent: 0
 --- !u!1 &8306389575047528816
 GameObject:
   m_ObjectHideFlags: 0

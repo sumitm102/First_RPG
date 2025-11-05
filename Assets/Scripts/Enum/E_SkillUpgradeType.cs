@@ -15,6 +15,6 @@ public enum E_SkillUpgradeType
     Shard_MoveToEnemy, // Shard will move towards nearest enemy
     Shard_Multicast, // Shard ability can have up to N charges. You can cast them all in a row.
     Shard_Teleport, // You can swap places with the last shard you created
-    Shard_TeleportAndHeal // When you swap places with shard, your HP% is the same as it was when you created shard
+    Shard_TeleportHPRewind // When you swap places with shard, your HP% is the same as it was when you created shard
 
 }

@@ -186,4 +186,8 @@ public class Player : Entity {
             AttackVelocity[i] = originalAttackVelocity[i];
     }
 
+    public void TeleportPlayer(Vector3 position) {
+        transform.position = position;
+    }
+
 }

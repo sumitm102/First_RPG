@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class SkillObjectShard : SkillObjectBase
@@ -6,6 +7,8 @@ public class SkillObjectShard : SkillObjectBase
 
     private Transform _target;
     private float _speed;
+
+    public event Action OnExplode;
 
     private void Update() {
         if (_target == null)
@@ -31,10 +34,11 @@ public class SkillObjectShard : SkillObjectBase
         }
     }
 
-    private void Explode() {
+    public void Explode() {
         DamageEnemiesInRadius(transform, checkRadius);
         Instantiate(_vfxPrefab, transform.position, Quaternion.identity);
 
+        OnExplode?.Invoke();
         Destroy(this.gameObject);
     }
 }

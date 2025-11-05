@@ -12,4 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2124ba7b269bbd545943351e0a75cde9, type: 3}
   m_Name: Default Stat Setup - Skeleton
   m_EditorClassIdentifier: 
-  damage: 0
+  maxHealth: 100
+  healthRegen: 0
+  strength: 0
+  agility: 0
+  intelligence: 0
+  vitality: 0
+  attackSpeed: 1
+  damage: 10
+  critChance: 0
+  critPower: 150
+  armorReduction: 0
+  fireDamage: 0
+  iceDamage: 0
+  lightningDamage: 0
+  armor: 0
+  evasion: 0
+  fireResistance: 0
+  iceResistance: 0
+  lightningResistance: 0
