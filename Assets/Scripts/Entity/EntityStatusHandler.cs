@@ -22,9 +22,23 @@ public class EntityStatusHandler : MonoBehaviour
         _entityHealth = GetComponent<EntityHealth>();
     }
 
+    public void ApplyStatusEffect(E_ElementType elementType, ElementalEffectData elementalEffectData) {
+        if(elementType == E_ElementType.Ice && CanStatusEffectBeApplied(E_ElementType.Ice)) {
+            ApplyChillEffect(elementalEffectData.chillDuration, elementalEffectData.chillSlowMultiplier);
+        }
+        else if(elementType == E_ElementType.Fire && CanStatusEffectBeApplied(E_ElementType.Fire)) {
+            ApplyBurnEffect(elementalEffectData.burnDuration, elementalEffectData.burnDamage);
+        }
+        else if(elementType == E_ElementType.Lightning && CanStatusEffectBeApplied(E_ElementType.Lightning)) {
+            ApplyElectrifyEffect(elementalEffectData.electrifyDuration, 
+                elementalEffectData.electrifyDamage, 
+                elementalEffectData.electrifyCharge);
+        }
+    }
+
     #region Applying Chill Effect
 
-    public void ApplyChillEffect(float duration, float slowMultiplier) {
+    private void ApplyChillEffect(float duration, float slowMultiplier) {
         float iceResistance = _entityStats.GetElementalResistance(E_ElementType.Ice);
         float reducedDuration = duration * (1f - iceResistance);
 
@@ -46,7 +60,7 @@ public class EntityStatusHandler : MonoBehaviour
 
     #region Applying Burn Effect
 
-    public void ApplyBurnEffect(float duration, float totalDamage) {
+    private void ApplyBurnEffect(float duration, float totalDamage) {
         float fireResistance = _entityStats.GetElementalResistance(E_ElementType.Fire);
         float reducedDamage = totalDamage * (1f - fireResistance);
 
@@ -76,7 +90,7 @@ public class EntityStatusHandler : MonoBehaviour
 
 
     #region Applying Electrify Effect
-    public void ApplyElectrifyEffect(float duration, float damage, float charge) {
+    private void ApplyElectrifyEffect(float duration, float damage, float charge) {
 
         float lightningResistance = _entityStats.GetElementalResistance(E_ElementType.Lightning);
         float finalCharge = charge * (1f - lightningResistance); // Lightning resistance reduces individual charge amount

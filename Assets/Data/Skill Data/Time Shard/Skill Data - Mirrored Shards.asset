@@ -18,6 +18,16 @@ MonoBehaviour:
   upgradeData:
     upgradeType: 8
     cooldown: 4
+    damageScaleData:
+      physical: 1
+      elemental: 1
+      chillDuration: 3
+      chillSlowMultiplier: 0.2
+      burnDuration: 3
+      burnDamageScale: 1
+      electrifyDuration: 3
+      electrifyDamageScale: 1
+      electrifyCharge: 1
   skillName: Mirrored Shards
   description: Time shard now has 3 charges.
   skillIcon: {fileID: -1273692985, guid: 3e085576af1e4484da5338302a2c3e88, type: 3}

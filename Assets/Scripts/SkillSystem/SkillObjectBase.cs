@@ -6,6 +6,9 @@ public class SkillObjectBase : MonoBehaviour
     [SerializeField] protected Transform targetCheck;
     [SerializeField] protected float checkRadius = 1f;
 
+    protected EntityStats playerStats;
+    protected DamageScaleData damageScaleData;
+
     protected Collider2D[] EnemiesAround(Transform t, float radius) {
         return Physics2D.OverlapCircleAll(t.position, radius, enemyLayer);
     }
@@ -13,7 +16,16 @@ public class SkillObjectBase : MonoBehaviour
     protected void DamageEnemiesInRadius(Transform t, float radius) {
         foreach(var target in EnemiesAround(t, radius)) {
             if(target.TryGetComponent<IDamagable>(out var damagable)) {
-                damagable.TakeDamage(1, 1, E_ElementType.None, transform);
+                ElementalEffectData elementalEffectData = new ElementalEffectData(playerStats, damageScaleData);
+
+                float physicalDamage = playerStats.GetPhysicalDamage(out bool isCritDamage, damageScaleData.physical);
+                float elementalDamage = playerStats.GetElementalDamage(out E_ElementType elementType, damageScaleData.elemental);
+
+                damagable.TakeDamage(physicalDamage, elementalDamage, elementType, transform);
+
+                if (elementType != E_ElementType.None) {
+                    target.GetComponent<EntityStatusHandler>()?.ApplyStatusEffect(elementType, elementalEffectData);
+                }
             }
         }
     }

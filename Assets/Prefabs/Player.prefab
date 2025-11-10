@@ -822,6 +822,16 @@ MonoBehaviour:
   <ElectrifyChargeAmount>k__BackingField: 0.4
   <FireScaleFactor>k__BackingField: 0.8
   <LightningScaleFactor>k__BackingField: 2
+  basicAttackScale:
+    physical: 1
+    elemental: 1
+    chillDuration: 3
+    chillSlowMultiplier: 0.2
+    burnDuration: 3
+    burnDamageScale: 1
+    electrifyDuration: 3
+    electrifyDamageScale: 1
+    electrifyCharge: 0.4
   <CounterRecovery>k__BackingField: 0.25
 --- !u!114 &3660344504111482020
 MonoBehaviour:
@@ -905,7 +915,7 @@ MonoBehaviour:
       _baseValue: 1
       _modifiers: []
     damage:
-      _baseValue: 0
+      _baseValue: 10
       _modifiers: []
     critPower:
       _baseValue: 150
@@ -923,7 +933,7 @@ MonoBehaviour:
       _baseValue: 0
       _modifiers: []
     lightningDamage:
-      _baseValue: 0
+      _baseValue: 5
       _modifiers: []
   defenceStats:
     armor:

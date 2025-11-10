@@ -10,6 +10,8 @@ public class SkillObjectShard : SkillObjectBase
 
     public event Action OnExplode;
 
+    private SkillShard _skillShard;
+
     private void Update() {
         if (_target == null)
             return;
@@ -22,10 +24,15 @@ public class SkillObjectShard : SkillObjectBase
         _speed = speed;
     }
 
-    public void SetupShard(float detonationTime) {
+    public void SetupShard(SkillShard skillShard) {
+        _skillShard = skillShard;
+        float duration = _skillShard.GetShardDuration();
+
+        playerStats = _skillShard.Player.Stats;
+        damageScaleData = _skillShard.DamageScaleData;
 
         // After some time execute the function to automatically destroy the shard
-        Invoke(nameof(Explode), detonationTime);
+        Invoke(nameof(Explode), duration);
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
