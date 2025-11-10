@@ -18,6 +18,16 @@ MonoBehaviour:
   upgradeData:
     upgradeType: 7
     cooldown: 4
+    damageScaleData:
+      physical: 0
+      elemental: 2
+      chillDuration: 3
+      chillSlowMultiplier: 0.3
+      burnDuration: 3
+      burnDamageScale: 1.5
+      electrifyDuration: 3
+      electrifyDamageScale: 1.5
+      electrifyCharge: 0.8
   skillName: Irritated Shard
   description: Shard will fly towards closest enemy
   skillIcon: {fileID: 686901599, guid: 3e085576af1e4484da5338302a2c3e88, type: 3}

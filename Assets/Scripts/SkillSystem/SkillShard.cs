@@ -38,7 +38,7 @@ public class SkillShard : SkillBase
 
         if(shardSkill.TryGetComponent<SkillObjectShard>(out var shardObject)) {
             _currentShard = shardObject;
-            shardObject.SetupShard(GetShardDuration());
+            _currentShard.SetupShard(this);
         }
 
 

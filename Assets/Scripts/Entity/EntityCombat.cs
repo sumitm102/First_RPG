@@ -27,6 +27,8 @@ public class EntityCombat : MonoBehaviour
     private EntityVFX _entityVFX;
     private EntityStats _entityStats;
 
+    public DamageScaleData basicAttackScale;
+
     private void Awake() {
         _entityVFX = GetComponent<EntityVFX>();
         _entityStats = GetComponent<EntityStats>();
@@ -42,13 +44,15 @@ public class EntityCombat : MonoBehaviour
 
             if (target.TryGetComponent<IDamagable>(out var damagable)) {
 
+                ElementalEffectData elementalEffectData = new ElementalEffectData(_entityStats, basicAttackScale);
+
                 float physicalDamage = _entityStats.GetPhysicalDamage(out bool isCritDamage);
                 float elementalDamage = _entityStats.GetElementalDamage(out E_ElementType elementType, 0.6f); // Perform 60% of the original elemental damage
-
                 bool targetTookDamage = damagable.TakeDamage(physicalDamage, elementalDamage, elementType, transform);
 
-                if (elementType != E_ElementType.None)
-                    ApplyStatusEffect(target.transform, elementType);
+                if (elementType != E_ElementType.None) {
+                    target.GetComponent<EntityStatusHandler>()?.ApplyStatusEffect(elementType, elementalEffectData);
+                }
 
                 if (targetTookDamage) {
                     _entityVFX.UpdateOnHitColor(elementType);
@@ -58,31 +62,7 @@ public class EntityCombat : MonoBehaviour
         }
     }
 
-    public void ApplyStatusEffect(Transform target, E_ElementType elementType, float scaleFactor = 1f) {
-
-        if (!target.TryGetComponent<EntityStatusHandler>(out EntityStatusHandler targetStatusHandler))
-            return;
-
-        if (elementType == E_ElementType.Ice && targetStatusHandler.CanStatusEffectBeApplied(elementType)) {
-
-            targetStatusHandler.ApplyChillEffect(DefaultDuration, ChillSlowMultiplier);
-        }
-        else if (elementType == E_ElementType.Fire && targetStatusHandler.CanStatusEffectBeApplied(elementType)) {
-
-            scaleFactor = FireScaleFactor;
-            float fireDamage = _entityStats.offenseStats.fireDamage.GetValue() * scaleFactor;
-
-            targetStatusHandler.ApplyBurnEffect(DefaultDuration, fireDamage);
-        }
-        else if (elementType == E_ElementType.Lightning && targetStatusHandler.CanStatusEffectBeApplied(elementType)) {
-
-            scaleFactor = LightningScaleFactor;
-            float finalBuildUpLightningDamage = _entityStats.offenseStats.lightningDamage.GetValue() * scaleFactor;
-
-            targetStatusHandler.ApplyElectrifyEffect(DefaultDuration, finalBuildUpLightningDamage, ElectrifyChargeAmount);
-
-        }
-    }
+    
     
     protected Collider2D[] GetDetectedColliders() {
         return Physics2D.OverlapCircleAll(TargetCheckTransform.position, TargetCheckRadius, TargetDetectionLayer);
