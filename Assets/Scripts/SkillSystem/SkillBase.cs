@@ -3,6 +3,7 @@ using UnityEngine;
 public class SkillBase : MonoBehaviour
 {
     public Player Player {  get; private set; }
+    public PlayerSkillManager PlayerSkillManager { get; private set; }
     public DamageScaleData DamageScaleData { get; private set; }
 
     [Header("General details")]
@@ -17,6 +18,7 @@ public class SkillBase : MonoBehaviour
         // To make sure skills can be used immediately after starting the game
         _lastTimeSkillUsed -= cooldown;
         Player = GetComponentInParent<Player>();
+        PlayerSkillManager = GetComponentInParent<PlayerSkillManager>();
     }
 
     public virtual void TryUseSkill() {

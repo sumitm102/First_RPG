@@ -246,6 +246,16 @@ MonoBehaviour:
   <ElectrifyChargeAmount>k__BackingField: 0.4
   <FireScaleFactor>k__BackingField: 0.8
   <LightningScaleFactor>k__BackingField: 2
+  basicAttackScale:
+    physical: 1
+    elemental: 1
+    chillDuration: 3
+    chillSlowMultiplier: 0.2
+    burnDuration: 3
+    burnDamageScale: 1
+    electrifyDuration: 3
+    electrifyDamageScale: 1
+    electrifyCharge: 0.4
 --- !u!114 &6044130287538685578
 MonoBehaviour:
   m_ObjectHideFlags: 0

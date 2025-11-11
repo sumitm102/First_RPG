@@ -8,6 +8,7 @@ public class SkillObjectBase : MonoBehaviour
 
     protected EntityStats playerStats;
     protected DamageScaleData damageScaleData;
+    protected E_ElementType usedElement;
 
     protected Collider2D[] EnemiesAround(Transform t, float radius) {
         return Physics2D.OverlapCircleAll(t.position, radius, enemyLayer);
@@ -20,6 +21,8 @@ public class SkillObjectBase : MonoBehaviour
 
                 float physicalDamage = playerStats.GetPhysicalDamage(out bool isCritDamage, damageScaleData.physical);
                 float elementalDamage = playerStats.GetElementalDamage(out E_ElementType elementType, damageScaleData.elemental);
+
+                usedElement = elementType;
 
                 damagable.TakeDamage(physicalDamage, elementalDamage, elementType, transform);
 

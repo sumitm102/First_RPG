@@ -9407,9 +9407,9 @@ MonoBehaviour:
   _lockedColorHex: '#AAA6A6'
   neededNodes:
   - {fileID: 1175894343}
+  - {fileID: 1131905262}
   conflictingNodes:
   - {fileID: 1314976114}
-  - {fileID: 722002939}
   isUnlocked: 0
   isLocked: 0
 --- !u!114 &538870599
@@ -14455,14 +14455,6 @@ PrefabInstance:
     - target: {fileID: 1102284660814084994, guid: 9c8c5273388b6a144aa04aad409d56d4, type: 3}
       propertyPath: m_Name
       value: EnemySkeleton
-      objectReference: {fileID: 0}
-    - target: {fileID: 8444133876684392322, guid: 9c8c5273388b6a144aa04aad409d56d4, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8444133876684392322, guid: 9c8c5273388b6a144aa04aad409d56d4, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

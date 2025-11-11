@@ -21,7 +21,7 @@ public class SkillDash : SkillBase
     }
     
     private void CreateShard() {
-        Debug.Log("Created time shard");
+        PlayerSkillManager.ShardSkill.CreateRawShard();
     }
 
     private void CreateClone() {

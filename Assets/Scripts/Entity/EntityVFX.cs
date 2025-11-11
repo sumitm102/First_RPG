@@ -35,13 +35,13 @@ public class EntityVFX : MonoBehaviour
         _originalHitVFXColor = _hitVFXColor;
     }
 
-    public void CreateOnHitVFX(Transform target, bool isCritDamage) {
+    public void CreateOnHitVFX(Transform target, bool isCritDamage, E_ElementType elementType) {
         GameObject vfxPrefab = isCritDamage ? _critHitVFX : _hitVFX;
         GameObject vfx = Instantiate(vfxPrefab, target.position, Quaternion.identity);
 
         SpriteRenderer spriteRenderer = vfx.GetComponentInChildren<SpriteRenderer>();
         if(spriteRenderer != null && !isCritDamage)
-            spriteRenderer.color = _hitVFXColor;
+            spriteRenderer.color = GetElementColor(elementType);
 
         // crit hit vfx should be facing away from the entity that is performing the hit
         if (_entity.FacingDir == -1 && isCritDamage)
@@ -64,20 +64,16 @@ public class EntityVFX : MonoBehaviour
         sr.material = _originalMat;
     }
 
-    public void UpdateOnHitColor(E_ElementType elementType) {
+    public Color GetElementColor(E_ElementType elementType) {
         switch(elementType) {
             case E_ElementType.Fire:
-                _hitVFXColor = _burnVFXColor;
-                break;
+                return _burnVFXColor;
             case E_ElementType.Ice:
-                _hitVFXColor = _chillVFXColor;
-                break;
+                return _chillVFXColor;
             case E_ElementType.Lightning:
-                _hitVFXColor = _electrifyVFXColor;
-                break;
-            case E_ElementType.None:
-                _hitVFXColor = _originalHitVFXColor;
-                break;
+                return _electrifyVFXColor;
+            default:
+                return Color.white;
         }
     }
 

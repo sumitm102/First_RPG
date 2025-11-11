@@ -11,6 +11,8 @@ public class UI : MonoBehaviour
         skillTree = GetComponentInChildren<UISkillTree>(true); // Able to get the component even when the game object is not active
     }
 
+
+
     public void ToggleSkillTreeUI() {
         _isSkillTreeEnabled = !_isSkillTreeEnabled;
         skillTree.gameObject.SetActive(_isSkillTreeEnabled);

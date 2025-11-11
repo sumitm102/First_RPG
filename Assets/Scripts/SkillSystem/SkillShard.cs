@@ -34,10 +34,10 @@ public class SkillShard : SkillBase
     }
 
     public void CreateShard() {
-        GameObject shardSkill = Instantiate(_shardPrefab, transform.position, Quaternion.identity);
+        GameObject shardObject = Instantiate(_shardPrefab, transform.position, Quaternion.identity);
 
-        if(shardSkill.TryGetComponent<SkillObjectShard>(out var shardObject)) {
-            _currentShard = shardObject;
+        if(shardObject.TryGetComponent<SkillObjectShard>(out var skillObjectShard)) {
+            _currentShard = skillObjectShard;
             _currentShard.SetupShard(this);
         }
 
@@ -45,6 +45,17 @@ public class SkillShard : SkillBase
         if (IsUpgradeUnlocked(E_SkillUpgradeType.Shard_Teleport) ||
            IsUpgradeUnlocked(E_SkillUpgradeType.Shard_TeleportHPRewind))
             _currentShard.OnExplode += ForceCooldown;
+    }
+
+    public void CreateRawShard() {
+        bool canMove = IsUpgradeUnlocked(E_SkillUpgradeType.Shard_MoveToEnemy) || IsUpgradeUnlocked(E_SkillUpgradeType.Shard_Multicast);
+
+        GameObject shardObject = Instantiate(_shardPrefab, transform.position, Quaternion.identity);
+
+        if(shardObject.TryGetComponent<SkillObjectShard>(out var skillObjectShard))
+            skillObjectShard.SetupShard(this, _shardDefaultDuration, canMove, _shardSpeed);
+        
+
     }
 
     public override void TryUseSkill() {
