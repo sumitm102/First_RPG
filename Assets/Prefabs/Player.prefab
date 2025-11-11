@@ -927,10 +927,10 @@ MonoBehaviour:
       _baseValue: 0
       _modifiers: []
     fireDamage:
-      _baseValue: 0
+      _baseValue: 8
       _modifiers: []
     iceDamage:
-      _baseValue: 0
+      _baseValue: 10
       _modifiers: []
     lightningDamage:
       _baseValue: 5

@@ -50,14 +50,13 @@ public class EntityCombat : MonoBehaviour
                 float elementalDamage = _entityStats.GetElementalDamage(out E_ElementType elementType, 0.6f); // Perform 60% of the original elemental damage
                 bool targetTookDamage = damagable.TakeDamage(physicalDamage, elementalDamage, elementType, transform);
 
-                if (elementType != E_ElementType.None) {
+                if (elementType != E_ElementType.None) 
                     target.GetComponent<EntityStatusHandler>()?.ApplyStatusEffect(elementType, elementalEffectData);
-                }
+                
 
-                if (targetTookDamage) {
-                    _entityVFX.UpdateOnHitColor(elementType);
-                    _entityVFX.CreateOnHitVFX(target.transform, isCritDamage);
-                }
+                if (targetTookDamage) 
+                    _entityVFX.CreateOnHitVFX(target.transform, isCritDamage, elementType);
+                
             }
         }
     }

@@ -35,6 +35,20 @@ public class SkillObjectShard : SkillObjectBase
         Invoke(nameof(Explode), duration);
     }
 
+    public void SetupShard(SkillShard skillShard, float duration, bool canMove, float shardSpeed) {
+        _skillShard = skillShard;
+
+        playerStats = skillShard.Player.Stats;
+        damageScaleData = skillShard.DamageScaleData;
+
+        // After some time execute the function to automatically destroy the shard
+        Invoke(nameof(Explode), duration);
+
+        if (canMove)
+            MoveTowardsClosestTarget(shardSpeed);
+        
+    }
+
     private void OnTriggerEnter2D(Collider2D collision) {
         if(collision.TryGetComponent<Enemy>(out var enemy)) {
             Explode();
@@ -43,7 +57,10 @@ public class SkillObjectShard : SkillObjectBase
 
     public void Explode() {
         DamageEnemiesInRadius(transform, checkRadius);
-        Instantiate(_vfxPrefab, transform.position, Quaternion.identity);
+
+        GameObject vfx = Instantiate(_vfxPrefab, transform.position, Quaternion.identity);
+        SpriteRenderer sprite = vfx.GetComponentInChildren<SpriteRenderer>();
+        sprite.color = _skillShard.Player.VFX.GetElementColor(usedElement);
 
         OnExplode?.Invoke();
         Destroy(this.gameObject);

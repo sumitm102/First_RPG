@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Skill Data - Time Shard
   m_EditorClassIdentifier: 
   cost: 0
-  isUnlockedByDefault: 1
+  isUnlockedByDefault: 0
   skillType: 2
   upgradeData:
     upgradeType: 6
