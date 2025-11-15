@@ -8,14 +8,14 @@ public class EntityCombat : MonoBehaviour
     [field: SerializeField] public LayerMask TargetDetectionLayer { get; private set; }
 
 
-    [field: Header("Status effect details")]
-    [field: SerializeField] public float DefaultDuration { get; private set; } = 3f;
-    [field: SerializeField] public float ChillSlowMultiplier { get; private set; } = 0.2f;
-    [field: SerializeField] public float ElectrifyChargeAmount { get; private set; } = 0.4f;
+    //[field: Header("Status effect details")]
+    //[field: SerializeField] public float DefaultDuration { get; private set; } = 3f;
+    //[field: SerializeField] public float ChillSlowMultiplier { get; private set; } = 0.2f;
+    //[field: SerializeField] public float ElectrifyChargeAmount { get; private set; } = 0.4f;
 
-    [field: Space]
-    [field: SerializeField] public float FireScaleFactor { get; private set; } = 0.8f;
-    [field: SerializeField] public float LightningScaleFactor { get; private set; } = 2f;
+    //[field: Space]
+    //[field: SerializeField] public float FireScaleFactor { get; private set; } = 0.8f;
+    //[field: SerializeField] public float LightningScaleFactor { get; private set; } = 2f;
 
 
 
