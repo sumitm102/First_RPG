@@ -13,6 +13,8 @@ public class PlayerSwordThrowState : PlayerState {
 
         if(_mainCamera != Camera.main)
             _mainCamera = Camera.main;
+
+        skillManager.SwordThrowSkill.EnableDots(true);
     }
     public override void UpdateState() {
         base.UpdateState();
@@ -21,21 +23,27 @@ public class PlayerSwordThrowState : PlayerState {
 
         player.SetVelocity(0, rb.linearVelocityY);
         player.HandleFlip(directionToMouse.x);
+        skillManager.SwordThrowSkill.PredictTrajectory(directionToMouse);
 
 
         // TODO: Change the input to something else later
-        if (inputSet.Player.CounterAttack.WasPressedThisFrame()) {
+        if (inputSet.Player.AimSword.WasReleasedThisFrame()) {
             anim.SetBool(_swordThrowPerformedHash, true);
+
+            skillManager.SwordThrowSkill.EnableDots(false);
+            skillManager.SwordThrowSkill.ConfirmTrajectory(directionToMouse);
 
         }
 
-        if(inputSet.Player.AimSword.WasReleasedThisFrame() || triggerCalled)
+        if(triggerCalled)
             stateMachine.ChangeState(player.IdleState);
     }
 
     public override void ExitState() {
         base.ExitState();
+
         anim.SetBool(_swordThrowPerformedHash, false);
+        skillManager.SwordThrowSkill.EnableDots(false);
     }
 
     public override void UpdateAnimationParameter() {
