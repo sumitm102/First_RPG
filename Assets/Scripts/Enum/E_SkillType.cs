@@ -3,5 +3,6 @@ public enum E_SkillType
 {
    Dash,
    TimeEcho,
-   TimeShard
+   TimeShard,
+   SwordThrow
 }
