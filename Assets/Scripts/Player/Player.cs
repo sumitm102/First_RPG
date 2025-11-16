@@ -39,6 +39,7 @@ public class Player : Entity {
     public PlayerJumpAttackState JumpAttackState { get; private set; }
     public PlayerDeadState DeadState { get; private set; }
     public PlayerCounterAttackState CounterAttackState { get; private set; }
+    public PlayerSwordThrowState SwordThrowState { get; private set; }
 
     #endregion
 
@@ -53,12 +54,14 @@ public class Player : Entity {
     private static readonly int _jumpAttackHash = Animator.StringToHash("JumpAttack");
     private static readonly int _deadHash = Animator.StringToHash("Dead");
     private static readonly int _counterAttackHash = Animator.StringToHash("CounterAttack");
+    private static readonly int _swordThrowHash = Animator.StringToHash("SwordThrow");
 
 
     #endregion
 
 
     public Vector2 MoveInput { get; private set; }
+    public Vector2 MousePosition { get; private set; }
 
 
     #region Action Events
@@ -74,6 +77,8 @@ public class Player : Entity {
 
     public PlayerSkillManager SkillManager { get; private set; }
     public PlayerVFX VFX { get; private set; }
+    public EntityHealth Health { get;private set; }
+    public EntityStatusHandler StatusHandler { get; private set; }
 
     #endregion
 
@@ -84,6 +89,8 @@ public class Player : Entity {
         UI = FindAnyObjectByType<UI>();
         SkillManager = GetComponent<PlayerSkillManager>();
         VFX = GetComponent<PlayerVFX>();
+        Health = GetComponent<EntityHealth>();
+        StatusHandler = GetComponent<EntityStatusHandler>();
 
         #region State Initialization
 
@@ -98,6 +105,7 @@ public class Player : Entity {
         JumpAttackState = new PlayerJumpAttackState(StateMachine, _jumpAttackHash, this);
         DeadState = new PlayerDeadState(StateMachine, _deadHash, this);
         CounterAttackState = new PlayerCounterAttackState(StateMachine, _counterAttackHash, this);
+        SwordThrowState = new PlayerSwordThrowState(StateMachine, _swordThrowHash, this);
 
         #endregion
 
@@ -110,6 +118,8 @@ public class Player : Entity {
 
         InputSet.Player.Movement.performed += ctx => MoveInput = ctx.ReadValue<Vector2>();
         InputSet.Player.Movement.canceled += ctx => MoveInput = Vector2.zero;
+
+        InputSet.Player.Mouse.performed += ctx => MousePosition = ctx.ReadValue<Vector2>();
 
         InputSet.Player.ToggleSkillTreeUI.performed += ctx => UI.ToggleSkillTreeUI();
 
