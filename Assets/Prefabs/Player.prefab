@@ -817,11 +817,6 @@ MonoBehaviour:
   <TargetDetectionLayer>k__BackingField:
     serializedVersion: 2
     m_Bits: 128
-  <DefaultDuration>k__BackingField: 3
-  <ChillSlowMultiplier>k__BackingField: 0.4
-  <ElectrifyChargeAmount>k__BackingField: 0.4
-  <FireScaleFactor>k__BackingField: 0.8
-  <LightningScaleFactor>k__BackingField: 2
   basicAttackScale:
     physical: 1
     elemental: 1

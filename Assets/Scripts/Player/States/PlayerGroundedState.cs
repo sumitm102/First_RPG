@@ -24,6 +24,9 @@ public class PlayerGroundedState : PlayerState {
         if (inputSet.Player.CounterAttack.WasPressedThisFrame())
             stateMachine.ChangeState(player.CounterAttackState);
 
+        if(inputSet.Player.AimSword.WasPressedThisFrame())
+            stateMachine.ChangeState(player.SwordThrowState);
+
     }
 
     public override void ExitState() {
