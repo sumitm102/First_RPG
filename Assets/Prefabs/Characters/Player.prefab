@@ -433,7 +433,7 @@ GameObject:
   - component: {fileID: 8797320692261261008}
   - component: {fileID: 3230285862113117299}
   - component: {fileID: 4504404604699823761}
-  - component: {fileID: 7899857241686963221}
+  - component: {fileID: 8814672859694839704}
   m_Layer: 6
   m_Name: Animator
   m_TagString: Untagged
@@ -533,7 +533,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &7899857241686963221
+--- !u!114 &8814672859694839704
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -542,7 +542,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4781555560534325497}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f94ab51e2f7e99f468b8c5efca2b0a62, type: 3}
+  m_Script: {fileID: 11500000, guid: 02c939bcfac26034785609643d089332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &4998695787335449788
@@ -985,6 +985,7 @@ GameObject:
   - component: {fileID: 3269753940522658086}
   - component: {fileID: 2328816501330762926}
   - component: {fileID: 1653524058227593170}
+  - component: {fileID: 4910564961814401495}
   m_Layer: 6
   m_Name: SkillContainer
   m_TagString: Untagged
@@ -1034,7 +1035,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c99aa280592cdac4b89ccbccfed84df0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillType: 0
+  skillType: 2
   upgradeType: 0
   cooldown: 0
   _shardPrefab: {fileID: 6288423565403261269, guid: 20faf460d97977e4db581de4c6e74251, type: 3}
@@ -1045,6 +1046,26 @@ MonoBehaviour:
   _isRecharging: 0
   _shardExtendedDuration: 10
   _savedHPPercent: 0
+--- !u!114 &4910564961814401495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7474007025058361552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f21a46b2a359034a978a7270751338f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillType: 3
+  upgradeType: 11
+  cooldown: 0
+  _swordPrefab: {fileID: 4342922800533149973, guid: a0c01d51f6796054083fe1f7796bf8be, type: 3}
+  _throwForce: 2
+  _predictionDot: {fileID: 5798934496495015096, guid: ea24661405f56714eb463d35df9d9913, type: 3}
+  _numberOfDots: 20
+  _spaceBetweenDots: 0.05
 --- !u!1 &8306389575047528816
 GameObject:
   m_ObjectHideFlags: 0

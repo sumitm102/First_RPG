@@ -2,26 +2,49 @@ using UnityEngine;
 
 public class SkillSwordThrow : SkillBase
 {
+    private SkillObjectSword _currentSword;
+
+    [Header("Regular sword upgrade")]
+    [SerializeField] private GameObject _swordPrefab;
     [Range(0, 10)]
     [SerializeField] private float _throwForce = 5f;
-    [SerializeField] private float _swordGravity = 3.5f;
 
     [Header("Trajectory prediction details")]
     [SerializeField] private GameObject _predictionDot;
     [SerializeField] private int _numberOfDots = 20;
     [SerializeField] private float _spaceBetweenDots = 0.05f;
+    private float _swordGravity;
     private Transform[] _dots;
     private Vector2 _confirmedDirection;
 
 
     protected override void Awake() {
         base.Awake();
+
+        _swordGravity = _swordPrefab.GetComponent<Rigidbody2D>().gravityScale;
         _dots = GenerateDots();
     }
 
-    public void ThrowSword() {
-        Debug.Log("Sword Created");
+    public override bool CanUseSkill() {
+        if (_currentSword != null) {
+            _currentSword.GetSwordBackToPlayer();
+            return false;
+        }
+
+        return base.CanUseSkill(); 
     }
+
+    public void ThrowSword() {
+        GameObject newSword = Instantiate(_swordPrefab, _dots[1].position, Quaternion.identity);
+
+        _currentSword = newSword.GetComponent<SkillObjectSword>();
+        _currentSword.SetupSword(this, GetThrowPower());
+
+
+    }
+
+    private Vector2 GetThrowPower() => _confirmedDirection * (_throwForce * 10);
+
 
     public void PredictTrajectory(Vector2 direction) {
         for(int i = 0; i < _dots.Length; i++) 

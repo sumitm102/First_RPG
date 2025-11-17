@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1f7a715018874844a6b1006977e0c60, type: 3}
+  m_Name: Skill Data - Catch This!
+  m_EditorClassIdentifier: 
+  skillName: Catch This!
+  description: Throw your sword to damage enemies. Sword will apply status effects.
+    There can only be one sword active at a time.
+  skillIcon: {fileID: 1953109853, guid: 3e085576af1e4484da5338302a2c3e88, type: 3}
+  cost: 1
+  isUnlockedByDefault: 0
+  skillType: 3
+  upgradeData:
+    upgradeType: 11
+    cooldown: 0
+    damageScaleData:
+      physical: 1
+      elemental: 1
+      chillDuration: 3
+      chillSlowMultiplier: 0.2
+      burnDuration: 3
+      burnDamageScale: 1
+      electrifyDuration: 3
+      electrifyDamageScale: 1
+      electrifyCharge: 0.4
