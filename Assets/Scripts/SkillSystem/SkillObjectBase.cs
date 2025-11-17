@@ -2,13 +2,17 @@ using UnityEngine;
 
 public class SkillObjectBase : MonoBehaviour
 {
+    [SerializeField] private GameObject _onHitVFX;
+    [Space]
     [SerializeField] protected LayerMask enemyLayer;
     [SerializeField] protected Transform targetCheck;
     [SerializeField] protected float checkRadius = 1f;
 
     protected EntityStats playerStats;
+    protected EntityVFX entityVFX;
     protected DamageScaleData damageScaleData;
     protected E_ElementType usedElement;
+    protected bool targetTookDamage;
 
     protected Collider2D[] EnemiesAround(Transform t, float radius) {
         return Physics2D.OverlapCircleAll(t.position, radius, enemyLayer);
@@ -24,11 +28,15 @@ public class SkillObjectBase : MonoBehaviour
 
                 usedElement = elementType;
 
-                damagable.TakeDamage(physicalDamage, elementalDamage, elementType, transform);
+                targetTookDamage = damagable.TakeDamage(physicalDamage, elementalDamage, elementType, transform);
 
-                if (elementType != E_ElementType.None) {
+                if (elementType != E_ElementType.None)
                     target.GetComponent<EntityStatusHandler>()?.ApplyStatusEffect(elementType, elementalEffectData);
-                }
+
+                if (targetTookDamage)
+                    entityVFX.CreateOnHitVFX(target.transform, isCritDamage, elementType);
+
+                
             }
         }
     }

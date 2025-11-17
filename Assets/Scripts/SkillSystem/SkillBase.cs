@@ -19,6 +19,9 @@ public class SkillBase : MonoBehaviour
         _lastTimeSkillUsed -= cooldown;
         Player = GetComponentInParent<Player>();
         PlayerSkillManager = GetComponentInParent<PlayerSkillManager>();
+
+        // Create default object to avoid null references since we only set it in the set skill upgrade
+        DamageScaleData = new DamageScaleData();
     }
 
     public virtual void TryUseSkill() {
@@ -31,7 +34,7 @@ public class SkillBase : MonoBehaviour
         DamageScaleData = upgradeData.damageScaleData;
     }
 
-    public bool CanUseSkill() {
+    public virtual bool CanUseSkill() {
         if (upgradeType == E_SkillUpgradeType.None) 
             return false;
 
