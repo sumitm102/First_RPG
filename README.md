@@ -1,6 +1,6 @@
 # 2D RPG Game - Unity Showcase
 
-![Unity](https://img.shields.io/badge/Unity-6.0-blue?logo=unity&logoColor=white) ![C#](https://img.shields.io/badge/C%23-Visual_Studio-blue?logo=c-sharp&logoColor=white) ![License](https://img.shields.io/badge/License-MIT-green)
+![Unity](https://img.shields.io/badge/Unity-6.0-blue?logo=unity&logoColor=white) ![C#](https://img.shields.io/badge/C%23-Visual_Studio-blue?logo=c-sharp&logoColor=white)
 
 A 2D action RPG built in Unity, showcasing dynamic player abilities, elemental effects, and a flexible stat-based system. This project demonstrates gameplay mechanics, AI state machines, and an extensible skill system.
 
@@ -14,7 +14,6 @@ A 2D action RPG built in Unity, showcasing dynamic player abilities, elemental e
 - [Technical Details](#technical-details)
 - [Planned Features](#planned-features)
 - [Contributing](#contributing)
-- [License](#license)
 
 ---
 
@@ -25,7 +24,6 @@ A 2D action RPG built in Unity, showcasing dynamic player abilities, elemental e
 - **Combat Skills:**
   - Basic attack
   - Jump attack
-  - Dash attack
   - Advanced skills: create shards, summon clones, throw sword at enemies
 - **Stats System:** Upgradeable stats affecting attack, defense, speed, and other attributes.
 - **Elemental Effects:**
@@ -65,18 +63,4 @@ A 2D action RPG built in Unity, showcasing dynamic player abilities, elemental e
 - Dialogue system
 - Additional enemies
 - More advanced player skills
-
----
-
-## Contributing
-This project is a personal showcase, but contributions are welcome:
-1. Fork the repository
-2. Create a new branch for your feature
-3. Submit a pull request with a detailed explanation of your changes
-
----
-
-## License
-The code in this project is licensed under MIT.  
-Third-party assets may have their own licenses; please respect the original asset authors.
 
