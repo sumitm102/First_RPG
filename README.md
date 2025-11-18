@@ -2,8 +2,6 @@
 
 ![Unity](https://img.shields.io/badge/Unity-6.0-blue?logo=unity&logoColor=white) ![C#](https://img.shields.io/badge/C%23-Visual_Studio-blue?logo=c-sharp&logoColor=white)
 
-A 2D action RPG built in Unity, showcasing dynamic player abilities, elemental effects, and a flexible stat-based system. This project demonstrates gameplay mechanics, AI state machines, and an extensible skill system.
-
 <div align="center">
   
   <h3 align="center">2D Action RPG</h3>
