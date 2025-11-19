@@ -11,7 +11,7 @@ public class SkillObjectSword : SkillObjectBase
     protected float maxAllowedDistance = 25f;
 
 
-    private void Update() {
+    protected virtual void Update() {
 
         // This will make the sword point towards the direction it's flying
         transform.right = rb.linearVelocity;

@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class SkillSwordThrow : SkillBase
@@ -8,6 +9,16 @@ public class SkillSwordThrow : SkillBase
     [SerializeField] private GameObject _swordPrefab;
     [Range(0, 10)]
     [SerializeField] private float _throwForce = 5f;
+
+    [Header("Pierce sowrd upgrade")]
+    [SerializeField] private GameObject _pierceSwordPrefab;
+    public int amountToPierce = 2; 
+
+    [Header("Spin sowrd upgrade")]
+    [SerializeField] private GameObject _spinSwordPrefab;
+    public int maxDistance = 5;
+    public float maxSpinDuratoin = 3f;
+    public float attacksPerSecond = 3f;
 
     [Header("Trajectory prediction details")]
     [SerializeField] private GameObject _predictionDot;
@@ -35,12 +46,24 @@ public class SkillSwordThrow : SkillBase
     }
 
     public void ThrowSword() {
-        GameObject newSword = Instantiate(_swordPrefab, _dots[1].position, Quaternion.identity);
+        GameObject swordPrefab = GetSwordPrefab();
+        GameObject newSword = Instantiate(swordPrefab, _dots[1].position, Quaternion.identity);
 
         _currentSword = newSword.GetComponent<SkillObjectSword>();
         _currentSword.SetupSword(this, GetThrowPower());
+    }
 
+    private GameObject GetSwordPrefab() {
+        if (IsUpgradeUnlocked(E_SkillUpgradeType.SwordThrow))
+            return _swordPrefab;
+        else if (IsUpgradeUnlocked(E_SkillUpgradeType.SwordThrowPierce))
+            return _pierceSwordPrefab;
+        else if (IsUpgradeUnlocked(E_SkillUpgradeType.SwordThrowSpin))
+            return _spinSwordPrefab;
 
+        Debug.Log("No valid sword upgrade type selected");
+        return null;
+        
     }
 
     private Vector2 GetThrowPower() => _confirmedDirection * (_throwForce * 10);

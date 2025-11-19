@@ -9596,7 +9596,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -108.54089, y: -108.540886}
+  m_AnchoredPosition: {x: -106.419556, y: -106.419556}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &435617381
@@ -10372,7 +10372,7 @@ GameObject:
   - component: {fileID: 541584550}
   - component: {fileID: 541584551}
   m_Layer: 5
-  m_Name: UITreeNode - Phantom Recall
+  m_Name: UITreeNode - The Chainsaw
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10390,8 +10390,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b1e60bd1bcdc0f438beb2967a959a52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillData: {fileID: 11400000, guid: 11566dd92b4a6bd42a1fce98cd5031af, type: 2}
-  _skillName: Phantom Recall
+  skillData: {fileID: 11400000, guid: 52c01772654dd4c4998ff0f8bd2293fe, type: 2}
+  _skillName: The Chainsaw
   _skillIcon: {fileID: 1497789248}
   _skillCost: 2
   _lockedColorHex: '#AAA6A6'
@@ -12498,15 +12498,15 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1131905260}
-  - {fileID: 54435548}
+  - {fileID: 1740184685}
   - {fileID: 1441287085}
   - {fileID: 436013503}
-  - {fileID: 1740184685}
+  - {fileID: 54435548}
   m_Father: {fileID: 1222955763}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 259, y: 146.59265}
+  m_AnchoredPosition: {x: 259, y: 482}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &855809244
@@ -13870,7 +13870,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1106, y: 146.59265}
+  m_AnchoredPosition: {x: 1106, y: 361}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1124158139
@@ -14830,6 +14830,7 @@ MonoBehaviour:
   - {fileID: 685146523}
   - {fileID: 1175894344}
   - {fileID: 1131905261}
+  - {fileID: 97117789}
 --- !u!1 &1244444940
 GameObject:
   m_ObjectHideFlags: 0
@@ -16812,10 +16813,10 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1175894345}
-  - {fileID: 722002937}
+  - {fileID: 1070730461}
   - {fileID: 538870600}
   - {fileID: 1314976116}
-  - {fileID: 1070730461}
+  - {fileID: 722002937}
   m_Father: {fileID: 1222955763}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -16861,7 +16862,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 93796244, guid: 3e085576af1e4484da5338302a2c3e88, type: 3}
+  m_Sprite: {fileID: -557613474, guid: 3e085576af1e4484da5338302a2c3e88, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -17388,7 +17389,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 686901599, guid: 3e085576af1e4484da5338302a2c3e88, type: 3}
+  m_Sprite: {fileID: -799223996, guid: 3e085576af1e4484da5338302a2c3e88, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -19470,7 +19471,7 @@ GameObject:
   - component: {fileID: 1883331033}
   - component: {fileID: 1883331034}
   m_Layer: 5
-  m_Name: UITreeNode - Irritated Shard
+  m_Name: UITreeNode - The Bulletsword
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19488,8 +19489,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b1e60bd1bcdc0f438beb2967a959a52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillData: {fileID: 11400000, guid: 2c9962e5e32a9864c9bc0dc23cb91238, type: 2}
-  _skillName: Irritated Shard
+  skillData: {fileID: 11400000, guid: 038cbe5ef95ea5646ab3235d1982e197, type: 2}
+  _skillName: The Bulletsword
   _skillIcon: {fileID: 1584046481}
   _skillCost: 2
   _lockedColorHex: '#AAA6A6'
@@ -20379,10 +20380,10 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 685146521}
-  - {fileID: 619102354}
-  - {fileID: 347959026}
   - {fileID: 534624557}
   - {fileID: 818154895}
+  - {fileID: 619102354}
+  - {fileID: 347959026}
   m_Father: {fileID: 1222955763}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -21240,6 +21241,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4910564961814401495, guid: 1a3dc3cff0f8de44abb4a0834ff417d6, type: 3}
+      propertyPath: upgradeType
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 4910564961814401495, guid: 1a3dc3cff0f8de44abb4a0834ff417d6, type: 3}
+      propertyPath: _swordPrefab
+      value: 
+      objectReference: {fileID: 4358831644093846120, guid: a0c01d51f6796054083fe1f7796bf8be, type: 3}
+    - target: {fileID: 4910564961814401495, guid: 1a3dc3cff0f8de44abb4a0834ff417d6, type: 3}
+      propertyPath: _pierceSwordPrefab
+      value: 
+      objectReference: {fileID: 3050148408853387370, guid: 3460262111c814649b8c8b90e9aed012, type: 3}
     - target: {fileID: 6798972382744166182, guid: 1a3dc3cff0f8de44abb4a0834ff417d6, type: 3}
       propertyPath: m_Name
       value: Player

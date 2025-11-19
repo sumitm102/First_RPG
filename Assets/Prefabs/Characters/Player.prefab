@@ -1059,10 +1059,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillType: 3
-  upgradeType: 11
+  upgradeType: 12
   cooldown: 0
   _swordPrefab: {fileID: 4342922800533149973, guid: a0c01d51f6796054083fe1f7796bf8be, type: 3}
   _throwForce: 2
+  _pierceSwordPrefab: {fileID: 2273854715656383045, guid: 3460262111c814649b8c8b90e9aed012, type: 3}
+  amountToPierce: 2
+  _spinSwordPrefab: {fileID: 4780231073711581445, guid: 5365a5e774babb34c8dbd1ac9b5fcbb1, type: 3}
+  maxDistance: 5
+  maxSpinDuratoin: 3
+  attacksPerSecond: 3
   _predictionDot: {fileID: 5798934496495015096, guid: ea24661405f56714eb463d35df9d9913, type: 3}
   _numberOfDots: 20
   _spaceBetweenDots: 0.05

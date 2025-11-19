@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c6c65388289a9848bff90b091c9ed14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _onHitVFX: {fileID: 6646761547182616872, guid: f8839fde554c0534e97af1bdc5a7651d, type: 3}
   enemyLayer:
     serializedVersion: 2
     m_Bits: 128
