@@ -8,11 +8,16 @@ public class SkillObjectBase : MonoBehaviour
     [SerializeField] protected Transform targetCheck;
     [SerializeField] protected float checkRadius = 1f;
 
+    protected Animator anim;
     protected EntityStats playerStats;
     protected EntityVFX entityVFX;
     protected DamageScaleData damageScaleData;
     protected E_ElementType usedElement;
     protected bool targetTookDamage;
+
+    protected virtual void Awake() {
+        anim = GetComponentInChildren<Animator>();
+    }
 
     protected Collider2D[] EnemiesAround(Transform t, float radius) {
         return Physics2D.OverlapCircleAll(t.position, radius, enemyLayer);
