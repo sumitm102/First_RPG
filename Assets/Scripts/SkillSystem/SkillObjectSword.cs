@@ -10,6 +10,9 @@ public class SkillObjectSword : SkillObjectBase
     protected float returnSpeed = 20f;
     protected float maxAllowedDistance = 25f;
 
+    // This is the animation hash used for spin and bounce sword animation
+    protected static readonly int spinHash = Animator.StringToHash("Spin");
+
 
     protected virtual void Update() {
 
@@ -26,16 +29,18 @@ public class SkillObjectSword : SkillObjectBase
         transform.parent = null;
     }
 
-    public virtual void SetupSword(SkillSwordThrow skilSwordThrow, Vector2 direction) {
+    public virtual void SetupSword(SkillSwordThrow skillSwordThrow, Vector2 direction) {
         rb = GetComponent<Rigidbody2D>();
+
+        // Moves the sword towards the pointed direction
         rb.linearVelocity = direction;
 
-        this.skillSwordThrow = skilSwordThrow;
+        this.skillSwordThrow = skillSwordThrow;
 
-        playerTransform = skillSwordThrow.Player.transform;
-        playerStats = skillSwordThrow.Player.Stats;
-        entityVFX = skillSwordThrow.Player.VFX;
-        damageScaleData = skillSwordThrow.DamageScaleData;
+        playerTransform = this.skillSwordThrow.Player.transform;
+        playerStats = this.skillSwordThrow.Player.Stats;
+        entityVFX = this.skillSwordThrow.Player.VFX;
+        damageScaleData = this.skillSwordThrow.DamageScaleData;
 
     }
 
