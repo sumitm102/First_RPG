@@ -9570,7 +9570,7 @@ GameObject:
   - component: {fileID: 435617382}
   - component: {fileID: 435617381}
   m_Layer: 5
-  m_Name: UITreeNode - Mirrored Shards
+  m_Name: UITreeNode - The Xenablade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9625,10 +9625,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b1e60bd1bcdc0f438beb2967a959a52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillData: {fileID: 11400000, guid: 5b2a59958b9973c4b842f23fe7caf826, type: 2}
-  _skillName: Mirrored Shards
+  skillData: {fileID: 11400000, guid: f8c5aa6198e55a44b8925e44a35a8829, type: 2}
+  _skillName: The Xenablade
   _skillIcon: {fileID: 654865612}
-  _skillCost: 3
+  _skillCost: 2
   _lockedColorHex: '#AAA6A6'
   neededNodes:
   - {fileID: 97117788}
@@ -11266,7 +11266,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1273692985, guid: 3e085576af1e4484da5338302a2c3e88, type: 3}
+  m_Sprite: {fileID: -436653373, guid: 3e085576af1e4484da5338302a2c3e88, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -21241,18 +21241,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4910564961814401495, guid: 1a3dc3cff0f8de44abb4a0834ff417d6, type: 3}
-      propertyPath: upgradeType
-      value: 11
-      objectReference: {fileID: 0}
-    - target: {fileID: 4910564961814401495, guid: 1a3dc3cff0f8de44abb4a0834ff417d6, type: 3}
-      propertyPath: _swordPrefab
-      value: 
-      objectReference: {fileID: 4358831644093846120, guid: a0c01d51f6796054083fe1f7796bf8be, type: 3}
-    - target: {fileID: 4910564961814401495, guid: 1a3dc3cff0f8de44abb4a0834ff417d6, type: 3}
-      propertyPath: _pierceSwordPrefab
-      value: 
-      objectReference: {fileID: 3050148408853387370, guid: 3460262111c814649b8c8b90e9aed012, type: 3}
     - target: {fileID: 6798972382744166182, guid: 1a3dc3cff0f8de44abb4a0834ff417d6, type: 3}
       propertyPath: m_Name
       value: Player

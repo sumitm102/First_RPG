@@ -7,13 +7,13 @@ public class SkillObjectSwordSpin : SkillObjectSword
     private float _attacksPerSecond;
     private float _attackTimer;
 
-    private static readonly int _spinHash = Animator.StringToHash("Spin");
+    
 
     public override void SetupSword(SkillSwordThrow skilSwordThrow, Vector2 direction) {
         base.SetupSword(skilSwordThrow, direction);
 
         if (anim != null)
-            anim.SetTrigger(_spinHash);
+            anim.SetTrigger(spinHash);
 
         _maxDistance = skillSwordThrow.maxDistance;
         _maxSpinDuration = skillSwordThrow.maxSpinDuratoin;

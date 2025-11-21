@@ -19,12 +19,12 @@ public class SkillObjectBase : MonoBehaviour
         anim = GetComponentInChildren<Animator>();
     }
 
-    protected Collider2D[] EnemiesAround(Transform t, float radius) {
+    protected Collider2D[] GetEnemiesAround(Transform t, float radius) {
         return Physics2D.OverlapCircleAll(t.position, radius, enemyLayer);
     }
 
     protected void DamageEnemiesInRadius(Transform t, float radius) {
-        foreach(var target in EnemiesAround(t, radius)) {
+        foreach(var target in GetEnemiesAround(t, radius)) {
             if(target.TryGetComponent<IDamagable>(out var damagable)) {
                 ElementalEffectData elementalEffectData = new ElementalEffectData(playerStats, damageScaleData);
 
@@ -51,7 +51,7 @@ public class SkillObjectBase : MonoBehaviour
         float closestDistance = Mathf.Infinity;
 
         // Checking for all enemies within a 10 meter radius of the player
-        foreach(var enemy in  EnemiesAround(transform, 10f)) {
+        foreach(var enemy in  GetEnemiesAround(transform, 10f)) {
             float distance = Vector2.Distance(transform.position, enemy.transform.position);
             
             if(distance < closestDistance) {
